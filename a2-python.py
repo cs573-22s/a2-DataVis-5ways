@@ -2,15 +2,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+import csv
 import pandas as pd
 
-csv_data = pd.read_csv('cars-sample.csv')  # 读取训练数据
-print(csv_data.shape)
-N = 5
-csv_batch_data = csv_data.tail(N)  # 取后5条数据
-print(csv_batch_data.shape)  # (5, 9)
-manufacturer = csv_batch_data[list(range(0, 1))]  # 取这20条数据的3到5列值(索引从0开始)
+manufacturer = pd.read_csv('cars-sample.csv', usecols=['Manufacturer'])
+manufacturer = np.array(manufacturer)
+manufacturer = manufacturer.tolist()
 print(manufacturer)
+print(type(manufacturer))
+
+MPG = pd.read_csv('cars-sample.csv', usecols=['MPG'])
+MPG = np.array(MPG)
+#MPG = MPG.tolist()
+print(MPG)
+print(type(MPG))
+
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
@@ -27,7 +33,7 @@ x2 = np.random.normal(2500, 1.2, 300)
 x3 = np.random.normal(3000, 1.2, 300)
 x4 = np.random.normal(3500, 1.2, 300)
 x5 = np.random.normal(4000, 1.2, 300)
-y1 = np.random.normal(20, 1.2, 300)
+y1 =
 y2 = np.random.normal(25, 1.2, 300)
 y3 = np.random.normal(30, 1.2, 300)
 y4 = np.random.normal(35, 1.2, 300)
