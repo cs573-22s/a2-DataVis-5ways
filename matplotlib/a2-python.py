@@ -2,7 +2,7 @@ import seaborn as sb
 import pandas as pd
 from matplotlib import pyplot as plt
 
-df=pd.read_csv('../cars.csv')
+df=pd.read_csv('https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sample.csv')
 
 #print(df)
 

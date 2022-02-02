@@ -5,7 +5,7 @@ output: plot pic
 
 ```{r setup, include=FALSE}
 library(ggplot2)
-cars <- read.csv("D:/CS573/A2/cars.csv")
+cars <- read.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sample.csv")
 ```
 
 ## Including Plots
