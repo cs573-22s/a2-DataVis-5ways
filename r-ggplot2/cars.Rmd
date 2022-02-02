@@ -1,6 +1,6 @@
 ---
 title: "ggplot2"
-output: plot pic
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
