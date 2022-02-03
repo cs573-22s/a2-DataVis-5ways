@@ -1,14 +1,12 @@
-import plotly.graph_objects as go
-import plotly.express as px
 import pandas as pd
+import plotly.express as px
+
 import math
 
-from plotly.validators.layout import legend
 
 data = pd.read_csv("./cars-sample.csv")
 sorted = data.sort_values("Manufacturer")
 print(sorted)
-
 
 # sorted = ['size','text']
 # sorted['size'] = bubble_size
