@@ -9,16 +9,6 @@ To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, wi
 
 While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
 
-![r-ggplot2](img/r-ggplot2.png)
+![r-ggplot2](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/r-gglpot2.png)
 
 # d3...
-
-(And so on...)
-
-
-## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
-
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
