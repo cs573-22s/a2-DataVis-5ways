@@ -12,3 +12,14 @@ While it takes time to find the correct documentation, these functions made the 
 ![r-ggplot2](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/r-gglpot2.png)
 
 # d3...
+
+I didn't use D3 before and what I know is just to use tools like powebi to showcase data.in Assignment 1,I learned a lot about the D3 and it's also the first stuff that jump out
+of my mind.
+
+![d3](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/d3.png)
+
+# tableau
+
+The tableau is what I used before and I think it's like most of bi software on the market. So it's easy for me to use it.
+
+![tableau](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/tableau.png)
