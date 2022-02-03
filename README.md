@@ -23,3 +23,25 @@ of my mind.
 The tableau is what I used before and I think it's like most of bi software on the market. So it's easy for me to use it.
 
 ![tableau](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/tableau.png)
+
+# python+matplotlib
+
+Matplotlib is a plotting library for the Python programming language and its numerical mathematics extension NumPy. It provides an object-oriented API for embedding plots into applications using general-purpose GUI toolkits like Tkinter, wxPython, Qt, or GTK+.
+
+I use pandas.read_csv() to load data. Then made use of notNull() to filter data and remove columns with NaN value. I also use map() to convert 'Weight' and 'MPG' data values from string to integer. When it comes to axes and grid, I made use of plt.rcParams[] to set. Finally, I use plt.scatter() to plot, and plt.show() to show result.
+
+The pro of matplotlib is it has very powerful function of plotting and can be combined with data analysis. The con of matplotlib is that we can't export results to web page directly, so I think it's not very suitable for web based visualization development.
+
+![matplotlib](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/matplotlib.png)
+
+# flourish
+
+here is the description of the features: https://flourish.studio/features/
+
+Flourish is an online data visualization tool. It's more easy to use than Tableau, and most importantly, it's free. For individuals, Flourish is good enough.
+
+![flourish](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/flourish.png)
+
+Acheivments:
+
+From this assignment, I learned a lot about the d3 development skills and reviewed the previous knowledges. I like the pace of learning.
