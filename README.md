@@ -117,6 +117,8 @@ We will choose some at random to run and test.
 
 **NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
 
+[Link to gh-pages](https://mchalmers.github.io/a2-DataVis-5ways/d3/index.html)
+
 # R + ggplot2 + R Markdown
 
 R is a language primarily focused on statistical computing.
