@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<!-- Create a div where the graph will take place -->
 <div id="viz"></div>
 
 <script>
 
-// set the dirmensions and margins of the graph
 var margin = {top: 100, right: 100, bottom: 100, left: 100},
     width = 800 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
 var svg = d3.select("#viz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -30,10 +26,8 @@ var svg = d3.select("#viz")
     .attr("width", width)
     .style("fill", "#f0f4ef")
 
-//Read the data
 d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sample.csv", function(data) {
 
-  // Add X axis
   var x = d3.scaleLinear()
     .domain([2000*.75, 5000*1.02])
     .range([ 0, width ]);
@@ -50,7 +44,6 @@ d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sa
     .attr("y", height + 30)
     .text("Weight");
 
-  // Add Y axis
   var y = d3.scaleLinear()
     .domain([10*.89, 40*1.2])
     .range([ height, 0]);
@@ -75,7 +68,6 @@ d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sa
     .domain([2000, 5000])
     .range([5,14]);
 
-  // Color scale: give me a specie name, I return a color
   var color = d3.scaleOrdinal()
     .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
     .range([ "#f6938c", "#b5b639", "#4ebd94","#45bced", "#cb91c0"]);
@@ -84,8 +76,6 @@ d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sa
     .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
     .range([ "#f6938c", "#b5b639", "#4ebd94","#45bced", "#cb91c0"]);
 
-
-  // Add dots
   svg.append('g')
     .selectAll("dot")
     .data(data)
@@ -108,6 +98,5 @@ d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sa
           .attr("r", 1)
           .style("opacity", 0); });})
 
-//site d3 graph gallery as my starter code
 </script>
       
