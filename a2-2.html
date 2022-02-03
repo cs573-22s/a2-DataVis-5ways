@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A2 - d3 Scatter Plot</title>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+  <body>
+    <h1>
+      A2 - d3.js
+    </h1>
+    <svg></svg>
+    <script>
+      const svg = d3.select('svg')
+      .attr('width', 750)
+      .attr('height', 650);
+
+      var width = +svg.attr('width');
+      var height = +svg.attr('height');
+
+      const render = data => {
+        
+        var xValue = d => d.Weight;
+        var xAxisLabel = 'Weight';
+        
+        var yValue = d => d.MPG;
+        var circleRadius = d => d.Weight * 0.0035;
+        var yAxisLabel = 'MPG';
+        
+        var margin = { top: 60, right: 40, bottom: 88, left: 150 };
+        var innerWidth = width - margin.left - margin.right;
+        var innerHeight = height - margin.top - margin.bottom;
+
+        const background = svg.append('rect')
+        .attr('class', 'plot-background')
+        .attr('x', margin.left)
+        .attr('y', margin.top)
+        .attr('width', innerWidth)
+        .attr('height', innerHeight);
+
+        var manufacturerSet = {'bmw': 1, 'ford': 2, 'honda': 3, 'mercedes': 4, 'toyota': 5};
+        var colorSet = d3.schemeCategory10;
+        const colorPicker = d => colorSet[manufacturerSet[d.Manufacturer]];
+        
+        const xScale = d3.scaleLinear()
+          .domain(d3.extent(data, xValue))
+          .range([0, innerWidth])
+          .nice();
+        
+        const yScale = d3.scaleLinear()
+          .domain([d3.min(data, yValue) - 1, d3.max(data, yValue) + 1])
+          .range([innerHeight, 0])
+          .nice();
+        
+        const g = svg.append('g')
+          .attr('transform', `translate(${margin.left},${margin.top})`);
+        
+        const xAxis = d3.axisBottom(xScale)
+          .ticks(4)
+          .tickSize(-innerHeight)
+          .tickPadding(15);
+        
+        const yAxis = d3.axisLeft(yScale)
+          .ticks(5)
+          .tickSize(-innerWidth)
+          .tickPadding(15);
+        
+        const yAxisG = g.append('g').call(yAxis);
+
+        yAxisG.selectAll('.domain').remove();
+        
+        yAxisG.append('text')
+            .attr('class', 'axis-label')
+            .attr('y', -60)
+            .attr('x', -innerHeight / 2)
+            .attr('fill', 'black')
+            .attr('transform', `rotate(-90)`)
+            .attr('text-anchor', 'middle')
+            .text(yAxisLabel);
+        
+        const xAxisG = g.append('g').call(xAxis)
+          .attr('transform', `translate(0,${innerHeight})`);
+        
+        xAxisG.select('.domain').remove();
+        
+        xAxisG.append('text')
+            .attr('class', 'axis-label')
+            .attr('y', 75)
+            .attr('x', innerWidth / 2)
+            .attr('fill', 'black')
+            .text(xAxisLabel);
+
+
+        g.selectAll('circle').data(data)
+          .enter().append('circle')
+            .attr('cy', d => yScale(yValue(d)))
+            .attr('cx', d => xScale(xValue(d)))
+            .attr('r', circleRadius)
+            .style("fill", colorPicker);
+
+      }
+
+      // data filter
+      function checkNaN(d) {
+        if(isNaN(d.MPG) || isNaN(d.Weight)){
+              return false;
+            }
+            return true;
+      }
+
+    d3.csv('https://raw.githubusercontent.com/cs573-22s/a2-DataVis-5ways/main/cars-sample.csv').then(data => {
+      data.forEach( d => {
+        d.Weight = +d.Weight;
+        d.MPG = +d.MPG;}
+      );
+      // Remove columns with NaN value
+      data = data.filter(checkNaN);
+      //console.log(data);
+      render(data);
+    }); 
+
+    </script>
+  </body>
+</html>
