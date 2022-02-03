@@ -140,3 +140,7 @@ While it takes time to find the correct documentation, these functions made the 
 
 ### Design Achievements
 - **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+
+Matlab - used two scatter plots overlayed on each other - one does the colors the other does the sizing. no function to change opacity on grouped scatter plot, so with the overlayed sizing scatter plot, I change the fill color to white and then made it more transparent, which then make the color behind it more transparent appearing. 
+
+Jasp - can't group by color, can't change sizing, can easily create trend line though so that's cool. s
