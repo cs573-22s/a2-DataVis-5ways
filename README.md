@@ -9,7 +9,7 @@ To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, wi
 
 While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
 
-![ggplot2](img/r-ggplot2.png)
+![ggplot2](https://github.com/PyRookie/a2-DataVis-5ways/tree/main/img/r-ggplot2.png)
 
 # d3...
 
