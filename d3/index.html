@@ -1,124 +1,113 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>A2 - d3 Scatter Plot</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-  </head>
-  <body>
-    <h1>
-      A2 - d3.js
-    </h1>
-    <svg></svg>
-    <script>
-      const svg = d3.select('svg')
-      .attr('width', 750)
-      .attr('height', 650);
+<meta charset="utf-8">
 
-      var width = +svg.attr('width');
-      var height = +svg.attr('height');
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
 
-      const render = data => {
-        
-        var xValue = d => d.Weight;
-        var xAxisLabel = 'Weight';
-        
-        var yValue = d => d.MPG;
-        var circleRadius = d => d.Weight * 0.003;
-        var yAxisLabel = 'MPG';
-        
-        var margin = { top: 60, right: 40, bottom: 88, left: 150 };
-        var innerWidth = width - margin.left - margin.right;
-        var innerHeight = height - margin.top - margin.bottom;
+<!-- Create a div where the graph will take place -->
+<div id="viz"></div>
 
-        const background = svg.append('rect')
-        .attr('class', 'plot-background')
-        .attr('x', margin.left)
-        .attr('y', margin.top)
-        .attr('width', innerWidth)
-        .attr('height', innerHeight);
+<script>
 
-        var manufacturerSet = {'bmw': 1, 'ford': 8, 'honda': 2, 'mercedes': 9, 'toyota': 6};
-        var colorSet = d3.schemeCategory10;
-        const colorPicker = d => colorSet[manufacturerSet[d.Manufacturer]];
-        
-        const xScale = d3.scaleLinear()
-          .domain(d3.extent(data, xValue))
-          .range([0, innerWidth])
-          .nice();
-        
-        const yScale = d3.scaleLinear()
-          .domain([d3.min(data, yValue) - 1, d3.max(data, yValue) + 1])
-          .range([innerHeight, 0])
-          .nice();
-        
-        const g = svg.append('g')
-          .attr('transform', `translate(${margin.left},${margin.top})`);
-        
-        const xAxis = d3.axisBottom(xScale)
-          .ticks(4)
-          .tickSize(-innerHeight)
-          .tickPadding(15);
-        
-        const yAxis = d3.axisLeft(yScale)
-          .ticks(5)
-          .tickSize(-innerWidth)
-          .tickPadding(15);
-        
-        const yAxisG = g.append('g').call(yAxis);
+// set the dirmensions and margins of the graph
+var margin = {top: 100, right: 100, bottom: 100, left: 100},
+    width = 800 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
-        yAxisG.selectAll('.domain').remove();
-        
-        yAxisG.append('text')
-            .attr('class', 'axis-label')
-            .attr('y', -60)
-            .attr('x', -innerHeight / 2)
-            .attr('fill', 'black')
-            .attr('transform', `rotate(-90)`)
-            .attr('text-anchor', 'middle')
-            .text(yAxisLabel);
-        
-        const xAxisG = g.append('g').call(xAxis)
-          .attr('transform', `translate(0,${innerHeight})`);
-        
-        xAxisG.select('.domain').remove();
-        
-        xAxisG.append('text')
-            .attr('class', 'axis-label')
-            .attr('y', 75)
-            .attr('x', innerWidth / 2)
-            .attr('fill', 'black')
-            .text(xAxisLabel);
+// append the svg object to the body of the page
+var svg = d3.select("#viz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+  
+  svg.append("rect")
+    .attr("x",0)
+    .attr("y",0)
+    .attr("height", height)
+    .attr("width", width)
+    .style("fill", "#f0f4ef")
+
+//Read the data
+d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sample.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([2000*.75, 5000*1.02])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x)
+    .tickSize(-height).ticks(4)
+    .tickSizeOuter(0));
+
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width - 270)
+    .attr("y", height + 30)
+    .text("Weight");
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([10*.89, 40*1.2])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y)
+    .tickSize(-width).ticks(4)
+    .tickSizeOuter(0));
+
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -25)
+    .attr("x", -250)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("MPG");
+
+  svg.selectAll(".tick line")
+  .attr("stroke", "white");
+
+  var size = d3.scaleLinear() 
+    .domain([2000, 5000])
+    .range([5,14]);
+
+  // Color scale: give me a specie name, I return a color
+  var color = d3.scaleOrdinal()
+    .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
+    .range([ "#f6938c", "#b5b639", "#4ebd94","#45bced", "#cb91c0"]);
+
+  var colorOutline = d3.scaleOrdinal()
+    .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
+    .range([ "#f6938c", "#b5b639", "#4ebd94","#45bced", "#cb91c0"]);
 
 
-        g.selectAll('circle').data(data)
-          .enter().append('circle')
-            .attr('cy', d => yScale(yValue(d)))
-            .attr('cx', d => xScale(xValue(d)))
-            .attr('r', circleRadius)
-            .style("fill", colorPicker);
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.Weight); } )
+      .attr("cy", function (d) { return y(d.MPG); } )
+      .attr("r", function (d) { return size(d.Weight);})
+      .style("fill", function (d) { 
+          return color(d.Manufacturer); } )
+      .style("opacity", .50)
+      .on('mouseover', function (d, i) {
+         d3.select(this).transition()
+          .duration('200')
+          .attr("r", 10)
+          .style("opacity", 1);})
+      .on('mouseout', function (d, i) {
+          d3.select(this).transition()
+          .duration('200')
+          .attr("r", 1)
+          .style("opacity", 0); });})
 
-      }
-
-      // data filter
-      function checkNaN(d) {
-        if(isNaN(d.MPG) || isNaN(d.Weight)){
-              return false;
-            }
-            return true;
-      }
-
-    d3.csv('https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sample.csv').then(data => {
-      data.forEach( d => {
-        d.Weight = +d.Weight;
-        d.MPG = +d.MPG;}
-      );
-      // Remove columns with NaN value
-      data = data.filter(checkNaN);
-      //console.log(data);
-      render(data);
-    }); 
-
-    </script>
-  </body>
-</html>
+//site d3 graph gallery as my starter code
+</script>
+      
