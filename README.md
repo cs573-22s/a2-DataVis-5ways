@@ -117,7 +117,39 @@ We will choose some at random to run and test.
 
 **NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
 
-# R + ggplot2 + R Markdown
+# Python + Jupyter + Matplotlib + Seaborn
+
+Python is a high level general pupose language. It has many different packages for data visualization. Few of the popular ones are Matplotlib and Seaborn. Matplotlib allows making of almost all kinds of graphs with very basic graphics. Seaborn is built on top of Matplotlib and allows advanced graphics and better themes.
+
+Jupyter is a web-based interactive environment for creating notebooks in Python. I have used Python inside a Jupyter notebook.
+
+Following are the steps that were followed: 
+1. Import libraries like Pandas and Numpy to import and manipulate data. Matplotlib and Seaborn are visualization libraries which are also imported.
+2. The csv was imported into the notebook as a pandas dataframe object.
+3. A plot was created of the appropriate size. 
+4. The grid in the background was matched just like in the provided chart. (ACH)
+5. Parameters were passed into the scatterplot function which are explained as follows:
+    - x : X variable
+    - y : Y variable
+    - hue: Color variable for the markers
+    - Size: Size variable for the markers
+    - Palette: Colors were passed to match the exact colors in the provided chart (ACH)
+    - Alpha: Transparency
+    - Data: Source DataFrame
+    - Size_norm: Domain of the size variable
+    - Sizes: Range of the sizes on graph
+    - Legend: Brief legend
+6. The next function is to position the legend in the position in the provided chart (ACH)
+7. The xticks and yticks were passed to mark the same ticks as in the provided chart (ACH)
+8. The result was then displayed
+
+Advantages: 
+- Matplotlib and Seaborn allow a high level of customization in very few lines of code.
+
+Disadvanatages: 
+- Editing the legend is a little more complicated.
+
+# R + ggplot2
 
 R is a language primarily focused on statistical computing.
 ggplot2 is a popular library for charting in R.
