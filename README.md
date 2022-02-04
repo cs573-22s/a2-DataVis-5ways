@@ -3,13 +3,6 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
-
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
-
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
-
 Your goal is to use 5 different tools to make the following chart:
 
 ![ggplot2](img/ggplot2.png)
@@ -31,50 +24,8 @@ Other features are not required. This includes:
 Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
 Be sure to note where these do not support the features you need, but feel free to still use them.
 
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
 You may write everything from scratch, or start with demo programs from books or the web. 
 If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
-
 
 Readme Requirements
 ---
@@ -119,9 +70,13 @@ We will choose some at random to run and test.
 
 # Python + Jupyter + Matplotlib + Seaborn
 
+(Language)
+
 Python is a high level general pupose language. It has many different packages for data visualization. Few of the popular ones are Matplotlib and Seaborn. Matplotlib allows making of almost all kinds of graphs with very basic graphics. Seaborn is built on top of Matplotlib and allows advanced graphics and better themes.
 
 Jupyter is a web-based interactive environment for creating notebooks in Python. I have used Python inside a Jupyter notebook.
+
+![matplotlib](img/Figure_Python.png)
 
 Following are the steps that were followed: 
 1. Import libraries like Pandas and Numpy to import and manipulate data. Matplotlib and Seaborn are visualization libraries which are also imported.
@@ -134,7 +89,7 @@ Following are the steps that were followed:
     - hue: Color variable for the markers
     - Size: Size variable for the markers
     - Palette: Colors were passed to match the exact colors in the provided chart (ACH)
-    - Alpha: Transparency
+    - Alpha: Transparency (set to 0.4 instead of 0.5 to match provided chart)
     - Data: Source DataFrame
     - Size_norm: Domain of the size variable
     - Sizes: Range of the sizes on graph
@@ -143,27 +98,80 @@ Following are the steps that were followed:
 7. The xticks and yticks were passed to mark the same ticks as in the provided chart (ACH)
 8. The result was then displayed
 
+Data Manipulation:
+- As such no data manipulation was required.
+
 Advantages: 
-- Matplotlib and Seaborn allow a high level of customization in very few lines of code.
+- Matplotlib and Seaborn allow us to craete visualizations in very few lines of code.
 
 Disadvanatages: 
 - Editing the legend is a little more complicated.
 
+Future Scope:
+- Although not a very high level of customization is possible, since data manipulation is really easy because of libraries like Pandas, this method will always remain popular.
+
+
 # R + ggplot2
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
+(Language)
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
+R is a language and environment for statistical computing and graphics. ggplot2 one of the most popular and an open-source data visualization package for the statistical programming language R. Tidyverse is a collection of open source packages in R for tidy data.
 
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
+![ggplot2](img/Figure_R.png)
 
-![ggplot2](img/ggplot2.png)
+Following are the steps that were followed: 
+1. Import libraries ggplot2 and tidyverse.
+2. The csv was imported into the script as a dataframe object.
+3. A plot was initialized. 
+4. ggplot2's geom_point() layer was used along with aesthetics functions to match the color and size.
 
-# d3...
+Data Manipulation:
+- No data manipulation was required.
 
-(And so on...)
+Advantages:
+- Minimal code
+- The visualization matches the original chart exactly probably because the original chart was also created in R
+
+Disadvantages:
+- Takes time to find relevant documentation
+
+Future Scope: 
+- Since R allows a lot of other statistical analysis, R will always remain popular among data scientists. 
+
+# Excel
+
+(Tool)
+
+Excel is a spreadsheet tool which features calculation capabilties along with graphing tools. It allows users to use many functions for data manipulation.
+
+![excel](img/Figure_Excel.PNG)
+
+Following are the steps that were followed: 
+1. The csv was first converted into an excel format of xlsx because csv files although read into excel, do not allow graphing. 
+2. The csv was imported into the script as a dataframe object.
+3. Bubble chart was used to make the chart in excel.
+4. For achieving the color scheme, the data had to be converted into a different format as shown:
+![Excel data](Excel/excel_data.png)
+5. Bubble plot function was then used with these different series being used as the values 
+6. To match the color values, colors were selected manually for each series. 
+7. The ticks were then edited. But not a very high level of customization was available there. Only the min and max values could be set, not the intervals between two ticks.
+8. The legend worked for the colors, but there was again no option to edit legend to show the sizes of the circles.
+
+Data Manipulation:
+- Data had to be converted to allow the colors to be selected differently by manufacturer.
+
+Advantages:
+- No coding involved and is easy for people with all backgrounds.
+- Once the data manipulation is done, colors can be manually selected for the different manufacturers.
+
+Disadvantages:
+- Selecting the data to plot on the chart was a little difficult
+- Extra Data Manipulation is required
+- Legends can not be edited to allow us to plot sizes 
+
+Future Scope: 
+- Even though Excel does not allow a very high level of customization, it is very simple to use and hence it will always remain a favourite.
+- Power BI is already built on top of excel and allows more customization which might become the future.
 
 
 ## Technical Achievements
