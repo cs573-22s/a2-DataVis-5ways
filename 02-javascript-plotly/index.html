@@ -1,0 +1,93 @@
+<html>
+  <head> </head>
+
+  <body>
+    <div id="plotly" style="width: 800px; height: 600px"></div>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>
+    <script>
+      // colorscheme based on d3 categorical swatches
+      const colorscheme = [
+        "#1f77b4",
+        "#ff7f0e",
+        "#2ca02c",
+        "#d62728",
+        "#9467bd",
+        "#8c564b",
+        "#e377c2",
+        "#7f7f7f",
+        "#bcbd22",
+        "#17becf",
+      ];
+
+      const draw = (data) => {
+        const manufacturers = Object.keys(
+          data.reduce((prev, current) => {
+            if (!prev[current.Manufacturer]) {
+              return { ...prev, [current.Manufacturer]: true };
+            }
+            return prev;
+          }, {})
+        ).sort();
+
+        const traces = manufacturers.map((manufacturer) => {
+          const filteredManufacturers = data.filter(
+            (item) => item.Manufacturer === manufacturer
+          );
+          // manufacturers.filter(manufacturer => manufacturer.)
+          return {
+            x: filteredManufacturers.map(
+              (manufacturer) => +manufacturer.Weight
+            ),
+            y: filteredManufacturers.map((manufacturer) => +manufacturer.MPG),
+            marker: {
+              size: filteredManufacturers.map(
+                (manufacturer) => +manufacturer.Weight / 200
+              ),
+            },
+            name: manufacturer,
+            mode: "markers",
+            opacity: 0.5, // somehow opacity of 1 is not exactly 1,
+            type: "scatter",
+          };
+        });
+
+        const elem = document.getElementById("plotly");
+
+        const layout = {
+          xaxis: {
+            title: {
+              text: "Weight",
+              font: {
+                size: 16,
+                color: "#7f7f7f",
+              },
+            },
+            gridcolor: "rgba(255,255,255,1)",
+          },
+          yaxis: {
+            title: {
+              text: "MPG",
+              font: {
+                size: 16,
+                color: "#7f7f7f",
+              },
+            },
+            gridcolor: "rgba(255,255,255,1)",
+          },
+          plot_bgcolor: "#f0f0f0",
+        };
+
+        Plotly.newPlot(elem, traces, layout);
+      };
+
+      const loadData = async () => {
+        const data = await d3.csv("../cars-sample.csv");
+        draw(data);
+      };
+
+      loadData();
+
+    </script>
+  </body>
+</html>
