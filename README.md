@@ -1,5 +1,5 @@
 # Assignment 2 - Data Visualization, 5 Ways  
-==========================================================================================
+===============================================
  # D3
 ![d3](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/D3.png)
 
