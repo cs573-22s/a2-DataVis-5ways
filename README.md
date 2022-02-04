@@ -173,10 +173,53 @@ Future Scope:
 - Even though Excel does not allow a very high level of customization, it is very simple to use and hence it will always remain a favourite.
 - Power BI is already built on top of excel and allows more customization which might become the future.
 
+# D3
+
+(Language)
+
+D3 is a javascript library for manipulating documents based on data. It helps create powerful visualizations.
+
+![D3](img/Figure_d3.PNG)
+
+Following are the steps that were followed: 
+1. 2 svg elements were created, 1 for the graph and 1 for the legend.
+2. Some values were initialized by creating arrays.
+3. Function was created to build the scatter plot which included size and color variables as well. 
+4. Then the axes were built in the function.
+5. Legend was tried to be recreated in the position next to the graph as in the provided chart. It was found to be difficult.
+6. The legend only contains the size variable and not the color variable.
+ 
+Data Manipulation:
+- No data manipulation was required.
+
+Advantages:
+- D3 allows more level of customization. 
+
+Disadvantages:
+- Difficult to debug the code
+- It was difficult to position the legend next to the graph. 
+
+Future Scope: 
+- D3 allows us a very high level of customization and hence d3 has its advantages. But the user friendly nature of the other tools/languages may cause people to switch to the other tools instead. 
+
+# Vegalite
+
+(Language)
+
+Data Manipulation:
+
+
+Advantages:
+
+
+Disadvantages:
+
+
+Future Scope: 
+
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+
