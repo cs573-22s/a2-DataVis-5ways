@@ -1,24 +1,32 @@
-# 02-DataVis-5ways
-
-Assignment 2 - Data Visualization, 5 Ways  
-===
- test
-
- test
-
- test
- 
-
+# Assignment 2 - Data Visualization, 5 Ways  
+==========================================================================================
+ # D3
 ![d3](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/D3.png)
 
-These features should be preserved as much as possible in your replication:
+ # Flourish
 
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
+ # Python
+
+ # R
+
+ # Tableau
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Other features are not required. This includes:
 
