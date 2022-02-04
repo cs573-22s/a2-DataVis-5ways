@@ -2,15 +2,7 @@
 
 Assignment 2 - Data Visualization, 5 Ways  
 ===
-
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
-
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
-
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
-
-Your goal is to use 5 different tools to make the following chart:
+ test test
 
 ![d3](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/D3.png)
 
