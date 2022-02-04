@@ -2,7 +2,7 @@
 
 Assignment 2 - Data Visualization, 5 Ways  
 ===
- test test
+ test 
 
 ![d3](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/D3.png)
 
