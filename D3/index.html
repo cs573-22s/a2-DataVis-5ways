@@ -1,0 +1,128 @@
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<svg> </svg>
+
+<svg id= 'k' width="200" height="200"> </svg>
+
+<script> 
+
+	var dataset = [40,70,100]
+	var x = [3,6.5,10]
+	var y = [2000, 3000, 4000]
+
+	var legend = d3.select("#k")
+									.selectAll("circle")
+  								.data(dataset)
+  								.enter()
+  								.append("circle")
+  								.attr("r", function (d,i) {return (x[i])})
+  								.attr("cx",40)
+  								.attr("cy",(function (d) {return(d)}));
+
+  d3.select('#k')
+			.append('rect')
+			.attr('x',10)
+			.attr('y',2)
+			.attr('width', 125)
+			.attr('height', 150)
+			.attr('stroke', 'blue')
+			.attr('stroke-width', 2)
+			.attr('fill','none')
+
+  d3.select('#k')
+			.selectAll('text')
+			.data(y)
+			.enter()
+			.append('text')
+			.attr('x', 60)
+			.attr("y",(function (d) {return(d/40)}))
+			.text(function(d){return(d)});
+
+  d3.select('#k')
+			.append('text')
+			.style("font-size","20px")
+			// .style("fill",function(d){return(colors[getRandomInt(7)]);})
+			.attr("x",35)
+			.attr("y",20)
+			.text("Weight")
+
+	var height = 600;
+	var width = 800;
+	var margin =({
+		top: 20,
+		right: 30,
+		bottom: 30,
+		left: 40
+	});
+
+	var x,y,color,size;
+
+	d3.csv("cars-sample.csv").then(function(d){
+		buildScatter(d);
+	})
+
+	function buildScatter(data){
+
+		x = d3.scaleLinear()
+    		.domain(d3.extent(data, d => +d.Weight)).nice()
+    		.range([margin.left, width - margin.right])
+
+    y = d3.scaleLinear()
+   			.domain(d3.extent(data, d => +d.MPG)).nice()
+   			.range([height - margin.bottom, margin.top])
+
+   	size = d3.scaleLinear()
+   			.domain(d3.extent(data, d=> +d.Weight))
+   			.range([3,10])
+
+   	color = d3.scaleOrdinal(data.map((d) => d.Manufacturer),d3.schemeCategory10)
+
+    var svg = d3
+    	.select("svg")
+    	.attr("viewBox", [0, 0, width, height])
+    	.property("value", []);
+
+  	svg.append("g").call(xAxis);
+  	svg.append("g").call(yAxis);
+
+  	var dot = svg
+		    .selectAll("circle")
+		    .data(data)
+		    .join("circle")
+		    .attr("transform", (d) => `translate(${x(+d.Weight)},${y(+d.MPG)})`)
+		    .attr("r", (d) => size(d.Weight))
+		    .attr("fill", (d) => color(d.Manufacturer))
+		    .attr("opacity", 0.5);
+
+  		return svg.node();
+	}
+
+  const xAxis = (g) =>
+    g
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x))
+      .call((g) =>
+          g
+          .append("text")
+          .attr("x", width - margin.right)
+          .attr("y", -4)
+          .attr("fill", "#000")
+          .attr("font-weight", "bold")
+          .attr("text-anchor", "end")
+          .text("Weight")
+        )
+
+  const yAxis = (g) =>
+      g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y))
+      .call((g) =>
+                g
+                  .select(".tick:last-of-type text")
+                  .clone()
+                  .attr("x", 4)
+                  .attr("text-anchor", "start")
+                  .attr("font-weight", "bold")
+                  .text("MPG")
+              )
+</script>
