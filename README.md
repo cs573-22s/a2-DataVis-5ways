@@ -163,7 +163,7 @@ Disadvantages:
 Future Scope: 
 - D3 allows us a very high level of customization and hence d3 has its advantages. But the user friendly nature of the other tools/languages may cause people to switch to the other tools instead. 
 
-# Vegalite
+# Vega-lite
 
 (Language)
 
@@ -198,8 +198,13 @@ Many references were used for Vega lite because it was a new language for me.
 1. https://vega.github.io/vega-lite/examples/circle_bubble_health_income.html (For making the graph interactive)
 
 ## Technical Achievements
-- Python: 
-  - 
+- Excel: 
+  - Converted data into usable format for using the color variable.
+- D3:
+  - Tried replicating the legend. Although long way to go there, still a start.
+- Vega-lite:
+  - Did not know the language but tried following a few examples
+  - Made it a little interactive by allowing scrolling zoom in and zoom out on the graph
 
 ## Design Achievements
 - Python: 
@@ -207,5 +212,8 @@ Many references were used for Vega lite because it was a new language for me.
   - Colors were provided to the function to match the exact color scheme of the provided chart
   - Legend position was matched exactly (center right of the graph)
   - The ticks on the x axis and y axis are matched exactly 
+
+- R: 
+  - The graph matches exactly with the provided graph
 
 
