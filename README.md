@@ -43,20 +43,20 @@ Following are the steps that were followed:
 1. Import libraries like Pandas and Numpy to import and manipulate data. Matplotlib and Seaborn are visualization libraries which are also imported.
 2. The csv was imported into the notebook as a pandas dataframe object.
 3. A plot was created of the appropriate size. 
-4. The grid in the background was matched just like in the provided chart. (ACH)
+4. The grid in the background was matched just like in the provided chart.
 5. Parameters were passed into the scatterplot function which are explained as follows:
     - x : X variable
     - y : Y variable
     - hue: Color variable for the markers
     - Size: Size variable for the markers
-    - Palette: Colors were passed to match the exact colors in the provided chart (ACH)
-    - Alpha: Transparency (set to 0.4 instead of 0.5 to match provided chart)
+    - Palette: Colors were passed to match the exact colors in the provided chart
+    - Alpha: Transparency (set to 0.4 instead of 0.5 intentionally to match provided chart)
     - Data: Source DataFrame
     - Size_norm: Domain of the size variable
     - Sizes: Range of the sizes on graph
     - Legend: Brief legend
-6. The next function is to position the legend in the position in the provided chart (ACH)
-7. The xticks and yticks were passed to mark the same ticks as in the provided chart (ACH)
+6. The next function is to position the legend in the position in the provided chart
+7. The xticks and yticks were passed to mark the same ticks as in the provided chart
 8. The result was then displayed
 
 Data Manipulation:
@@ -173,10 +173,10 @@ Vega-Lite is a high-level grammar of interactive graphics. It provides a concise
 
 Following are the steps that were followed: 
 1. Data was first converted from csv into a json by using an online converter. 
-2. Width, height were first specified.
+2. Width, height were first specified. (Above the json data which is dumped after that)
 3. Params was passed to make the graph interactive (Allows zoom in and out using scroller in the graph)
 4. Data then includes the whole json file which was converted online.
-5. In the last few lines of the code, mark was specified as a circle and opacity was set to 0.5.
+5. In the last few lines of the code (scroll way down past the json data), mark was specified as a circle and opacity was set to 0.5.
 6. Encoding allows us to specify the variables to plot and their types (quantitative/qualitative) on the different axes.
 7. The color and size variables were also set there after scaling the sizes to the specified domain.
 
@@ -198,7 +198,14 @@ Many references were used for Vega lite because it was a new language for me.
 1. https://vega.github.io/vega-lite/examples/circle_bubble_health_income.html (For making the graph interactive)
 
 ## Technical Achievements
+- Python: 
+  - 
 
+## Design Achievements
+- Python: 
+  - Grid was matched just like in the provided chart
+  - Colors were provided to the function to match the exact color scheme of the provided chart
+  - Legend position was matched exactly (center right of the graph)
+  - The ticks on the x axis and y axis are matched exactly 
 
-### Design Achievements
 
