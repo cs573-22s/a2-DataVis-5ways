@@ -21,12 +21,6 @@ Other features are not required. This includes:
 - The background grid.
 - The legends.
 
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
-
-
 ============================================================================================
 
 # Python + Jupyter + Matplotlib + Seaborn
