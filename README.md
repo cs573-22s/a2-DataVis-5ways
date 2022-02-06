@@ -3,13 +3,27 @@
  # D3
 ![d3](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/D3.png)
 
+
+
+
+
  # Flourish
+![Flourish](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/Flourish.png)
+
 
  # Python
+![matplotli](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/matplotlib.png)
+
 
  # R
+![ggplot2](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/ggplot2.png)
+
 
  # Tableau
+ ![tableau](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/tableau.png)
+
+
+
  
 
 
