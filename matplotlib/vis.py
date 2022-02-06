@@ -1,4 +1,6 @@
-from __future__ import annotations # Weird type hinting
+from __future__ import annotations
+from re import I
+from typing import Dict # Weird type hinting
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -36,14 +38,38 @@ def main():
         lines = file.readlines()[1:] # skip the first line
         data_points = [point for point in [DataPoint.instance_of(line) for line in lines] if not point.bad]
 
-    groups = {}
+    max_weight : float = max(data_points, key=lambda pt: pt.weight).weight
+    min_weight : float = min(data_points, key=lambda pt: pt.weight).weight
+    range_weight : float = max_weight - min_weight
+
+    # Do a group by operation
+    groups : Dict[str, list[DataPoint]]= {}
     for point in data_points:
         if point.manufacturer not in groups:
             groups[point.manufacturer] = [point]
         else:
             groups[point.manufacturer].append(point)
 
-    print(groups)
+    # Actually do the plotting
+    figure, axis = plt.subplots()
+    for group, points in groups.items():
+        # Plot each group individually
+        mpg_vals = []
+        weight_vals = []
+        for point in points:
+            mpg_vals.append(point.mpg)
+            weight_vals.append(point.weight)
+        mpg_vals = np.array(mpg_vals)
+        weight_vals = np.array(weight_vals)
+        # Add cubic scaling on the weights of the scatter
+        scaled_weights = ((weight_vals / range_weight) ** 3) * 100
+        plt.scatter(x = weight_vals, y = mpg_vals, s = scaled_weights, label=group, alpha=0.5)
+    axis.set_xlabel("Weight")
+    axis.set_ylabel("MPG")
+    axis.set_title("Weight v. MPG")
+    axis.grid(True)
+    axis.legend()
+    plt.show()
     
 
 if __name__ == "__main__":
