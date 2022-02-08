@@ -29,8 +29,8 @@ fig, ax = plt.subplots()
 
 manufacturers_handles = [mpatches.Patch(
     color=colors_map[key], label=key) for key in colors_map]
-l1 = ax.legend(handles=manufacturers_handles, loc="upper right", title="Manufacturer")
-
+l1 = ax.legend(handles=manufacturers_handles,
+               loc="upper right", title="Manufacturer")
 
 
 scatter = ax.scatter(weight, mpg, s=size, c=colors, alpha=0.5)
@@ -38,10 +38,9 @@ scatter = ax.scatter(weight, mpg, s=size, c=colors, alpha=0.5)
 kw = dict(prop="sizes", num=4, color='#777',
           func=lambda s: (s - 50) * (max_size - min_size) / 150 + min_size)
 l2 = ax.legend(*scatter.legend_elements(**kw),
-                    loc="center right", title="Weight")
+               loc="center right", title="Weight")
 
 
 ax.add_artist(l1)
 ax.add_artist(l2)
 plt.show()
-
