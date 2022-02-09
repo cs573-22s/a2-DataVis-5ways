@@ -5,6 +5,11 @@
 
 .mark {
   opacity: .5;
+  transition: 200ms;
+}
+
+.mark.mark--hide {
+  opacity: 0;
 }
 
 .axis-name {

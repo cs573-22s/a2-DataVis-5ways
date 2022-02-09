@@ -15,7 +15,9 @@ function App() {
 
   const [mpgRange, setMpgRange] = useState([0, 0, 0]);
   const [weightRange, setWeightRange] = useState([0, 0, 0]);
-  
+
+  const [activeManufacturer, setActiveManufacturer] = useState();
+
   useEffect(() => {
     const load = async () => {
       const d = await loadData();
@@ -42,7 +44,6 @@ function App() {
     };
     load();
   }, []);
-
 
   const xScale = scaleLinear()
     .domain([
@@ -163,10 +164,11 @@ function App() {
 
             {/* marks */}
             {data.map((d) => {
+              const c = activeManufacturer && activeManufacturer !== d.Manufacturer ? 'mark mark--hide' : 'mark';
               return (
                 <g key={d[""]}>
                   <circle
-                    className="mark"
+                    className={c}
                     cx={xScale(d.Weight)}
                     cy={yScale(d.MPG)}
                     r={sizeScale(d.Weight)}
@@ -194,6 +196,12 @@ function App() {
                     r={8}
                     opacity={0.5}
                     fill={schemeCategory10[manufacturers.indexOf(manufacturer)]}
+                    onMouseEnter={() => {
+                      setActiveManufacturer(manufacturer);
+                    }}
+                    onMouseLeave={() => {
+                      setActiveManufacturer(null);
+                    }}
                   />
                   <text x={15} dy="0.35em">
                     {manufacturer}
