@@ -1,58 +1,18 @@
 ---
-title: "R Notebook"
+title: "A2 R Portion"
+author: James Plante
 output: html_notebook
 ---
 
-This is going to be our cars plotting demo
-
-```{r libraries_and_loading}
+Code adapted from the R plotting demo in class
+```{r}
 library(ggplot2) # install.packages("ggplot2")
 library(tidyverse)
 
 carsdf <- read.csv("cars.csv") 
-
-```
-
-Now we have loaded our data and our libraries, we are now going to plot.
-
-# Plotting
-
-Let's plot our dataset, first: a histogram
-
-```{r}
 carsdf %>% ggplot() + 
-  geom_point( aes(x=Weight, y=MPG, color=Manufacturer), alpha = .6) + 
+  geom_point( aes(x=Weight, y=MPG, color=Manufacturer, size=Weight), alpha = .5) + 
   scale_colour_brewer(palette = "Set1")
 
-carsdf %>% 
-  mutate(
-    hpratio = Weight/Horsepower
-  ) %>% 
-  ggplot() + 
-  geom_point( aes(x=hpratio, y=MPG, color=Manufacturer), alpha = 1.0) +
-  geom_smooth( aes(x=hpratio, y=MPG), method = lm, se = FALSE) +
-  facet_wrap(~ Manufacturer)
-```
-
-Class request: plot all in one chart and have best fit lines by color.
-
-```{r}
-carsdf %>% 
-  mutate(
-    hpratio = Weight/Horsepower
-  ) %>% 
-  ggplot( aes(x=hpratio, y=MPG, color=Manufacturer) ) + 
-  geom_point( alpha = 1.0) +
-  geom_smooth( method = lm, se = FALSE)
-```
-# Confidence interval demo
-
-```{r}
-carsdf %>% 
-  ggplot(aes(y=Manufacturer, x=MPG)) +
-  geom_point(
-    
-  ) +
-  stat_summary(aes(colour = Manufacturer), fun.data = "mean_cl_boot", size = 0.5, position = position_nudge(y = -0.2))
 ```
 
