@@ -1,4 +1,10 @@
-import { scaleLinear, schemeCategory10 } from "d3";
+import {
+  easeSinInOut,
+  interpolate,
+  scaleLinear,
+  schemeCategory10,
+  selection,
+} from "d3";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { loadData } from "./request";
@@ -13,6 +19,8 @@ function App() {
 
   const [data, setData] = useState([]);
 
+  const [mpgRangeDefault, setMpgRangeDefault] = useState([0, 0, 0]);
+  const [weightRangeDefault, setWeightRangeDefault] = useState([0, 0, 0]);
   const [mpgRange, setMpgRange] = useState([0, 0, 0]);
   const [weightRange, setWeightRange] = useState([0, 0, 0]);
 
@@ -41,6 +49,12 @@ function App() {
       });
       setMpgRange([+mpgLow, +mpgHigh, +mpgHigh - +mpgLow]);
       setWeightRange([+weightLow, +weightHigh, +weightHigh - +weightLow]);
+      setMpgRangeDefault([+mpgLow, +mpgHigh, +mpgHigh - +mpgLow]);
+      setWeightRangeDefault([
+        +weightLow,
+        +weightHigh,
+        +weightHigh - +weightLow,
+      ]);
     };
     load();
   }, []);
@@ -57,7 +71,7 @@ function App() {
     .range([contentHeight, 0]);
 
   const sizeScale = scaleLinear()
-    .domain([weightRange[0], +weightRange[1]])
+    .domain([+weightRange[0], +weightRange[1]])
     .range([5, 15]);
 
   const manufacturers = Array.from(
@@ -66,6 +80,96 @@ function App() {
       return s;
     }, new Set())
   ).sort();
+
+  const handleMouseEnter = (manufacturer) => {
+    setActiveManufacturer(manufacturer);
+
+    const md = data.filter((d) => d.Manufacturer === manufacturer);
+
+    let highest = +md[0].Weight;
+    let lowest = +md[0].Weight;
+    md.forEach((d) => {
+      if (+d.Weight < lowest) {
+        lowest = +d.Weight;
+      }
+      if (+d.Weight > highest) {
+        highest = +d.Weight;
+      }
+    });
+
+    let highestMPG = +md[0].MPG;
+    let lowestMPG = +md[0].MPG;
+    md.forEach((d) => {
+      if (+d.MPG < lowestMPG) {
+        lowestMPG = +d.MPG;
+      }
+      if (+d.MPG > highestMPG) {
+        highestMPG = +d.MPG;
+      }
+    });
+
+    selection()
+      .transition("zoomin")
+      .duration(1500)
+      .ease(easeSinInOut)
+      .tween("xRange", () => {
+        const percentInterpolate1 = interpolate(weightRange[0], lowest);
+        const percentInterpolate2 = interpolate(weightRange[1], highest);
+        const percentInterpolate3 = interpolate(mpgRange[0], lowestMPG);
+        const percentInterpolate4 = interpolate(mpgRange[1], highestMPG);
+        return (t) => {
+          setWeightRange([
+            percentInterpolate1(t),
+            percentInterpolate2(t),
+            highest - lowest,
+          ]);
+          setMpgRange([
+            percentInterpolate3(t),
+            percentInterpolate4(t),
+            highestMPG - lowestMPG,
+          ]);
+        };
+      });
+  };
+
+  const handleMouseLeave = () => {
+    setActiveManufacturer(null);
+
+    selection()
+      .transition("zoomout")
+      .duration(1500)
+      .ease(easeSinInOut)
+      .tween("xRange", () => {
+        const percentInterpolate1 = interpolate(
+          weightRange[0],
+          weightRangeDefault[0]
+        );
+        const percentInterpolate2 = interpolate(
+          weightRange[1],
+          weightRangeDefault[1]
+        );
+        const percentInterpolate3 = interpolate(
+          mpgRange[0],
+          mpgRangeDefault[0]
+        );
+        const percentInterpolate4 = interpolate(
+          mpgRange[1],
+          mpgRangeDefault[1]
+        );
+        return (t) => {
+          setWeightRange([
+            percentInterpolate1(t),
+            percentInterpolate2(t),
+            percentInterpolate2(t) - percentInterpolate1(t),
+          ]);
+          setMpgRange([
+            percentInterpolate3(t),
+            percentInterpolate4(t),
+            percentInterpolate4(t) - percentInterpolate3(t),
+          ]);
+        };
+      });
+  };
 
   return (
     <div className="App">
@@ -164,14 +268,19 @@ function App() {
 
             {/* marks */}
             {data.map((d) => {
-              const c = activeManufacturer && activeManufacturer !== d.Manufacturer ? 'mark mark--hide' : 'mark';
+              const c =
+                activeManufacturer && activeManufacturer !== d.Manufacturer
+                  ? "mark mark--hide"
+                  : "mark";
+              const rTemp = sizeScale(d.Weight);
+              const r = rTemp < 5 ? 5 : rTemp;
               return (
                 <g key={d[""]}>
                   <circle
                     className={c}
                     cx={xScale(d.Weight)}
                     cy={yScale(d.MPG)}
-                    r={sizeScale(d.Weight)}
+                    r={r}
                     fill={
                       schemeCategory10[manufacturers.indexOf(d.Manufacturer)]
                     }
@@ -189,21 +298,25 @@ function App() {
 
             {manufacturers.map((manufacturer, idx) => {
               return (
-                <g key={manufacturer} transform={`translate(0, ${idx * 25})`}>
+                <g
+                  className={`legend-manufacturer ${manufacturer === activeManufacturer ? 'legend-manufacturer--active' : ''}`}
+                  onMouseEnter={() => {
+                    handleMouseEnter(manufacturer);
+                  }}
+                  onMouseLeave={() => {
+                    handleMouseLeave(null);
+                  }}
+                  key={manufacturer}
+                  transform={`translate(0, ${idx * 25})`}
+                >
                   <circle
                     cx={0}
                     cy={0}
                     r={8}
                     opacity={0.5}
                     fill={schemeCategory10[manufacturers.indexOf(manufacturer)]}
-                    onMouseEnter={() => {
-                      setActiveManufacturer(manufacturer);
-                    }}
-                    onMouseLeave={() => {
-                      setActiveManufacturer(null);
-                    }}
                   />
-                  <text x={15} dy="0.35em">
+                  <text x={15} dy="0.35em" className="legend-manufacturer__text">
                     {manufacturer}
                   </text>
                 </g>

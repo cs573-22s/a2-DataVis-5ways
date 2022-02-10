@@ -5,11 +5,12 @@
 
 .mark {
   opacity: .5;
-  transition: 200ms;
+  transition: opacity 500ms 1000ms;
 }
 
 .mark.mark--hide {
   opacity: 0;
+  transition: opacity 500ms;
 }
 
 .axis-name {
@@ -18,4 +19,12 @@
 
 .axis-value {
   font-size: 0.8em;
+}
+
+.legend-manufacturer {
+  cursor: pointer;
+}
+
+.legend-manufacturer--active .legend-manufacturer__text {
+  font-weight: bold;
 }
