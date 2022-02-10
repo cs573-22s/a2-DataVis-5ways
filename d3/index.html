@@ -1,0 +1,90 @@
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<svg id="main_canvas" width=800 height=600>
+
+</svg>
+
+<script>
+    const CANVAS_WIDTH = 800;
+    const CANVAS_HEIGHT = 600;
+    const margins = {
+        left : 20,
+        right : 20,
+        top : 20,
+        bottom : 20
+    };
+    console.log(d3);
+    const plot = (data) => {
+        const x = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Weight)).nice()
+            .range([margins.left, CANVAS_WIDTH - margins.right]);
+        const y = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.MPG)).nice()
+            .range([CANVAS_HEIGHT - margins.bottom, margins.top]);
+        const color = d3.scaleOrdinal(data.map(elt => elt.Manufacturer),
+            d3.schemeCategory10
+        );
+
+        const svg = d3.select("#main_canvas")
+            .attr("viewBox", [0, 0, CANVAS_WIDTH, CANVAS_HEIGHT])
+            .property("value", []);
+        
+
+        var dot = svg
+            .selectAll("circle")
+            .data(data)
+            .join("circle")
+            .attr("transform", (d) => `translate(${x(+d.Weight)},${y(+d.MPG)})`)
+            .attr("r", (d) => 10)
+            .attr("fill", (d) => color(d.Manufacturer))
+
+        }
+
+    const xAxis = (g) =>
+    g
+      .attr("transform", `translate(0,${CANVAS_HEIGHT - margins.bottom})`)
+      .call(d3.axisBottom(x))
+      .call((g) =>
+          g
+          .append("text")
+          .attr("x", CANVAS_WIDTH - margins.right)
+          .attr("y", -4)
+          .attr("fill", "#000")
+          .attr("font-weight", "bold")
+          .attr("text-anchor", "end")
+          .text("Weight")
+        )
+
+
+  const yAxis = (g) =>
+      g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y))
+      .call((g) =>
+                g
+                  .select(".tick:last-of-type text")
+                  .clone()
+                  .attr("x", 4)
+                  .attr("text-anchor", "start")
+                  .attr("font-weight", "bold")
+                  .text("MPG")
+              )
+    const data = d3.csv("cars.csv", (d) => {
+        return {
+            Acceleration: parseInt(d.Displacement),
+            Car: d.Car,
+            Cylinders: parseInt(d.Displacement),
+            Displacement: parseInt(d.Displacement),
+            Horsepower: parseFloat(d.Horsepower),
+            MPG: parseInt(d.MPG),
+            Manufacturer: d.Manufacturer,
+            Weight: parseInt(d.Weight),
+            ModelYear: parseInt(d["Model.Year"]),
+            Origin: d.Origin
+        }
+    })
+    .then(data => {
+        console.log(data);
+        plot(data);
+    });
+</script>
