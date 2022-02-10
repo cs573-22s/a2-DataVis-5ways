@@ -131,10 +131,22 @@ While it takes time to find the correct documentation, these functions made the 
 
 ![ggplot2](img/ggplot2.png)
 
-# d3...
+# D3
 
-(And so on...)
+I started with D3 for this project. As a jumping off point I started with [This js graph example](https://github.com/stevemacn/D3-Vanilla-Template/blob/main/scatterplot.js)
+This rudimentary graph was helpful to build off of. Reading in the values properly was very easy using d3.csv and it was even able to extrapolate the
+names of each of the columns. After toying with the domains of both axes I was able to get the scaling correct which wasn't painful. Plotting the data
+was also easy enough except for two rows which didn't have a MPG. Two values report NaN and my D3 decided they would be off the charts. I put in a catch
+for any value that wasn't a number and then just make the radius of their circles 0 to hide them. I also maually set the color of each manufacturer. The
+new colors I chose are easier for me to distinguish but they don't really correlate to the brands. But since every car brand is basically associated with
+silver there isn't really a spesific (unique) color for each brand. Size and opacity were simple in D3 but outside of data changing things stylistically
+tended to be tricky. Labeling the axis was alright once I figured out that the 'rotation transform' causes the 'translate transform' to behave differently.
+Extending the tick marks created the proper grid, but I was unable to figure out a way to have only 4 labeled ticks but have 3 other smaller ticks between them.
+Changing the color of the background was alright but changing the color of the grid was more hacky.
 
+Overall, aside from the missing smaller interlaced grid lines the graph matches pretty perfectly.
+
+![d3-graph](img/d3.jpeg)
 
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
