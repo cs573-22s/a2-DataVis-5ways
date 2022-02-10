@@ -1,5 +1,5 @@
 import {
-  easeSinInOut,
+  easeCubicInOut,
   interpolate,
   scaleLinear,
   schemeCategory10,
@@ -23,6 +23,8 @@ function App() {
   const [weightRangeDefault, setWeightRangeDefault] = useState([0, 0, 0]);
   const [mpgRange, setMpgRange] = useState([0, 0, 0]);
   const [weightRange, setWeightRange] = useState([0, 0, 0]);
+
+  const [activeCar, setActiveCar] = useState(null);
 
   const [activeManufacturer, setActiveManufacturer] = useState();
 
@@ -62,7 +64,7 @@ function App() {
   const xScale = scaleLinear()
     .domain([
       weightRange[0] - weightRange[2] / 20,
-      +weightRange[1] + weightRange[2] / 20,
+      weightRange[1] + weightRange[2] / 20,
     ])
     .range([0, contentWidth]);
 
@@ -111,7 +113,7 @@ function App() {
     selection()
       .transition("zoomin")
       .duration(1500)
-      .ease(easeSinInOut)
+      .ease(easeCubicInOut)
       .tween("xRange", () => {
         const percentInterpolate1 = interpolate(weightRange[0], lowest);
         const percentInterpolate2 = interpolate(weightRange[1], highest);
@@ -138,7 +140,7 @@ function App() {
     selection()
       .transition("zoomout")
       .duration(1500)
-      .ease(easeSinInOut)
+      .ease(easeCubicInOut)
       .tween("xRange", () => {
         const percentInterpolate1 = interpolate(
           weightRange[0],
@@ -174,7 +176,7 @@ function App() {
   return (
     <div className="App">
       <h1>D3 with React</h1>
-      <div>
+      <div className="viz">
         <svg className="viz-container" width={width} height={height}>
           <g
             transform={`translate(${
@@ -268,7 +270,7 @@ function App() {
 
             {/* marks */}
             {data.map((d) => {
-              const c =
+              let c =
                 activeManufacturer && activeManufacturer !== d.Manufacturer
                   ? "mark mark--hide"
                   : "mark";
@@ -281,9 +283,16 @@ function App() {
                     cx={xScale(d.Weight)}
                     cy={yScale(d.MPG)}
                     r={r}
+                    stroke={d === activeCar ? "#000" : "transparent"}
                     fill={
                       schemeCategory10[manufacturers.indexOf(d.Manufacturer)]
                     }
+                    onMouseEnter={() => {
+                      setActiveCar(d);
+                    }}
+                    onMouseLeave={() => {
+                      setActiveCar(null);
+                    }}
                   />
                 </g>
               );
@@ -299,7 +308,11 @@ function App() {
             {manufacturers.map((manufacturer, idx) => {
               return (
                 <g
-                  className={`legend-manufacturer ${manufacturer === activeManufacturer ? 'legend-manufacturer--active' : ''}`}
+                  className={`legend-manufacturer ${
+                    manufacturer === activeManufacturer
+                      ? "legend-manufacturer--active"
+                      : ""
+                  }`}
                   onMouseEnter={() => {
                     handleMouseEnter(manufacturer);
                   }}
@@ -316,7 +329,11 @@ function App() {
                     opacity={0.5}
                     fill={schemeCategory10[manufacturers.indexOf(manufacturer)]}
                   />
-                  <text x={15} dy="0.35em" className="legend-manufacturer__text">
+                  <text
+                    x={15}
+                    dy="0.35em"
+                    className="legend-manufacturer__text"
+                  >
                     {manufacturer}
                   </text>
                 </g>
@@ -346,6 +363,21 @@ function App() {
             })}
           </g>
         </svg>
+        {activeCar && (
+          <div className="tooltip" style={{transform: `translate(${xScale(activeCar.Weight)}px, ${yScale(activeCar.MPG) - 150}px)`}}>
+            <div>
+              <strong style={{color: '#f00'}}>{activeCar.Car}</strong>
+            </div>
+            <dl>
+              <dt>Manufacturer</dt>
+              <dd>{activeCar.Manufacturer}</dd>
+              <dt>Weight</dt>
+              <dd>{activeCar.Weight}</dd>
+              <dt>MPG</dt>
+              <dd>{activeCar.MPG}</dd>
+            </dl>
+          </div>
+        )}
       </div>
     </div>
   );
