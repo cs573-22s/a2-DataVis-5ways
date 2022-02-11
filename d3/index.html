@@ -4,11 +4,20 @@
 
 <svg id="scatterplot" width=900 height=700 ></svg>
 
+<style>
+  path.domain  {
+  stroke: white;
+}
+ .tick line {
+  stroke:white;
+}
+</style>
+
 <script>
   // console.log("Testing"); // test if d3 is loaded
   var width=800, height=600
   var Mercedes="#8E7CA2"
-  var Honda="#11D07A"
+  var Honda="#F5E400"
   var Bmw="#DD1C1A"
   var Ford="#FFA500"
   var Toyota="#0000FF"
@@ -19,7 +28,7 @@
           .range([ 0, width ]);
 
       var y = d3.scaleLinear()
-          .domain([d3.min(data, (d) => { return +d.MPG})*0.95, d3.max(data, (d) => { return +d.MPG})*1.05])
+          .domain([d3.min(data, (d) => { return +d.MPG})*0.90, d3.max(data, (d) => { return +d.MPG})*1.05])
           .range([height, 0]);
         
       var svg = d3.select('#scatterplot');
@@ -29,6 +38,7 @@
 
       Graph.append("g")
           .attr("transform", "translate(0," + (height) + ")")
+          .style("fill","#EEEEEE")
           .call(d3.axisBottom(x).ticks(4).tickSize(-height));
 
       Graph.append("text")
@@ -39,9 +49,7 @@
           .call(d3.axisLeft(y).ticks(4).tickSize(-width));
 
       Graph.append("text")
-        // .attr("transform", "translate(-40," + (height/2) + ")")
-        .attr("transform", "rotate(-90)")
-        .attr("transform", "translate(-40,300)")
+        .attr("transform", "rotate(-90) translate(-"+(height/2)+",-20)")
         .text("MPG");
 
       Graph.append("g")
@@ -54,7 +62,7 @@
                 .attr("r", function (d) { 
                   //2 values in MPG are NaN so this makes them invisible :/
                   if(+d.MPG){
-                    return 0.002*(+d.Weight);
+                    return 0.0025*(+d.Weight);
                   } else {
                     return 0;
                   }
