@@ -1,6 +1,8 @@
 # 02-DataVis-5ways
 
-Assignment 2 - Data Visualization, 5 Ways  
+# Assignment 2 - Data Visualization, 5 Ways  
+
+#Jules Cazaubiel
 ===
 
 # Excel
@@ -22,7 +24,7 @@ Assignment 2 - Data Visualization, 5 Ways
 
 ![ggplot replica](img/ggplot.png)
 
-![ggplot improved](img/ggplot improved.png)
+![ggplot improved](img/ggplot-improved.png)
 
 
 # Flourish
