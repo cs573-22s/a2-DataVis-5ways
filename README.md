@@ -26,7 +26,11 @@ Then you can see my redesign which makes the plot more accessible to colorblind 
 ![this is an image](https://github.com/njtourtillott/a2-DataVis-5ways/blob/main/img/Screen%20Shot%202022-02-11%20at%202.38.31%20PM.png)
 ![this is an image](https://github.com/njtourtillott/a2-DataVis-5ways/blob/main/img/Screen%20Shot%202022-02-11%20at%202.38.38%20PM.png)
 
-
+https://ghenshaw-work.medium.com/customizing-axes-in-d3-js-99d58863738b
+https://bl.ocks.org/wadefagen/ce5d308d8080130de10f21254273e30c
+https://www.d3-graph-gallery.com/graph/scatter_grouped.html
+https://www.d3-graph-gallery.com/scatter.html
+https://www.d3-graph-gallery.com/graph/scatter_grouped_highlight.html
 
 # Excel
 
