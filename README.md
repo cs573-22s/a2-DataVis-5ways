@@ -3,77 +3,40 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+# Excel
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+![Excel replica](img/excel.png)
 
-Your goal is to use 5 different tools to make the following chart:
+![Excel improved](img/excel-improved.png)
 
-![ggplot2](img/ggplot2.png)
 
-These features should be preserved as much as possible in your replication:
+# Seaborn (Python)
 
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
+![Seaborn replica](img/seaborn.png)
 
-Other features are not required. This includes:
+![Seaborn improved](img/seaborn.png)
 
-- The background grid.
-- The legends.
 
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
+# ggplot2 (R)
 
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
+![ggplot replica](img/ggplot.png)
 
-Libraries, Tools, Languages
----
+![ggplot improved](img/ggplot improved.png)
 
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
 
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
+# Flourish
 
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
+![Flourish replica](img/Flourish.png)
 
-I have marked a few that are strongly suggested.
+![Flourish improved](img/Flourish-improved.png)
 
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
+# D3
 
-Tips
----
+![D3 replica](img/D3.png)
 
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+![D3 improved](img/D3-improved.png)
 
 
 Readme Requirements
