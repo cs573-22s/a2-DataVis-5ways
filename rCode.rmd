@@ -1,3 +1,6 @@
+# https://ggplot2.tidyverse.org/
+# https://stackoverflow.com/questions/32207086/vary-scale-of-geom-point-size-by-facet
+
 ## loading libraries
 library(tidyverse)
 library(ggplot2)
