@@ -58,15 +58,6 @@
         .attr("opacity" , (d) => 0.5)
         .attr("r", (d) => size(+d.Weight))
 
-        svg.append('g')
-  .attr('class', 'x axis-grid')
-  .attr('transform', 'translate(0,' + INNER_HEIGHT + ')')
-  .call(xAxisGrid);
-
-svg.append('g')
-  .attr('class', 'y axis-grid')
-  .call(yAxisGrid);
-
 
       keys = ['toyota','ford','mercedes','bmw','honda']
       w = [1500,2500,3500,4500]
