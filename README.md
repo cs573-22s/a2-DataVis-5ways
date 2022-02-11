@@ -23,7 +23,7 @@ Flourish is an online data visualization tool. It’s easier to use than Tableau
 
 
  # Python + seaborn
-![seaborn](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/matplotlib.png)
+![seaborn](https://raw.githubusercontent.com/speraruba/a2-DataVis-5ways/main/img/Seaborn.png)
 
 Matplotlib is a plotting library for the Python programming language and its numerical mathematics extension NumPy. It provides an object-oriented API for embedding plots into applications using general-purpose GUI toolkits like Tkinter, wxPython, Qt, or GTK+.
 
