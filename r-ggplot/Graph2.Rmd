@@ -1,0 +1,18 @@
+---
+title: "R Notebook"
+output: html_notebook
+
+---
+
+```{r}
+
+library(tidyverse)
+
+data <- read.csv("cars-sample.csv")
+
+ggplot(data, aes(x=Weight, y=MPG)) + geom_point(aes(size=Weight, color=Manufacturer), alpha = 0.5)
+
+
+```
+
+
