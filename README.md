@@ -1,5 +1,5 @@
 # 02-DataVis-5ways
-The following is Assignment 2 for CS573.
+The following is Assignment 2 for CS573. All the images can be seen on: https://evbruk.github.io/a2-DataVis-5ways/
 
 # Tableau
 Tableau is a data visualization tool that allows users to easily create visualizations using imported data. Using the desktop version I was able to create the scatterplot.
@@ -33,7 +33,6 @@ Python can also be used to create a scatter plot. In my example I used 'pandas',
 
 I ran into difficulty trying to color the circles, because matplotlib.pyplot requires color names in order to use the 'color='. I created a dictionary of what color should correspond to each manufacturer. Using that, I had it assign the color of each dot. 
 
-
 ![Python](img\PythonGraph.JPG)
 
 # d3
@@ -42,8 +41,6 @@ d3 is a JavaScript library used for visualizing data using web standards. I used
 The 'd3.scaleLinear()' function was used to construct a linear relationship for the x and y axis. The color was also assigned to be based on the manufacturer. Then the size of each dot had to be set based on the weight. Then the svg was built with the dots based on their corresponding size. There were also x and y axis constructed to be used in the function to label the graph. 
 
 This was the most difficult of the five ways to construct the graph. There are many little components that need to be completed in order for the graph to be created. For a while, I could not get the graph to load until I reconstructed how the function was called so that the data could be read and type casted before it was being used in future code. I also had difficulty getting the size of the dots to correspond to the weight. I was also unable to build out the legends on the side of the graph. 
-
-gh-pages url: https://evbruk.github.io/a2-DataVis-5ways/
 
 
 ![d3](img\d3Graph.JPG)
