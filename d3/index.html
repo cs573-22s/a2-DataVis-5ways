@@ -72,7 +72,7 @@ d3.csv("https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/cars-sa
     .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
     .range([ "#f6938c", "#b5b639", "#4ebd94","#45bced", "#cb91c0"]);
 
-svg.append('g')
+  svg.append('g')
     .selectAll("dot")
     .data(data)
     .enter()
