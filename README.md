@@ -2,141 +2,31 @@
 
 Assignment 2 - Data Visualization, 5 Ways  
 ===
+## 1) Javascript + D3
+![a2-D3](https://github.com/johvanniperez/a2-DataVis-5ways/blob/a2-johvanniperez-Johvanni-Perez/D3Graph.PNG)
+Out of all the libraries I used to recreate the cars sample dataset graph, I felt that D3 gave me the most control in creating a custom graph/visual. However, I did find that it was the trickiest to place and emphasize certain chart elements and aesthetics. For example, I found a "tick" functionality in the D3 library that would allow a programmer to specify the number of axes tick marks could be displayed in the graph. Unfortuanley, this tick functionality did not allow me to specify how the units or intervals are incremented on the graph (i.e the model graph provided shows that the MPG units increments from 10 to 20 to 30...). 
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+## 2) Python + Matplotlib
+![a2-python](https://github.com/johvanniperez/a2-DataVis-5ways/blob/a2-johvanniperez-Johvanni-Perez/a2-python/a2-python-graph.png)
+Matplotlib is an easy library to use and implement and recreating the graph using this library and python was not as difficult as I thought. The only challenge in recreating the model graph was specifying the weight for the sizing of the data points. For example, I did some arithmetic transformation on the dataset to manually specify the weight that would be applied to each individual data point. While I was able to chang the sizing for each data point, it is not as accurate as the one shown in the model graph. I ended up playing with different weight values to see what looked best/worse. One other thing with noting is that matplotlib does not support multiple legends being displayed on a singular graph.
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
+## 3) R + ggplot2
+![a2-RStudio](https://github.com/johvanniperez/a2-DataVis-5ways/blob/a2-johvanniperez-Johvanni-Perez/a2-RStudio/a2-RStudio/a2-RStudioggplot.png)
+In comparison to the other libraries, ggplot2 was the easiest and most efficient of them all. I was able to recreate the model graph using just this library in RStudio and with only 3 lines of code or so.
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+## 4) PowerBI
+![a2-PowerBI](https://github.com/johvanniperez/a2-DataVis-5ways/blob/a2-johvanniperez-Johvanni-Perez/a2PB/PowerBIGraph.PNG)
+I have used PowerBI before to create data visualizations before and it is a relatively easy tool to use. However, it was quite tricky when it came to trying to recreate the graph. For example, before I could even graph the data, I had to transform the dataset so that the null values would be removed in order for the data type to be correctly identified for colulmns Weight and MPG. With null values the data gets read as "text" type, but without it is read as "numeric" type and without it being identified as of "numeric" type, PowerBI does not graph the data how one would expect. Like matplotlib, PowerBI does not allow multiple legends to be displayed.
 
-Your goal is to use 5 different tools to make the following chart:
-
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
-
-
-Readme Requirements
----
-
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
-
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
-
-Other Requirements
----
-
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
-
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
-
-GitHub Details
----
-
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-
-Grading
----
-
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
-
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
-
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
-
-# R + ggplot2 + R Markdown
-
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
-
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
-
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
-
-![ggplot2](img/ggplot2.png)
-
-# d3...
-
-(And so on...)
-
+## 3) Excel
+![a2-Excel](https://github.com/johvanniperez/a2-DataVis-5ways/blob/a2-johvanniperez-Johvanni-Perez/a2Excel/ExcelGraph.png)
+Like PowerBI, I have used Excel to create visualizations and the toolsets it provides for making these visuals. Excel wasn't too tedious, but it did have some shortcomings. For example, in order to create a color coded scatter plot where each color represented a manufacturer in the dataset, I had to first sort and order the dataset by manufacturers. For each manufacturer, I had to manually insert the respective data into the graph. After doing so, I then had to repeatedly change the formatting of the data such as the transparancy of the data points for each manfucturer group. Like PowerBI and matplotlib, Excel does not support multiple legends on a particular graph.
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- Matplotlib was tricky enough in trying to get one legend for the Manufacturer/colors. I was able to implement this legend using Line2D
+- Applying weight to the data points for four different ways as they did not handle it as easy as ggplot2
+- Mapping color to Manufacturer
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+- Using different colors to identify the manufacturers
+- Demonstrating the axes and their labels
