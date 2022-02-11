@@ -32,6 +32,7 @@ Again I initially started by trying to recreate the initial graph using d3.js. B
 ![d3CarsDataScatterplot.png](img/d3CarsDataScatterplot.PNG)
 ![d3CarsDataScatterplotWithToolTip.png](img/d3CarsDataScatterplotWithToolTip.PNG)
 
+Play with here: https://valley-invited-bismuth.glitch.me/
 
 # Chart.js
 
@@ -42,6 +43,8 @@ Again I initially started by trying to recreate the initial graph using chart.js
 
 ![chartjsCarsDataScatterplot.png](img/chartjsCarsDataScatterplot.PNG)
 ![chartjsCarsDataScatterplotWithToolTip.png](img/chartjsCarsDataScatterplotWithToolTip.PNG)
+
+Play with here: https://valley-invited-bismuth.glitch.me/
 
 # Flourish
 
