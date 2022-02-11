@@ -3,140 +3,49 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+## 01 Python Plotly
+![python-plotly](01-python-plotly/screenshot.png)
+Python is a popular programming language which is easy to use mainly because of the flexibility it provides. Plotly with python is relatively easy to use. It has an inbuilt function for scatter plot. So, we don't need to have much custom code to get the desired result. Currently, plotly does not allow multiple legends to be displayed at once. 
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
+## 02 Javascript Plotly
+![javascript-plotly](02-javascript-plotly/javascript-plotly.png)
+Javascript is a popular language mostly used in website for dynamic contents. Plotly is a library for javascript for simple data visualizations. Plotly with javascript is comparatively difficult to implement than python-plotly. Mainly because we need to separate each category of data beforehand and then plot each group at once. Multiple legends, like in python plotly is not possible with the current version.
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+## 03 Python Matplotlib
+![matplotlib](./03-python-matplotlib/python-matplotlib.png)
+Matplotlib is a visualization tool for python which allows creation of animated and interactive visualizations. Like plotly, it does not need much custom code to create a visualization like scatterplot. It has inbuilt method to do that called `scatter`. Creation of custom legends is possible but is difficult to implement.
 
-Your goal is to use 5 different tools to make the following chart:
+## 04 Flourish
+![flourish](./04-flourish/cars-visualization-flourish@2x.png)
+Flourish is an online tool for visualization. It is the easiest of all to implement since we don't need to write any code for it. To get a visualization, we can simply upload out data, select the columns for the axes, sizes and category. However, multiple legends cannot be created with flourish too.
 
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+Implementation: [Flourish](https://public.flourish.studio/visualisation/8644756/)
 
 
-Readme Requirements
----
+## 05 Javascript React D3
+![d3](./05-javascript-d3/d3-react.png)
+D3 is a powerful javascript library for visualization. Although we usually need to write a lot to get a desired visualization, the fact that we can tweak and create our own visualization makes this library really powerful. 
 
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
+React is a javascript library for building interfaces. It helps to create interactive interfaces with ease.
 
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
-
-Other Requirements
----
-
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
-
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
-
-GitHub Details
----
-
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-
-Grading
----
-
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
-
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
-
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
-
-# R + ggplot2 + R Markdown
-
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
-
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
-
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
-
-![ggplot2](img/ggplot2.png)
-
-# d3...
-
-(And so on...)
+I implemented this visualization with d3 on top of react. I wanted to try zooming in for focus of selected category of data. The animation part was difficult to implement.
 
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- Implemented d3 with react
+- Repicating legends were thoughest. With matplotlib, I could not exactly replicat the legend but almost looks similar. In d3, it was properly done.
+- Zoom to view animation: In d3 with react, I was able to integrate animation of scales.
+- In all visualizations, manufactures are uniquely identified dynamically; manufacturers are not hard coded.
 
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+
+## Design Achievements
+- All manufacturers were uniquely identified dynamically and colors were assigned based on d3 categorical swatches. All colors are consistent between manufacturers.
+- Grids and axes were added in all visualizations as per the original design.
+- (d3) For **context focus**, whenever we hover over a manufacturer, the entire scale shifts to focus on the marks of same manufacturer. And when we hover out, scales are reset to show all marks.
+- (d3) Tooltip is displayed when we hover over a mark.
+
+
+1. Dynamically identify unique manufactures. Manufacturers are not hard coded
+2. Colorscheme d3 categorical swatches
+3. Same color for each manufacturer in all viz by sorting via name
+<!-- Targeting (eye movement) d3 -->
