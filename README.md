@@ -189,6 +189,22 @@ intermediate tick marks without labels. Finally the NaN values defaulted to 0 wh
 
 ![Excel](img/excel.png)
 
+# Google Sheets
+
+Since I tend to use Google Sheets over Excel in smaller projects I've done in the past I wanted to do a 6th replication and compare the two.
+Immediatly it was much nicer to use google sheets and I  was able to get Google to recognize that each brand should be a seperate color in
+the bubble chart without having to manualy seperate the data. Setting size was simple and all lables were easy to just type in. Moving on to
+the stylization of the plot, I was able to add my own colors again but there was no option to select only the backgound of the graph so I had
+to color the entirity of the background the light gray. Besides that I was able to actually set up the axies and tick marks perfectly, something
+that excel couldn't even come close to. I was unable to label the legend for some reason even though there was a option to add a label that was 
+grayed out for some reason. The one really big drawback that really affects the readability of this plot is the fact that there was no option for
+me to alter the size of he bubbles. They were standarddized off the weights but They're far too big for the graph and theres no way for me to reduce
+that besides manually changing the data vales.
+Over all it was much easier to make but becuase of the solid gray background and the inability to change the size of the bubbles it actually ended up
+being one of the worst recreations.
+
+![Google Sheets](img/google.png)
+
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
 - **Solved AI Forever**: ...
