@@ -3,7 +3,7 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-# R + ggplot2 + R Markdown
+# R + ggplot2 
 
 R is a language primarily focused on statistical computing.
 ggplot2 is a popular library for charting in R.
@@ -26,9 +26,14 @@ Tableu is very versatile and it allows you to make very complex graphs. the only
 
 ![ggplot2](tableu.png)
 
+# Flourish
+Flourish is a free grpahing tool, I think it was a little hard, and I was not able to add the weight legend as well. Flourish has a nice way of adding your graphs to your website using html tags, and they update if you change it on the flourish platform. 
+
+![ggplot2](flourish.png)
+
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- Was able to create the graphs in 3 coding languages and libraries.
+- Used two non coding platforms to create two graphs 
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+- Used differnt colors and opacities on the graphs
