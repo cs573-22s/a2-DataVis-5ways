@@ -11,7 +11,7 @@ R Markdown is a document format that compiles to HTML or PDF and allows you to i
 
 While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
 
-![ggplot2](rplot.png)
+![ggplot2](Rplott.png)
 
 # d3
 
