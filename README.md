@@ -3,7 +3,7 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-# R + ggplot2 + R Markdown
+# R + ggplot2 
 
 R is a language primarily focused on statistical computing.
 ggplot2 is a popular library for charting in R.
