@@ -18,7 +18,7 @@ I started by using the excel bubble plot function to create the first plot and b
 
 As excel is fairly limited in terms of interaction and other customizations that I felt would add to the visualization, I decided to keep my improvements simple. I simply changed the colors to a colorblind accessible palette (created using the following website: https://davidmathlogic.com/colorblind/#%2333FF00-%23785EF0-%23DC267F-%23FE6100-%23FFB000) and added a title. 
 
-![Excel improved](img/excel-improved.png)
+![Excel improved](img/excel-improved-final.png)
 
 Excel is easy to use and is very guided, so modifying parameters to achieve what I wanted in it was relatively easy but some aspects of it were restrictive. Some things I had to look for a little more in depth, like how to create multiple series, but overall it wasn't too bad. 
 
@@ -35,7 +35,7 @@ Seaborn is a visualization library based on the matplotlib library. It adds more
 
 In order to improve on the design using seaborn, I found my options to be limited. I once more updated the color palette to be colorblind friendly and added a title.
 
-![Seaborn improved](img/seaborn.png)
+![Seaborn improved](img/seaborn-improved-final.png)
 
 Python is the programming language I am probably most comfortable with, and while I wasn't familiar with seaborn, it is well documented. This made finding ways to achieve what I wanted achievable with a little research.
 
@@ -64,7 +64,7 @@ I used the Scatter template and manually updated which columns of the dataset to
 Flourish also didn't allow me to download the HTML version of the visualization, so I only have an image to show for it, but the live visualization can be found here: 
 https://public.flourish.studio/visualisation/8646932/
 
-![Flourish replica](img/flourish.png)
+![Flourish replica](img/Flourish.png)
 
 As Flourish didn't really offer much freedom in customization, I added a title and changed the color palette. I also added trendlines for each individual Manufacturer. Even though they are a little messy when looking at all the manufacturers together, the user can click on the legend to select only one, making it easier to see. 
 The live visualization can be found here: https://public.flourish.studio/visualisation/8678450/
@@ -82,7 +82,7 @@ D3 is a javascript library used to create highly customizable and interactive vi
 
 In order to improve it, I once more added a title and modified the color palette. Additionally, I made the graph interactive, so the user could get more information out of it. Hovering over a circle makes it more opaque so it stands out more, and a tooltip displays its data nearby. I added what type of car the circle represented in this tooltip, because it adds one more level of information, and I also listed how many cars were present for each Manufacturer in the legend. 
 
-![D3 improved](img/D3-improved.png)
+![D3 improved](img/D3-improved-final.png)
 
 D3 is definitely the most complicated of all the tools I used, mostly because it is the newest to me but also because you need to do absolutely everything in it. There is no wrapper function to create a graph easily like in seaborn, you have to do everything yourself. However, this is also what makes it the most customizable and potentially interactive.
 
