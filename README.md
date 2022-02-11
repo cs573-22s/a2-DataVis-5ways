@@ -164,6 +164,19 @@ transform the window. In a symilar vein I just had to add a fake point with a la
 
 ![matplotlib](img/Python.png)
 
+# Flourish
+
+Flourish is very straight forward to use and I was honestly very impressed. Most of the time when you can only use preset options to build
+something you're always going to be limited in some way but for the most part I was able to create everything painlessly. The data was easy
+to upload and it automatically got rid of the two NaN values for me. It was easy to add my own colors to the graph as well as change the background.
+The only imitations I ran into was that I was unable to have intermediate tickmarks on the axies and that I was only able to add one legend
+which could only be placed on the bottom or the top. Honestly with how much Flourish lets you do I'm really suprised that I couldn't just put
+a legend on the side of the graph. But other aspects let me customize to an insane ammount, for example, this is the only tool aside from R
+that has allowed me to specify that the axies have no lines but have tick marks at the numbers.
+Overall very straigtforward. Also I couldn't save any file but it's published publicaly here: [Flourish Plot](https://public.flourish.studio/visualisation/8673630/)
+
+![Flourish](img/flourish.png)
+
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
 - **Solved AI Forever**: ...
