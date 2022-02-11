@@ -1,0 +1,283 @@
+Assignment 2 ~ CS 573 ~ Nick Tourtillott
+
+<!Intro>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<div id="graph"></div>
+<div id="cbv"></div>
+<meta charset="utf-8">
+
+
+<script>
+
+// lets make the margins of the graph & make the svg to house it
+var margin = {top: 30, right: 50, bottom: 50, left: 80},
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+var svg = d3.select("#graph")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right + 300)
+    .attr("height", height + margin.top + margin.bottom + 200)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// background
+svg.append("rect").attr("x",0).attr("y",0).attr("height", 320).attr("width", 330).attr("fill", "#eeeeee")
+
+// axis labels
+svg.append("text").attr("x", 125).attr("y", 350).text("Weight").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", -50).attr("y", 145).text("MPG").style("font-size", "15px").attr("alignment-baseline","middle").attr("transform", "translate(-175,125) rotate(-90)")
+
+    // legend
+    // colors
+    svg.append("text").attr("x", 380).attr("y", 5).text("Manufacturer").style("font-size", "18px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy",20).attr("r", 5).attr("fill", "#E64345").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 20).text("bmw").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy",40).attr("r", 5).attr("fill", "#49C168").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 40).text("ford").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy",60).attr("r", 5).attr("fill", "#E48F1B").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 60).text("honda").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy",80).attr("r", 5).attr("fill", "#60CEED").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 80).text("mercedes").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy",100).attr("r", 5).attr("fill", "#FFC9ED").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 100).text("toyota").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    // weight
+    svg.append("text").attr("x", 380).attr("y", 145).text("Weight").style("font-size", "18px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy", 160).attr("r", (2000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 160).text("2000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy", 180).attr("r", (3000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 180).text("3000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    svg.append("circle").attr("cx",400).attr("cy", 200).attr("r", (4000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    svg.append("text").attr("x", 420).attr("y", 200).text("4000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+// Now lets load in the cars and make the thing-- NOTE: I filtered out the two fords without values by deleteing them
+d3.csv("cars-sample.csv").then( function(data) {
+
+    // x axis
+    var x = d3.scaleLinear()
+    .domain([1600, 5250])
+    .range([ 0, width ]);
+    svg.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x).ticks(4))
+    .call(g => g.select(".domain").remove())
+    .selectAll("path")
+    .attr("stroke", "white");
+
+    // y axis
+    var y = d3.scaleLinear()
+    .domain([8, 48])
+    .range([ height, 0]);
+    svg.append("g")
+    .call(d3.axisLeft(y).ticks(4))
+    .call(g => g.select(".domain").remove())
+    .selectAll("path")
+    .attr("stroke", "white");
+
+    // Grid lines
+    var gridlinesx = d3.axisTop()
+                    .tickFormat("")
+                    .tickSize(-height)
+                    .scale(x);
+    var gridlinesy = d3.axisLeft()
+                    .tickFormat("")
+                    .tickSize(-width)
+                    .scale(y);
+
+  svg.append("g")
+     .attr("class", "gridx")
+     .call(gridlinesx)
+     .selectAll("line")
+     .attr("stroke", "white");
+
+
+     svg.append("g")
+        .attr("class", "gridy")
+        .call(gridlinesy)
+        .selectAll("line")
+        .attr("stroke", "white");
+
+svg.selectAll("path").style("stroke", "white")
+
+    var color = d3.scaleOrdinal()
+        .domain(["ford", "bmw", "toyota", "honda", "mercedes"])
+        .range([ "#49C168", "#E64345", "#FFC9ED", "#E48F1B", "#60CEED"])
+
+
+    // actually plotting
+    svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .join("circle")
+        .attr("cx", function (d) { return x(d.Weight); } )
+        .attr("cy", function (d) { return y(d.MPG); } )
+        .attr("r", function (d) {return (d.Weight * .002); })
+        .style("fill", function (d) { return color(d.Manufacturer) })
+        .style("opacity", .5)
+
+})
+
+
+</script>
+
+
+
+
+<script>
+
+// lets make the margins of the graph & make the svg to house it
+var margin = {top: 30, right: 50, bottom: 50, left: 80},
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+var cb = d3.select("#cbv")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right + 300)
+    .attr("height", height + margin.top + margin.bottom + 200)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// background
+cb.append("rect").attr("x",0).attr("y",0).attr("height", 320).attr("width", 330).attr("fill", "#eeeeee")
+
+// axis labels
+cb.append("text").attr("x", 125).attr("y", 350).text("Weight").style("font-size", "15px").attr("alignment-baseline","middle")
+cb.append("text").attr("x", -50).attr("y", 145).text("MPG").style("font-size", "15px").attr("alignment-baseline","middle").attr("transform", "translate(-175,125) rotate(-90)")
+
+    // legend
+    // colors
+    cb.append("text").attr("x", 380).attr("y", 5).text("Manufacturer").style("font-size", "18px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy",20).attr("r", 5).attr("fill", "#cc79a7").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 20).text("bmw").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy",40).attr("r", 5).attr("fill", "#d55e00").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 40).text("ford").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy",60).attr("r", 5).attr("fill", "#f0e442").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 60).text("honda").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy",80).attr("r", 5).attr("fill", "#009e73").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 80).text("mercedes").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy",100).attr("r", 5).attr("fill", "#0072b2").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 100).text("toyota").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    // weight
+    cb.append("text").attr("x", 380).attr("y", 145).text("Weight").style("font-size", "18px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy", 160).attr("r", (2000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 160).text("2000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy", 180).attr("r", (3000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 180).text("3000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    cb.append("circle").attr("cx",400).attr("cy", 200).attr("r", (4000 * .002)).attr("fill", "#808080").style("opacity", .5)
+    cb.append("text").attr("x", 420).attr("y", 200).text("4000").style("font-size", "15px").attr("alignment-baseline","middle")
+
+// Now lets load in the cars and make the thing-- NOTE: I filtered out the two fords without values by deleteing them
+d3.csv("cars-sample.csv").then( function(data) {
+
+    // x axis
+    var x = d3.scaleLinear()
+    .domain([1600, 5250])
+    .range([ 0, width ]);
+    cb.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x).ticks(4))
+    .call(g => g.select(".domain").remove())
+    .selectAll("path")
+    .attr("stroke", "white");
+
+    // y axis
+    var y = d3.scaleLinear()
+    .domain([8, 48])
+    .range([ height, 0]);
+    cb.append("g")
+    .call(d3.axisLeft(y).ticks(4))
+    .call(g => g.select(".domain").remove())
+    .selectAll("path")
+    .attr("stroke", "white");
+
+    // Grid lines
+    var gridlinesx = d3.axisTop()
+                    .tickFormat("")
+                    .tickSize(-height)
+                    .scale(x);
+    var gridlinesy = d3.axisLeft()
+                    .tickFormat("")
+                    .tickSize(-width)
+                    .scale(y);
+
+  cb.append("g")
+     .attr("class", "gridx")
+     .call(gridlinesx)
+     .selectAll("line")
+     .attr("stroke", "white");
+
+
+     cb.append("g")
+        .attr("class", "gridy")
+        .call(gridlinesy)
+        .selectAll("line")
+        .attr("stroke", "white");
+
+cb.selectAll("path").style("stroke", "white")
+
+    var color = d3.scaleOrdinal()
+        .domain(["ford", "bmw", "toyota", "honda", "mercedes"])
+        .range([ "#d55e00", "#cc79a7", "#0072b2", "#f0e442", "#009e73"])
+
+
+  var groupSel = function(event, d){
+    manSel = d.Manufacturer
+
+    d3.selectAll(".dot")
+      .transition()
+      .duration(200)
+      .style("fill", "lightgrey")
+
+
+      d3.selectAll("." + manSel)
+      .transition()
+      .duration(200)
+      .style("fill", color(manSel))
+      .style("opacity", 1)
+
+  }
+
+  var notSel = function(event, d){
+    d3.selectAll(".dot")
+      .transition()
+      .duration(200)
+      .style("fill", function (d) { return color(d.Manufacturer) })
+      .style("opacity", .5)
+  }
+
+    // actually plotting
+    cb.append('g')
+    .selectAll("dot")
+    .data(data)
+    .join("circle")
+    .attr("class", function (d) { return "dot " + d.Manufacturer } )
+        .attr("cx", function (d) { return x(d.Weight); } )
+        .attr("cy", function (d) { return y(d.MPG); } )
+        .attr("r", function (d) {return (d.Weight * .002); })
+        .style("fill", function (d) { return color(d.Manufacturer) })
+        .style("opacity", .5)
+    .on("mouseover", groupSel)
+    .on("mouseleave", notSel )
+
+})
+
+
+</script>
