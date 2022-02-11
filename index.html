@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Data Vis Assignment 2</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+
+    <svg></svg>
+    <canvas id="canvas"></canvas>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!--<script src="js/scripts.js"></script> -->
+    <script>
+    var height = 350;
+  var width = 700;
+  var margin = ({top: 20, right: 30, bottom: 30, left: 40});
+
+  // initialize our scales
+  var x, y, color;
+
+  // TODO sanitizing and type casting your CSV as it comes in. ANYONE?!
+  d3.csv("cars-sample.csv", d3.autoType).then(function(d) {
+      console.log(d);
+      buildScatter(d);
+  })
+
+  function buildScatter(data) {
+
+      x = d3.scaleLinear()
+          .domain(d3.extent(data, d => d.Weight)).nice()
+          .range([margin.left, width - margin.right])
+
+      y = d3.scaleLinear()
+         .domain(d3.extent(data, d => d.MPG)).nice()
+         .range([height - margin.bottom, margin.top])
+
+      color = d3.scaleOrdinal(data.map((d) => d.Manufacturer),
+          d3.schemeCategory10
+        )
+
+
+      // make our blank svg canvas
+      var svg = d3
+        .select("svg")
+        .attr("viewBox", [0, 0, width, height])
+        .property("value", []);
+
+      svg.append("g").call(xAxis);
+      svg.append("g").call(yAxis);
+
+      // draw some dots!
+
+      var dot = svg
+        .selectAll("circle")
+        .data(data)
+        .join("circle")
+        .attr("cx", function (d) { return 40; } )
+        .attr("cy", function (d) { return 20; } )
+        .style("opacity", .5)
+        .attr("fill", (d) => color(d.Manufacturer))
+        .attr("r", (d) => 1)
+        .on("mouseover",(e,d) => {    // event listener to show tooltip on hover
+          d3.select("#bubble-tip-"+d.ID)  
+        .style("display","block");
+        })
+        .on("mouseout", (e,d) => {    // event listener to hide tooltip after hover
+          if(!d.toolTipVisible){
+            d3.select("#bubble-tip-"+d.ID)
+              .style("display","none");
+            }
+        })
+  .on("click", (e,d) => {    // event listener to make tooltip remain visible on click
+    if(!d.toolTipVisible){
+      d3.select("#bubble-tip-"+d.ID)
+        .style("display", "block");
+      d.toolTipVisible = true;
+    }
+    else{
+      d3.select("#bubble-tip-"+d.ID)
+        .style("display", "none");
+      d.toolTipVisible = false;
+    }
+  })
+
+      
+      svg.selectAll(".bubble-tip")
+  .data(data)
+  .join("g")
+  .attr("class", "bubble-tip")
+  .attr("id", (d)=> "bubble-tip-"+d.ID)
+  .attr("transform", d => "translate(" + (x( d.Weight )+20) + ", " + y( d.MPG) + ")"  )
+  .style("display", "none")   
+  .append("rect") 
+  .attr("x",-5)
+  .attr("y",-20)
+  .attr("rx",5)
+  .attr("fill","white")
+  .attr("fill-opacity", 0.9)
+  .attr("width",180)
+  .attr("height",80)
+
+
+svg.selectAll(".bubble-tip")
+  .append("text")
+  .text(d =>d.Car +  " - " + d.Manufacturer)
+  .style("font-family", "sans-serif")
+  .style("font-size", 14)
+  .attr("stroke", "none")
+  .attr("fill", d => color(d.Manufacturer))
+
+svg.selectAll(".bubble-tip")
+  .append("text")
+  .classed("bubble-tip-yText", true)
+  .text(d => "MPG: " + d.MPG + " mpg")
+  .attr("y", 26 )
+  .style("font-family", "sans-serif")
+  .style("font-size", 14)
+  .attr("stroke", "none")
+  .attr("fill", d => color(d.Manufacturer))
+svg.selectAll(".bubble-tip")
+  .append("text")
+  .classed("bubble-tip-yText", true)
+  .text(d => "Weight: " + d.Weight + " lbs")
+  .attr("y", 44)
+  .style("font-family", "sans-serif")
+  .style("font-size", 14)
+  .attr("stroke", "none")
+  .attr("fill", d => color(d.Manufacturer))
+      
+  svg.selectAll("circle")
+    .transition()
+    .delay(function(d,i){return(i*4);})
+    .duration(3000)
+    .attr("cx", function (d) { return x(+d.Weight); } )
+    .attr("cy", function (d) { return y(+d.MPG); } )
+    .attr("r", (d) => +d.Weight/250)
+  
+  } // end of build scatter
+      
+  
+
+  const xAxis = (g) =>
+    g
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x))
+      .call((g) =>
+          g
+          .append("text")
+          .attr("x", width - margin.right)
+          .attr("y", -4)
+          .attr("fill", "#000")
+          .attr("font-weight", "bold")
+          .attr("text-anchor", "end")
+          .text("Weight")
+        )
+
+
+  const yAxis = (g) =>
+      g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y))
+      .call((g) =>
+                g
+                  .select(".tick:last-of-type text")
+                  .clone()
+                  .attr("x", 4)
+                  .attr("text-anchor", "start")
+                  .attr("font-weight", "bold")
+                  .text("MPG")
+              )
+
+
+    </script>
+    <script>
+    let filename = 'cars-sample.csv';
+
+d3.csv(filename).then(function(loadedData) {
+  
+
+  let data = [];
+  
+  for (let i=0; i<loadedData.length; i++) {
+    let MPG = loadedData[i].MPG;
+    let Weight = loadedData[i].Weight;
+    let carName = loadedData[i].Car;
+    let manufacturer = loadedData[i].Manufacturer;
+    
+    // combine the data into a single datapoint
+    let point = { x: Weight, y: MPG, name: carName, manu: manufacturer };
+    data.push(point);
+  }
+  let colorArray = [];
+  let radiusArray = [];
+  
+  function fillArrays () {
+    for (let i = 0; i < data.length; i ++) {
+      if (data[i].manu === 'bmw') {
+        colorArray.push('rgba(30, 130, 76, 0.5)');
+      } else if (data[i].manu === 'ford') {
+        colorArray.push('rgba(45, 85, 255, 0.5)');
+      } else if (data[i].manu === 'honda') {
+        colorArray.push('rgba(242, 38, 19, 0.5)');
+      } else if (data[i].manu === 'mercedes') {
+        colorArray.push('rgba(255, 240, 0, 0.5)');
+      } else {
+        colorArray.push('rgba(140, 20, 252, 0.5)');
+      }
+      radiusArray.push(data[i].x / 300);
+    }
+  }
+  fillArrays();
+  
+  let options = {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        data: data,
+        label: "Car Dataset",
+        pointBackgroundColor: colorArray,
+        fill: false,
+        showLine: false,
+        radius: radiusArray,
+
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'MPG vs Weight'
+      },
+      
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'MPG'
+          },
+          
+          ticks: {
+            min: 0,
+            max: 50
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Weight'
+          },
+          ticks: {
+            min: 1500,
+            max: 5000,
+            callback: function(value, index, values) {
+                return value.toLocaleString() + ' lbs';
+              }
+          }
+        }],
+      },
+      tooltips: {
+        callbacks: {
+            title: function(tooltipItem, all) {
+              return [
+                all.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index].name,
+              ]
+            },
+            label: function(tooltipItem, all) {
+              return [
+                'Weight : ' + tooltipItem.xLabel.toLocaleString() + ' lbs',
+                'MPG: ' + tooltipItem.yLabel.toLocaleString() + ' mpg'
+              ]
+            }
+          },
+      },
+      
+      legend: {
+        display: true,
+      }
+    }
+  };
+  
+  let chart = new Chart(document.getElementById('canvas'), options);
+});
+
+    </script>
+    
+   
+  </body>
+</html>
