@@ -46,7 +46,7 @@ For my 4th method, I created the plot using python and the packages: Seaborn & m
 So first, for my recreation you can see that below, and while colors and the amount of increments on the size legend differ the plot is virtually the same.
 ![this is an image](https://github.com/njtourtillott/a2-DataVis-5ways/blob/main/img/seaborn%20plot%201.png)
 
-Then similar to past methods, I focused my design efforts on making the plot color blind friendly through the use of a specific color palette.
+Then similar to past methods, I focused my design efforts on making the plot color blind friendly through the use of a specific color palette and unqiue symbols for each manufacturer.
 ![this is an image](https://github.com/njtourtillott/a2-DataVis-5ways/blob/main/img/seaborn%20plot%202.png)
 
 
