@@ -1,0 +1,13 @@
+---
+title: "R ggplot2"
+output: html_document
+author: Yujun Mao
+---
+
+```{r}
+library(ggplot2)
+cars <- read.csv("https://raw.githubusercontent.com/cs573-22s/a2-DataVis-5ways/main/cars-sample.csv")
+sp <- ggplot(cars, aes(x=Weight, y=MPG, size=Weight, color=Manufacturer)) + geom_point(alpha = 0.5)
+sp + scale_color_manual(values=c("#999999", "#E69F00", "#56B4E9", "#C71585", "#4B0082"))
+```
+
