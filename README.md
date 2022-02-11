@@ -1,12 +1,10 @@
-# 02-DataVis-5ways
-
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
 
 # JS + d3
 
-![JS d3 plot](plot_images/d3_plot.png)
+![JS d3 plot](plot_images/d3_plot.PNG)
 
 I used d3 to create this scatterplot in JavaScript. I am still pretty new to JavaScript, so this was a bit of a challenge, though the starter code helped greatly. I found that changing or adding things didn't always break the code - the scatterplot would still show up on my server, so it was sometimes hard to tell what exactly I had done wrong. Still, I think this tool will be very useful for me in the future for making data visualizations for websites. 
 
@@ -17,14 +15,14 @@ I also experimented with color and the mouseover tool, which I will explain futh
 
 # Python + matplotlib + seaborn + pandas
 
-![Python plot](plot_images/py_plot.png)
+![Python plot](plot_images/py_plot.PNG)
 
 I used Python and a few statistical libraries to create this scatterplot. I use these libraries fairly often for my own projects, so this was not difficult. I used pandas to read the cars CSV file into a Pandas dataframe. Pandas is a data manipulation library that makes working with data very easy. I then used Seaborn to create the scatterplot from the dataframe. Seaborn is useful for making pretty visualizations from data. And finally, I used Matplotlib to create a legend and show the plot. I find Matplotlib the easiest library to use if I want to output an array as an image. 
 
 
 # R + ggplot2 + R Markdown
 
-![R plot](plot_images/R_plot.png)
+![R plot](plot_images/R_plot.PNG)
 
 For this visualization, I used R along with the library ggplot2. ggplot allowed me to create the scatterplot itself, and I used geom_point() to create the datapoints. The aes() function let me easily map the color to manufacturer and the size to weight. 
 
