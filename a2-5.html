@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <title>Assignment-2</title>
+    </head>
+    <body>
+    
+        <div id="chart-area"></div>
+
+        	<!-- External JS libraries -->
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
+        
+        <script>
+
+            const MARGIN = { LEFT: 80, RIGHT: 90, TOP: 30, BOTTOM: 90 }
+            const WIDTH = 600 - MARGIN.LEFT - MARGIN.RIGHT
+            const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM
+            const radiusScale = d3.scaleSqrt()  /////
+
+
+
+            // 1. Loading data
+            d3.csv("cars-sample.csv").then(data => {
+                data.forEach(d => d.Weight = Number(d.Weight));
+                data.forEach(d => d.MPG = Number(d.MPG));
+                //console.log(data)
+
+
+
+            // 2. Creating svg + Background + legend
+            const svg = d3.select("#chart-area")
+                    .append("svg")
+                        .attr("width", "100%")
+                        .attr("height", "100%");
+
+                //Backgroud
+            svg.append("rect")
+                .attr("transform", `translate(${MARGIN.LEFT-20}, ${MARGIN.TOP-10})`)
+                .attr("width", WIDTH + 40) 
+                .attr("height", HEIGHT + 40)
+                .attr("fill", "#E2E2E2");
+  
+                //Legend (Manufacturers)
+            const manufactures = ["bmw", "ford", "honda", "mercedes", "toyota"]
+            const Weights = ["2000", "3000", "4000"]
+
+
+            const color = d3.scaleOrdinal()
+                            .domain(["bmw", "ford", "honda", "mercedes", "toyota"])
+                            .range(["#E87D72", "#A3A433", "#56BB82", "#4DAEF0", "#D875EC"])
+            const weightSize = d3.scaleOrdinal()
+                            .domain(["2000", "3000", "4000"])
+                            .range([3, 5, 6.5])
+
+
+            const legend1 = svg.append("g")
+                        .attr("transform", `translate(${WIDTH + 130}, ${HEIGHT -180})`)
+
+            legend1.append("text")
+                    .attr("x", -15)
+                    .attr("y", 1)
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "12px")
+                    .attr("font-family", "sans-serif") 
+                    .text("Manufacturer");
+
+            manufactures.forEach((m, i) => {
+                const row = legend1.append("g")
+                    .attr("transform", `translate(0, ${i * 17})`)
+
+                row.append("rect")
+                    .attr("width", 16)
+                    .attr("height", 16)
+                    .attr("x", -15)
+                    .attr("y", 5)
+                    .attr("fill", "#e2e2e2");
+
+                row.append("circle")
+                    .attr("cx", -7)
+                    .attr("cy", 13.5)
+                    .attr("r", 2.5)
+                    .attr("fill", color(m))
+
+                row.append("text")
+                    .attr("x", 2)
+                    .attr("y", 16.5)
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "10.5px")
+                    .attr("font-family", "sans-serif")
+                    .text(m);
+                })
+                
+                //Legend (Weight)
+
+            const legend2 = svg.append("g")
+                        .attr("transform", `translate(${WIDTH + 130}, ${HEIGHT -60})`)
+
+            legend2.append("text")
+                    .attr("x", -15)
+                    .attr("y", 1)
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "12px")
+                    .attr("font-family", "sans-serif")
+                    .text("Weight");
+                        
+            Weights.forEach((m, i) => {
+                    const row = legend2.append("g")
+                    .attr("transform", `translate(0, ${i * 17})`)
+                
+                row.append("rect")
+                    .attr("width", 16)
+                    .attr("height", 16)
+                    .attr("x", -15)
+                    .attr("y", 5)
+                    .attr("fill", "#e2e2e2");
+
+                row.append("circle")
+                    .attr("cx", -7)
+                    .attr("cy", 13.5)
+                    .attr("r", weightSize(m))
+                    .style("fill", "#666565")
+
+                row.append("text")
+                    .attr("x", 2)
+                    .attr("y", 16.5)
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "10.5px")
+                    .attr("font-family", "sans-serif")
+                    .text(m); 
+                })
+
+                //Vis group
+            const g = svg.append("g")
+                        .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
+
+
+
+            // 3. Lables
+
+            g.append("text")
+                .attr("x", WIDTH/2)
+                .attr("y", HEIGHT + 70)
+                .attr("font-size", "14px")
+                .attr("font-family", "sans-serif")
+                .attr("text-anchor", "middle")
+                .text("Weight");
+
+            g.append("text")
+                .attr("x", -(HEIGHT/2))
+                .attr("y", -50)
+                .attr("transform", "rotate(-90)")
+                .attr("font-size", "14px")
+                .attr("font-family", "sans-serif")
+                .attr("text-anchor", "middle")
+                .text("MPG");
+
+
+
+            // 4. Axis   (1.Scaler - 2.Build axis - 3.Call axis)
+
+            const x = d3.scaleLinear() 
+                        .domain(d3.extent(data, d => d.Weight))
+                        .range([0, WIDTH]);
+
+            const xAxis = d3.axisBottom(x)
+                            .tickValues([2000, 3000, 4000, 5000])
+                            .tickFormat(d3.format("d"))
+                            //.tickSize(-HEIGHT- 40)  // to create vertical lines
+                            
+            g.append("g")
+                .attr("transform", `translate(0, ${HEIGHT+30})`)
+                .call(xAxis)
+                .call(g => g.select(".domain").remove())
+                .attr("fill", "red")
+                .selectAll("text")
+                    .style("fill", "grey")
+                    
+            
+
+            const y = d3.scaleLinear() 
+                        .domain(d3.extent(data, d => d.MPG))
+                        .range([HEIGHT, 0]);
+
+            const yAxis = d3.axisLeft(y)
+                        .tickValues([10, 20, 30, 40, 50])
+                        //.tickSize(-WIDTH-40)     // to create horizontal lines
+            g.append("g")
+                .attr("transform", `translate(-20, 0)`)
+                .call(yAxis)
+                .call(g => g.select(".domain").remove())
+                .selectAll("text")
+                    .style("fill", "grey")
+            
+
+
+            // 5.1. radius scaler:
+            radiusScale
+                .range([4.5, 8])
+                .domain(d3.extent(data, d => d.Weight))
+
+
+
+            // 5.2. Creating the plot
+
+            const circle = g.selectAll("circle")
+                            .data(data).enter()
+                            .append("circle")
+                                .attr("cx", d => x(d.Weight))
+                                .attr("cy", d => y(d.MPG))
+                                .attr("r", d => radiusScale(d.Weight))
+                                .attr("fill", d => color(d.Manufacturer))
+                                .style("opacity", 0.5)
+
+
+            })
+        </script>
+    </body>
+</html>
