@@ -50,7 +50,7 @@ I used ggplot2, a popular plotting library for R. Using the ggplot function and 
 
 In order to improve the plot, I once again added a title and updated the color scheme. However, I found that I have more freedom using ggplot. As R is usually used for statistical purposes, it was easy to plot regression lines for each manufacturer using geom_smooth(). As that crowded the plot however, I decided to split the graph into 5 individual ones using facet_wrap() and increased the size of the circles, since the resulting plots had more space. As each plot was labelled with the name of the corresponding manufacturer, I decided to remove the Manufacturer legend because it felt redundant. I then moved the Weight legend in the empty space on the bottom right of the graph, to make it more compact.
 
-![ggplot improved](img/ggplot improved.png)
+![ggplot improved](img/ggplot-improved.png)
 
 Even though I had never used ggplot before, it was surprisingly easy to use at first. Some of the more obscure functions however (such as how to get rid of the Manufacturer legend) required more in depth research.
 
@@ -61,7 +61,7 @@ Flourish is an online tool used to make visualization of datasets easy. It allow
 
 I used the Scatter template and manually updated which columns of the dataset to use for X, Y, size, and color. I then was able to just go into the settings for the background, the axis, or the points and manually change them so they fit the original visualization as much as possible. However, I wasn't able to change the location of the Manufacturer legend (it could either be above or below the graph, not to the side) nor could I add a secondary legend for the Weight. I was also unable to add minor gridlines between the major ones. However, Flourish is by nature interactive, and information can be see when hovering over a point.
 
-Fkourish also didn't allow me to download the HTML version of the visualization, so I only have an image to show for it, but the live visualization can be found here: 
+Flourish also didn't allow me to download the HTML version of the visualization, so I only have an image to show for it, but the live visualization can be found here: 
 https://public.flourish.studio/visualisation/8646932/
 
 ![Flourish replica](img/flourish.png)
