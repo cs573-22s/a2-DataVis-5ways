@@ -146,7 +146,7 @@ Changing the color of the background was alright but changing the color of the g
 
 Overall, aside from the missing smaller interlaced grid lines the graph matches pretty perfectly.
 
-![d3-graph](img/d3.png)
+![d3-graph](img/d3.PNG)
 
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
