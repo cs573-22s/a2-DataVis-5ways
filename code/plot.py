@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
 
-df = pd.read_csv("cars-sample.csv")
+df = pd.read_csv("code/cars-sample.csv")
 
 sb.set_style('darkgrid')
 splot = sb.scatterplot(data=df, 
@@ -10,7 +10,6 @@ splot = sb.scatterplot(data=df,
             y='MPG',
             hue='Manufacturer',
             size='Weight',
-            style='Cylinders',
             alpha=0.5
             )
 
