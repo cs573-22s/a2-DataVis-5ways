@@ -1,4 +1,5 @@
 # 02-DataVis-5ways
+The following is Assignment 2 for CS573.
 
 # Tableau
 Tableau is a data visualization tool that allows users to easily create visualizations using imported data. Using the desktop version I was able to create the scatterplot.
@@ -49,7 +50,7 @@ gh-pages url: https://evbruk.github.io/a2-DataVis-5ways/
 
 
 ## Technical Achievements
-- **Python**Adding in a color to manufacturer dictionary in the Python graph to allow for each manufacturer to have a specific color.
+- **Python**: Adding in a color to manufacturer dictionary in the Python graph to allow for each manufacturer to have a specific color.
 
 ## Design Achievements
 - **Tableau**: In the Tableau graph, I set up each dot so that the user could hover over and see what its specific detail was. 
