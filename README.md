@@ -24,11 +24,13 @@ The tableau is what I used before and I think it's like most of bi software on t
 
 ![tableau](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/tableau.png)
 
-# python+matplotlib
+# python+matplotlib+seaborn
 
 Matplotlib is a plotting library for the Python programming language and its numerical mathematics extension NumPy. It provides an object-oriented API for embedding plots into applications using general-purpose GUI toolkits like Tkinter, wxPython, Qt, or GTK+.
 
 The pro of matplotlib is it has very powerful function of plotting and can be combined with data analysis. The con of matplotlib is that we can't export results to web page directly, so I think it's not very suitable for web based visualization development.
+
+Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics
 
 ![matplotlib](https://raw.githubusercontent.com/PyRookie/a2-DataVis-5ways/main/img/matplotlib.png)
 
