@@ -21,7 +21,11 @@ This python library provides the necesary tools for creating graphs in a few lin
 
 ![ggplot2](plotly.png)
 
-# Tableu 
+# Tableau 
+Tableu is very versatile and it allows you to make very complex graphs. the only difficulty is that it contatins lots of functionality which can be a little bit overewhelming. 
+
+![ggplot2](tableu.png)
+
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
 - **Solved AI Forever**: ...
