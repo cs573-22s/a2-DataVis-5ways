@@ -15,6 +15,7 @@ While it takes time to find the correct documentation, these functions made the 
 
 # d3
 D3 is a javascript library used for adding designs, creating plots and animating webpages trough html. I think this one was the most complex graph out of all of them, and it requiered the most lines of code. 
+![ggplot2](d3.PNG)
 
 # Python + plotly
 This python library provides the necesary tools for creating graphs in a few lines of code, but i found that is not very versatile and it those not allow you to change the structure of the graphs much, that is why I was not able to add the legen for the dot sizes. 
