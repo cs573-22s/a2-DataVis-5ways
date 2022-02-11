@@ -177,6 +177,18 @@ Overall very straigtforward. Also I couldn't save any file but it's published pu
 
 ![Flourish](img/flourish.png)
 
+# Excel
+
+Excel was much more frustrating to use than I remember. Using the graph feature felt horribly out of date, I wouldn't be suprised if they haven't
+updated the bubble/scatter plots since windows XP. Regardless I was actually able to get close to the original graph. After searching around I
+was able to find areas to add all of my colors and the proper background. However, to do this I had to manually seperate the data. Labels were as 
+simple as typing text, the only issues were in the legend and axies. The legend wouldn't allow more than one again and I couldn't figure out how to
+give it a title. The axies were frustrating because they would always start on the first value even if I set them to increase by 1000 and so I wasn't 
+able to preserve the 2000,3000,4000... on either axis in favor of starting the graphs in the correct places. And once again I wasn't able to get
+intermediate tick marks without labels. Finally the NaN values defaulted to 0 which skewed the graph and so I just had to delete those datapoints.
+
+![Excel](img/excel.png)
+
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
 - **Solved AI Forever**: ...
