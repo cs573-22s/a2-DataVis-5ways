@@ -6,7 +6,7 @@ Libraries used:
 ---
 - d3.js (code available in index.html)
 - chart.js (code available in index.html)
-- R w/ ggplot (code available in r-ggplot.rmd)
+- R w/ ggplot (code available in r-ggplot.r)
 - Flourish
 - Tableau
 
