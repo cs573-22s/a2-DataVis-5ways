@@ -1,14 +1,14 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
 <svg></svg>
-<div class="flourish-embed flourish-scatter" data-src="visualisation/8596134"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+<!--<div class="flourish-embed flourish-scatter" data-src="visualisation/8596134"><script src="https://public.flourish.studio/resources/embed.js"></script></div>-->
 <script>
 
 //data = FileAttachment("cars-sample.csv").csv({ typed: true })
 
-  var height = 600;
-  var width = 800;
-  var margin = ({top: 20, right: 30, bottom: 30, left: 40});
+  var height = 500;
+  var width = 600;
+  var margin = ({top: 20, right: 50, bottom: 30, left: 100});
 
   // initialize our scales
   var x, y, color;
@@ -34,9 +34,6 @@
         )
 
 
-//      console.log(data.map((d) => d.Manufacturer));
-//      console.log(d3.schemeCategory10);
-
       // make our blank svg canvas
       var svg = d3
         .select("svg")
@@ -47,18 +44,70 @@
       svg.append("g").call(yAxis);
 
       // draw some dots!
-
+      const size = d3
+          .scaleLinear()
+          .domain(d3.extent(data, (d) => d.Weight))
+          .nice()
+          .range([10, 20])
       var dot = svg
         .selectAll("circle")
         .data(data)
         .join("circle")
         .attr("transform", (d) => `translate(${x(+d.Weight)},${y(+d.MPG)})`)
-        .attr("r", (d) => 10)
-        .attr("fill", (d) => color(d.Manufacturer));
-        //.attr("r", (d) => size(+d.Weight))
+        .attr("fill", (d) => color(d.Manufacturer))
+        .attr("opacity" , (d) => 0.5)
+        .attr("r", (d) => size(+d.Weight))
 
+
+      keys = ['toyota','ford','mercedes','bmw','honda']
+      w = [1500,2500,3500,4500]
+// Add one dot in the legend for each name.
+
+      svg.selectAll("dot")
+          .data(keys)
+          .enter()
+          .append("circle")
+          .attr("cx", width-100)
+          .attr("cy", function(d,i){ return 50 + i*(17+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+          .attr("r", 10)
+          .style("fill", function(d){ return color(d)})
+          .attr("opacity", (d) => 0.5)
+// Add one dot in the legend for each name.
+      svg.selectAll("legend")
+          .data(keys)
+          .enter()
+          .append("text")
+          .attr("x", width-100 + 10*1.2)
+          .attr("y", function(d,i){ return 50 + i*(16+5) + (10/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+          .style("fill", function(d){ return color(d)})
+
+          .text(function(d){ return d})
+          .attr("text-anchor", "left")
+          .style("alignment-baseline", "middle")
+
+      svg.selectAll("size")
+          .data(w)
+          .enter()
+          .append("circle")
+          .attr("cx", width-100)
+          .attr("cy", function(d,i){ return 180 + i*(33+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+          .attr("r", (d) => size(+d))
+          .style("fill", "grey")
+          .attr("opacity", (d) => 0.5)
+
+      svg.selectAll("legendw")
+          .data(w)
+          .enter()
+          .append("text")
+          .attr("x", width-100 + 10*2)
+          .attr("y", function(d,i){ return 180 + i*(33+5) + (10/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+          .style("fill", "grey")
+          .text(function(d){ return d})
+          .attr("text-anchor", "left")
+          .style("alignment-baseline", "middle")
 
   }
+
 
   const xAxis = (g) =>
     g
