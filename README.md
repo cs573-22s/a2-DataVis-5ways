@@ -1,142 +1,55 @@
-# 02-DataVis-5ways
-
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
+# JS + d3
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+![JS d3 plot](plot_images/d3_plot.PNG)
 
-Your goal is to use 5 different tools to make the following chart:
+I used d3 to create this scatterplot in JavaScript. I am still pretty new to JavaScript, so this was a bit of a challenge, though the starter code helped greatly. I found that changing or adding things didn't always break the code - the scatterplot would still show up on my server, so it was sometimes hard to tell what exactly I had done wrong. Still, I think this tool will be very useful for me in the future for making data visualizations for websites. 
 
-![ggplot2](img/ggplot2.png)
+To remove the null datapoints that were appearing, I used an if/else statement, where the "if" caused the radius of the point to be 0 if the weight or MPG was null, and the "else" set the size according to weight otherwise. This worked, and though it seemed a bit hacky, I also figured it was the simplest way to do it. 
 
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+I also experimented with color and the mouseover tool, which I will explain futher in the technical and design achievement sections. 
 
 
-Readme Requirements
----
+# Python + matplotlib + seaborn + pandas
 
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
+![Python plot](plot_images/py_plot.PNG)
 
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
+I used Python and a few statistical libraries to create this scatterplot. I use these libraries fairly often for my own projects, so this was not difficult. I used pandas to read the cars CSV file into a Pandas dataframe. Pandas is a data manipulation library that makes working with data very easy. I then used Seaborn to create the scatterplot from the dataframe. Seaborn is useful for making pretty visualizations from data. And finally, I used Matplotlib to create a legend and show the plot. I find Matplotlib the easiest library to use if I want to output an array as an image. 
 
-Other Requirements
----
-
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
-
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
-
-GitHub Details
----
-
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-
-Grading
----
-
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
-
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
-
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
 
 # R + ggplot2 + R Markdown
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
+![R plot](plot_images/R_plot.PNG)
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
+For this visualization, I used R along with the library ggplot2. ggplot allowed me to create the scatterplot itself, and I used geom_point() to create the datapoints. The aes() function let me easily map the color to manufacturer and the size to weight. 
 
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
+I've used R in the past, and am always impressed by how much it can do with so few lines of code, though there are so many libraries to learn. Overall, this was not particularly difficult. I may use R in the future, though I much prefer Python.
 
-![ggplot2](img/ggplot2.png)
 
-# d3...
+# Tableau
 
-(And so on...)
+![Tableau plot](plot_images/tableau_plot.png)
 
+I created this plot in Tableau, which is a data visualization software. I've not used this tool before, but I found it very intuitive and I could immediately see the potential it has. It was very easy to make a visually pleasing scatterplot that fit the requirements - I didn't even have to check out a tutorial or documentation. I imagine that this tool will be fairly useful for me in the future, as many data science related job descriptions I see have Tableau as a desired tool to be familiar with. 
+
+
+# Flourish
+
+![Flourish plot](plot_images/flourish_plot.png)
+
+I created this plot in Flourish. Like Tableau, I hadn't used this tool before. I like the fact that it is a web-based and very accessible data visualization tool. I found it slightly more confusing than Flourish, but overall still simple to use. I think it's a nice way to quickly make a data visualization, though I'm more likely to use something like Tableau in the future if I'm working on a large project.
+
+
+---
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
 
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+For the technical achievement portion, I created a mouse over tool in my d3 visualization. When you mouse over a datapoint, it shows the weight and MPG as a coordinate pair beside the datapoint. This was a nice challenge, as it let me start learning how to create interactive visualizations in JS. It was also fairly simple, as I only really needed the JS documentation. 
+
+
+## Design Achievements
+
+For the design achievement portion, I experimented with colors and fonts in JS. I made the tooltip for the mouseover event more visually pleasing than the default. I also created my own color scheme instead of using d3 SchemeCategory10. I did this by creating an array of 5 hexadecimals and chose the colors using Google's built-in hex color picker. It took me some experimentation to get each color to be decipherable from each other while being visually pleasing, so it was a useful lesson. 

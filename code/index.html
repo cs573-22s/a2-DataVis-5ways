@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<svg></svg>
+
+<script>
+
+    var height = 600;
+    var width = 800;
+    var margin = ({top: 100, right: 100, bottom: 100, left: 100});
+
+    var x,y,color,size
+
+    d3.csv("cars-sample.csv", d3.autoType).then(function(d) {
+        console.log(d);
+        buildScatter(d);
+        console.log("Scatter built!")
+    })
+
+    function buildScatter(data) {
+
+        x = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Weight)).nice()
+            .range([margin.left, width - margin.right]);
+
+        y = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.MPG)).nice()
+            .range([height - margin.bottom, margin.top]);
+
+        console.log("x range, y range")
+        console.log(margin.left)
+        console.log(width - margin.right)
+        console.log(height - margin.bottom)
+        console.log(margin.top)
+
+        pretty_colors = ["#4dffde", "#4d70ff", "#ffb41f", "#f74a81", "#ff4ff6"] 
+        color = d3.scaleOrdinal(data.map((d) => d.Manufacturer), pretty_colors);
+        size = d3.scaleLinear().domain([1500, 5000]).range([3, 10]);
+
+        var svg = d3
+            .select("svg")
+            .attr("viewBox", [0, 0, width, height])
+            .property("value", []);
+
+        svg.append("g").call(xAxis);
+        svg.append("g").call(yAxis);
+
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+        
+        var dot = svg
+        .selectAll("circle")
+        .data(data)
+        .join("circle")
+        .attr("transform", (d) => `translate(${x(+d.Weight)},${y(+d.MPG)})`)
+        .attr("r", function(d) {
+                    if (d.Weight == "NA" || d.MPG == "NA") {
+                        return 0
+                    }
+                    else {
+                        return size(d.Weight)
+                    }
+                })  
+        .attr("fill", (d) => color(d.Manufacturer))
+        .attr("opacity", 0.5)
+        .on('mouseover', function (d, i) {
+            const ex = d.pageX;
+            const ey = d.pageY;
+            div.transition()
+                .duration(100)
+                .style("opacity", 1);
+            div.html(i.Weight + ", " + i.MPG)
+                .style("left", (ex + 10) + "px")
+                .style("top", (ey - 15) + "px");
+        })
+        .on('mouseout', function (d, i) {
+            div.transition()
+                .duration(100)
+                .style("opacity", 0)
+        })
+        
+    }
+
+    const xAxis = (g) =>
+        g.attr("transform", `translate(0,${height - margin.bottom})`)
+         .call(d3.axisBottom(x).tickSize(10).ticks(4))
+         .call((g) =>
+            g.append("text")
+             .attr("x", width - margin.right)
+             .attr("y", -4)
+             .attr("fill", "#000")
+             .attr("font-weight", "bold")
+             .attr("text-anchor", "end")
+             .text("Weight")
+            )
+    
+    const yAxis = (g) =>
+        g.attr("transform", `translate(${margin.left},0)`)
+         .call(d3.axisLeft(y).tickSize(10).ticks(4))
+         .call((g) =>
+            g.select(".tick:last-of-type text")
+             .clone()
+             .attr("x", 4)
+             .attr("text-anchor", "start")
+             .attr("font-weight", "bold")
+             .text("MPG")
+            )
+
+</script>
+
+<style>
+
+div.tooltip {
+     position: absolute;
+     text-align: center;
+     padding: .3rem;
+     background: #00d9ff;
+     color: #ffffff;
+     border: 0px;
+     border-radius: 7px;
+     font-family: Arial, Helvetica, monospace;
+     font-size: .7rem;
+}
+
+</style>
