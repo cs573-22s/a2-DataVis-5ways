@@ -36,7 +36,7 @@ ax.set_xlabel('Weight')
 plt.grid(color = '#ECECEC')
 
 classes = ['bmw','ford','honda','mercedes','toyota']
-class_colours = ['#2377B480','#FF7F0E80','#2CA02C80','#D6272880','#9467BD80']
+class_colours = ['#FF69B4','#00BFFF','#32CD32','#FFFF00','#808080']
 recs = []
 for i in range(0, len(class_colours)):
     recs.append(mpatches.Rectangle((0,0),1,1,fc = class_colours[i]))
