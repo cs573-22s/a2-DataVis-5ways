@@ -120,7 +120,13 @@ var linscale = d3.scaleLinear()
          		d3.select(this).transition()
           		.duration('5000')
           		.ease(d3.easeLinear)
-          		.attr('cy', function(d) { return linscale(d) + 200; });});
+          		.attr('cy', function(d) { return linscale(d) + 200; });})
+		
+		.on('doubleclick', function (d, i) {
+         		d3.select(this).transition()
+          		.duration('5000')
+          		.ease(d3.easeLinear)
+          		.attr('cy', d => yScale(yValue(d)));});
 
       }
 
