@@ -129,7 +129,29 @@ While it takes time to find the correct documentation, these functions made the 
 
 ![ggplot2](img/ggplot2.png)
 
-# d3...
+
+# d3
+img/CARS_d3.png
+D3, I have achieved how the scatter plot slowly spreads after you open the page and tried to achieve a more difficult task such as when you hover over a legend, only the object with color you chose will be highlited in the graph but I couldn't achive one on time, couldn't workout some errors and will work on it until i figue it out.
+I've tried to keep the color, size of the circles and axis consistent across all the five different platforms
+
+# Python
+img/cars_python.png
+
+I've learnt about a nedw library thats built upon matlplotlib called sns plot and is much easier and looks better compared to matplotlib and have manged to keep the legend also the same
+
+# ggplot_R
+img/Cars_Rplot.jpg
+Have succesfuuly created my first ever graph or my first ever code in R. 
+
+# Tableau
+img/cars_tableau.png
+It has the feature if you hover over the datapoints it displays the results
+
+# Power_BI
+img/power_bi.png
+Faced some problem was using it the first time and had trouble creating color based on the 
+manufacturers but succesfully created it with a legend.
 
 (And so on...)
 
