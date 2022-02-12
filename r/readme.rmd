@@ -1,0 +1,18 @@
+---
+title: "A2 R Portion"
+author: James Plante
+output: html_notebook
+---
+
+Code adapted from the R plotting demo in class
+```{r}
+library(ggplot2) # install.packages("ggplot2")
+library(tidyverse)
+
+carsdf <- read.csv("cars.csv") 
+carsdf %>% ggplot() + 
+  geom_point( aes(x=Weight, y=MPG, color=Manufacturer, size=Weight), alpha = .5) + 
+  scale_colour_brewer(palette = "Set1")
+
+```
+

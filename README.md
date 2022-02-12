@@ -1,142 +1,48 @@
 # 02-DataVis-5ways
+James Plante
+jplante@wpi.edu
 
-Assignment 2 - Data Visualization, 5 Ways  
-===
+# p5.js
+Processing is a software library that is used for drawing and teaching new programmers how to code. It has a number of implementations such as versions targeted at Java, JavaScript, and Python. I used the p5.js library for this project due to difficulties getting a Processing-like library working in Python 3 (the official version uses Jython as its runtime so it is still targeting Python 2.7). It also has an integrated editor/sketchbook that allows code to be easily shared online.
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+![p5js](img/p5js.png)
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
+While the web editor was very easy to use and edit in (save for a lack of a Vim mode), the process of creating a scatter plot/bubble chart was very time consuming since there were no built-in libraries to do this, meaning some manual work had to be done in terms of data processing. While importing the data is relatively easy with the `loadStrings` function, most of the CSV parsing had to be done by hand which was made easier using higher order functions such as `Array.map()` to parse the lines one by one and do the necessary data conversions, which largely consisted of doing a group by operation using a dictionary by category to separate out the manufacturer time series. 
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+The plotting of the bubbles was relatively easy since Processing has a built in way to convert ranges of values to locations on the canvas (the function is coincidentally named `map()`). The main issue with plotting presented itself when having to figure out how to manually draw the grid lines and making sure that they were in scale with the data. The title, axis, and tick labels had to be drawn manually also using text drawing primitives, which was somewhat tedious compared to other libraries where this is already done. To get the y axis title in the correct orientation I had to learn how to to a transformation
+to rotate the canvas in the right orientation to draw the text. Drawing the legend was a largely manual
+process by careful positioning of text, ellipse, and rectangle primitives (with loops of course). I also added some interactivity as an extra, so you can mouse over the bubbles and get data associated with these points.
 
-Your goal is to use 5 different tools to make the following chart:
-
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
-
-
-Readme Requirements
----
-
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
-
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
-
-Other Requirements
----
-
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
-
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
-
-GitHub Details
----
-
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-
-Grading
----
-
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
-
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
-
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
+While I found this exercise in creating a bubble chart in p5 to be educational, I would not recommend this tool since it takes much more effort to make a simple bubble chart than other libraries and interactivity is much harder since rendered objects do not have any internal state or event handling, making interactivity somewhat difficult for more advanced tasks.
 
 # R + ggplot2 + R Markdown
-
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
-
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
-
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
+R is a commonly used programming language for visualization, ggplot2 being a popular library for R. I primarily based my code on the lecture notes, so it uses the geom_point() layer. Overall, it was very easy to use and had no issues with creating this bubble chart to the exact specifications (the whole visualization code is 3 lines of code).
 
 ![ggplot2](img/ggplot2.png)
 
-# d3...
+# Matplotlib
+Matplotlib is a Python library that is used for plotting and making charts similar to MATLAB's plotting libraries that are included in the language. The data processing for this library was involved was not trivial: I still had to do grouping on the data using a dictionary to plot the individual categories and do manual CSV parsing. However it was relatively easy to do the actual plottting of the graph: it was mostly just calling functions to set axis titles, specifying that a legend needed to be created, and plotting each category. The only difficulty that I had in this section was that I had to manually determine the size of each bubble which I scaled based on the range of all of the weights. I would recommend this tool since it does not require a lot of effort, the syntax is easy to follow, and it still gives control to the user if they need to.
 
-(And so on...)
+![matplotlib](img/matplotlib.png)
 
+# Excel
+![excel](img/excel.png)
+
+Excel is a Microsoft spreadsheet application that has a graphical way of plotting data and doing data visualization. I surpingly had a more difficult time with this application than with other graphical data visualization tools. For one, while Excel has native support for bubble charts, it did not detect that the Manufacturers were categories. My solution to this was to filter the orginal CSV by category, paste the result into a new Sheet per category, then plot them as individual series, which seemed to fix the issue. I also had to manually scale the bubble sizes since they did not have a sane default scale: this was surpisingly difficult to do due to my lack of experience with Excel, but managed to make the chart work in the end. I would recommend this tool to someone who does not want to learn how to code or they have very basic data visualization needs since for more complex tasks, it is easier just to code it.
+
+# d3
+![d3](img/d3.png)
+
+d3 is a powerful JavaScript library that allows for interactive and appealing visualizations. I found using d3 relatively easy to use due to prior experience, although I found it difficult to debug with due to the nature of how it will silently fail. In terms of data processing, I was pleasantly suprised I did not have to do grouping of individual time series. I also found it easier to add new geometry in since it has a relatively intuitive syntax once you get past the initial learning curve. While it is a powerful tool, I would mainly use it if I needed to do a very advanced visualization with a lot of interactive elements.
+
+# Flourish
+![flourish](img/flourish.png)
+
+Flourish is a graphical visualization tool that exposes a lot of options to the user and does automatic data processing. This was a very easy application to use: creating the chart took less than 15 minutes. It already had a bubble chart template so I used it, uploaded the CSV, set the correct axes, enabled a legend, set the opacity and grid lines, and I was done. One aspect that I did not appreciate was the lack of customization so I was not able to find an option right away to include the size of the Weights as an option. Also I was not able to set a custom scaling for the size of the bubbles so it uses just a linear scale. I would see this tool being useful for simple visualizations, although I would not use it for more advanced visualizations due to the lack of control you have over the final image.
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- **Interactivity in p5.js**: I enabled some interactivity in the p5.js sketch, whenever you hover your mouse over a data point, it will show the other attributes of the data point.
+- **Creating a legend in d3 and p5.js**: I attempted to create similar legends to the ggplot plot which was generally non-trivial. For d3 I learned how to create a legend by following a tutorial (link in the source code) and in p5, I did it manually.
+- **Used Greater than Five Tools**: I used 6 tools in total for this project, 4 of which were code-based
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
