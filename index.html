@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+</html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://d3js.org/d3.v4.js"></script>
+<style> .axis {font: 14px sans-serif;}</style>
+<svg id="base" width="900" height="500"></svg>
+
+<script>
+    var width = 800
+    var height = 400;
+
+    var svg = d3.select("#base")
+        .append("svg")
+        .append("g")
+        .attr("transform", "translate(0" + 50 + "," + 20 + ")");
+
+
+    d3.csv("https://raw.githubusercontent.com/124135417/a2-DataVis-5ways/main/cars-sample.csv", function (data) {
+
+        var x = d3.scaleLinear()
+            .domain([2000 * .75, 5000 * 1.02])
+            .range([0, width]);
+
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)
+                .tickSize(-height)
+                .ticks(4)
+                .tickSizeOuter(0));
+
+        svg.append("text")
+            .style("font", "17px sans-serif")
+            .attr("class", "x label")
+            .attr("x", width - 350)
+            .attr("y", height + 45)
+            .text("Weight");
+
+        var y = d3.scaleLinear()
+            .domain([10 * .89, 40 * 1.2])
+            .range([height, 0]);
+            
+
+        svg.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y)
+                .tickSize(-width)
+                .ticks(4)
+                .tickSizeOuter(0));
+
+        svg.append("text")
+            .style("font", "17px sans-serif")
+            .attr("class", "y label")
+            .attr("y", -45)
+            .attr("x", -200)
+            .attr("dy", ".75em")
+            .attr("transform", "rotate(-90)")
+            .text("MPG");
+
+        svg.selectAll(".tick line")
+            .attr("stroke", "black")
+            .attr("opacity", 0.1);
+
+        var size = d3.scaleLinear()
+            .domain([2000, 5000])
+            .range([6, 14]);
+
+        var color = d3.scaleOrdinal()
+            .domain(["ford", "bmw",  "honda", "mercedes", "toyota"])
+            .range(["#90EE90", "#f6938c", "#CCCC00", "#45bced", "#EE82EE"]);
+
+        svg.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x(d.Weight); })
+            .attr("cy", function (d) { return y(d.MPG); })
+            .attr("r", function (d) { return size(d.Weight) - 2; })
+            .style("fill", function (d) {
+                return color(d.Manufacturer);
+            })
+            .style("opacity", .5)
+            ;
+    })
+
+</script>
