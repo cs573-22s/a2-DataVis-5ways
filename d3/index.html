@@ -1,0 +1,205 @@
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<h1 id="welcome" class="text">D3 Car's MPG v.s. Weight</h1>
+
+<svg id="scatterplot" width=1100 height=700 ></svg>
+
+<style>
+  path.domain  {
+  stroke: white;
+}
+ .tick line {
+  stroke:white;
+}
+</style>
+
+<script>
+  // console.log("Testing"); // test if d3 is loaded
+  var width=800, height=600
+  var Mercedes="#8E7CA2"
+  var Honda="#F5E400"
+  var Bmw="#DD1C1A"
+  var Ford="#FFA500"
+  var Toyota="#0000FF"
+  //Read in CSV
+  d3.csv("../cars-sample.csv").then((data) => {
+      var x = d3.scaleLinear()
+          .domain([d3.min(data, (d) => { return +d.Weight})*0.95, d3.max(data, (d) => { return +d.Weight})*1.05])
+          .range([ 0, width ]);
+
+      var y = d3.scaleLinear()
+          .domain([d3.min(data, (d) => { return +d.MPG})*0.90, d3.max(data, (d) => { return +d.MPG})*1.05])
+          .range([height, 0]);
+        
+      var svg = d3.select('#scatterplot');
+
+      const Legend = svg.append("g")
+        .attr("transform", "translate("+(width-125)+","+(height/4)+")");
+
+      Legend.append("text")
+        .attr("x", 200)
+        .attr("y", 80)
+        .text("Manufacturer")
+        .style("font-size", "20px")
+        .attr("alignment-baseline","middle");
+
+      Legend.append("text")
+        .attr("x", 200)
+        .attr("y", 370)
+        .text("Weight")
+        .style("font-size", "20px")
+        .attr("alignment-baseline","middle");
+
+      var ManCount = d3.group(data, d => d.Manufacturer);
+
+      var x_man = d3.scaleBand()
+        .range([ 200, 400 ])
+        .domain(["ford","bmw","honda","mercedes","toyota"])
+        .padding(0.2);
+
+      var y_man = d3.scaleLinear()
+        .domain([0, 80])
+        .range([ 300, 100]);
+
+      Legend.append("g")
+        .attr("transform", "translate(0," + 300 + ")")
+        .style("fill","#EEEEEE")
+        .call(d3.axisBottom(x_man).tickSize(-200))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+
+      Legend.append("g")
+        .attr("transform", "translate(" + 200 + ",0)")
+        .call(d3.axisLeft(y_man));
+
+      Legend.append("g")
+        .selectAll("rect")
+        .data(ManCount)
+        .enter()
+        .append("rect")
+          .attr("x", function(d) { return x_man(d[0]); })
+          .attr("y", function(d) { return y_man(d[1].length); })
+          .attr("width", x_man.bandwidth())
+          .attr("height", function(d) { return (300 - y_man(d[1].length)); })
+          .style("opacity", 0.5)
+          .style("fill", function (d) {
+                  switch(d[0]){
+                    case "ford":
+                      return Ford;
+                      break;
+                    case 'bmw':
+                      return Bmw; 
+                      break;
+                    case 'toyota':
+                      return Toyota;
+                      break;
+                    case 'honda':
+                      return Honda;
+                      break;
+                    case 'mercedes':
+                      return Mercedes;
+                      break;
+                    default:
+                      return "#000000";
+                  }
+                });
+
+      Legend.append("circle")
+        .attr("cx",200)
+        .attr("cy",400)
+        .attr("r", 0.0025*2000)
+        .style("fill", "#BBBBBB80");
+      
+      Legend.append("circle")
+        .attr("cx",200)
+        .attr("cy",430)
+        .attr("r", 0.0025*3000)
+        .style("fill", "#BBBBBB80");
+      
+      Legend.append("circle")
+        .attr("cx",200)
+        .attr("cy",460)
+        .attr("r", 0.0025*4000)
+        .style("fill", "#BBBBBB80");
+
+      Legend.append("text")
+        .attr("x", 220)
+        .attr("y", 400)
+        .text("2000")
+        .style("font-size", "15px")
+        .attr("alignment-baseline","middle");
+      
+      Legend.append("text")
+        .attr("x", 220)
+        .attr("y", 430)
+        .text("3000")
+        .style("font-size", "15px")
+        .attr("alignment-baseline","middle");
+
+      Legend.append("text")
+        .attr("x", 220)
+        .attr("y", 460)
+        .text("4000")
+        .style("font-size", "15px")
+        .attr("alignment-baseline","middle");
+
+      const Graph = svg.append("g")
+        .attr("transform", `translate(50, 50)`);
+
+      Graph.append("g")
+          .attr("transform", "translate(0," + (height) + ")")
+          .style("fill","#EEEEEE")
+          .call(d3.axisBottom(x).ticks(4).tickSize(-height));
+
+      Graph.append("text")
+            .attr("transform", "translate("+ (width/2) +"," + (height+20) + ")")
+            .text("Weight");
+
+      Graph.append("g")
+          .call(d3.axisLeft(y).ticks(4).tickSize(-width));
+
+      Graph.append("text")
+        .attr("transform", "rotate(-90) translate(-"+(height/2)+",-20)")
+        .text("MPG");
+
+      Graph.append("g")
+          .selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+                .attr("cx", function (d) { return x(+d.Weight); } )
+                .attr("cy", function (d) { return y(+d.MPG); } )
+                .attr("r", function (d) { 
+                  //2 values in MPG are NaN so this makes them invisible :/
+                  if(+d.MPG){
+                    return 0.0025*(+d.Weight);
+                  } else {
+                    return 0;
+                  }
+                } )
+                .style("opacity", 0.5)
+                .style("fill", function (d) {
+                  switch(d.Manufacturer){
+                    case "ford":
+                      return Ford;
+                      break;
+                    case 'bmw':
+                      return Bmw; 
+                      break;
+                    case 'toyota':
+                      return Toyota;
+                      break;
+                    case 'honda':
+                      return Honda;
+                      break;
+                    case 'mercedes':
+                      return Mercedes;
+                      break;
+                    default:
+                      return "#000000";
+                  }
+                });
+
+  });
+</script>

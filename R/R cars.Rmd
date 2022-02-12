@@ -1,0 +1,12 @@
+---
+title: "R Cars Graph"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+
+ggplot(cars.sample, aes(Weight, MPG, color = Manufacturer, size = Weight)) + geom_point() + scale_color_manual(values=c("#DD1C1A80", "#FFA50080", "#F5E40080", "#8E7CA280", "#0000FF80"))
+
+
+```
