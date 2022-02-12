@@ -41,8 +41,8 @@ d3 is a powerful JavaScript library that allows for interactive and appealing vi
 Flourish is a graphical visualization tool that exposes a lot of options to the user and does automatic data processing. This was a very easy application to use: creating the chart took less than 15 minutes. It already had a bubble chart template so I used it, uploaded the CSV, set the correct axes, enabled a legend, set the opacity and grid lines, and I was done. One aspect that I did not appreciate was the lack of customization so I was not able to find an option right away to include the size of the Weights as an option. Also I was not able to set a custom scaling for the size of the bubbles so it uses just a linear scale. I would see this tool being useful for simple visualizations, although I would not use it for more advanced visualizations due to the lack of control you have over the final image.
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- **Interactivity in p5.js**: I enabled some interactivity in the p5.js sketch, whenever you hover your mouse over a data point, it will show the other attributes of the data point.
+- **Creating a legend in d3 and p5.js**: I attempted to create similar legends to the ggplot plot which was generally non-trivial. For d3 I learned how to create a legend by following a tutorial (link in the source code) and in p5, I did it manually.
+- **Used Greater than Five Tools**: I used 6 tools in total for this project, 4 of which were code-based
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
