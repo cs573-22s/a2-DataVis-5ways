@@ -1,142 +1,97 @@
 # 02-DataVis-5ways
 
-Assignment 2 - Data Visualization, 5 Ways  
+# Assignment 2 - Data Visualization, 5 Ways  
+
+Jules Cazaubiel
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+# Introduction
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
-
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
-
-Your goal is to use 5 different tools to make the following chart:
-
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+For each visualization, I started by creating the closest replica to the original visualization I could manage before improving it. This lead to me having two files (and thus two images) for each tool - a replica and an improved version.
 
 
-Readme Requirements
----
+# Excel
 
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
+I started by using the excel bubble plot function to create the first plot and be able to link circle size to the Weight value. In order to change the color of the circles depending on the manufacturer, I grouped the data by manufacturer and created separate data series for each group. This allowed me to plot them on the same graph while keeping the colors distinct. I tried to recreate the colors of the original graph. Since excel didn't seem to support adding a second legend for the Weight, I added one manually by inserting appropriately sized circles and corresponding text to the side of the graph. Finally, the formatting of the background and the axes was performed by modifying parameters in the Options tab. I wasn't able to start the axes at a different value than the first tick mark, so the axes start ad slightly different values that the original.
 
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
+![Excel replica](img/excel.png)
 
-Other Requirements
----
+As excel is fairly limited in terms of interaction and other customizations that I felt would add to the visualization, I decided to keep my improvements simple. I simply changed the colors to a colorblind accessible palette (created using the following website: https://davidmathlogic.com/colorblind/#%2333FF00-%23785EF0-%23DC267F-%23FE6100-%23FFB000) and added a title. 
 
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
+![Excel improved](img/excel-improved-final.png)
 
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
+Excel is easy to use and is very guided, so modifying parameters to achieve what I wanted in it was relatively easy but some aspects of it were restrictive. Some things I had to look for a little more in depth, like how to create multiple series, but overall it wasn't too bad. 
 
-GitHub Details
----
+Note: the same color palettes were used for all following visualizations.
 
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
 
-Grading
----
+# Seaborn (Python + Jupyter Notebook)
 
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
+I decided to use Jupyter Notebook to code this visualization, because it is easy to use and I enjoy the notebook aspect of it (multiple chunks of code and their outputs clearly separated).
 
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
+Seaborn is a visualization library based on the matplotlib library. It adds more customization options, and is fairly simple to use. To recreate the graph, I used the seaborn scatterplot function. Various other functions were used to modify the appearance of the graph, such as making major and minor gridlines appear, or setting tick marks. However, Seaborn did not offer any function I could find to change the weight intervals displayed in the legend, and I was unable to match the original visualization.
 
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
+![Seaborn replica](img/seaborn.png)
 
-# R + ggplot2 + R Markdown
+In order to improve on the design using seaborn, I found my options to be limited. I once more updated the color palette to be colorblind friendly and added a title.
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
+![Seaborn improved](img/seaborn-improved-final.png)
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
+Python is the programming language I am probably most comfortable with, and while I wasn't familiar with seaborn, it is well documented. This made finding ways to achieve what I wanted achievable with a little research.
 
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
 
-![ggplot2](img/ggplot2.png)
+# ggplot2 (R and R markdown)
 
-# d3...
+I used R markdown to code this visualization, once again because I enjoy having my code in a notebook and having multiple chunks of code displayed easily and separately.
 
-(And so on...)
+I used ggplot2, a popular plotting library for R. Using the ggplot function and a few other cosmetic ones made it incredibly easy to replicate the original plot. 
 
+![ggplot replica](img/ggplot.png)
+
+In order to improve the plot, I once again added a title and updated the color scheme. However, I found that I have more freedom using ggplot. As R is usually used for statistical purposes, it was easy to plot regression lines for each manufacturer using geom_smooth(). As that crowded the plot however, I decided to split the graph into 5 individual ones using facet_wrap() and increased the size of the circles, since the resulting plots had more space. As each plot was labelled with the name of the corresponding manufacturer, I decided to remove the Manufacturer legend because it felt redundant. I then moved the Weight legend in the empty space on the bottom right of the graph, to make it more compact.
+
+![ggplot improved](img/ggplot-improved.png)
+
+Even though I had never used ggplot before, it was surprisingly easy to use at first. Some of the more obscure functions however (such as how to get rid of the Manufacturer legend) required more in depth research.
+
+
+# Flourish
+
+Flourish is an online tool used to make visualization of datasets easy. It allows the user to input their data and then play with different setting to change the visualization of said data. As I was entirely dependent on the parameters I could change in Flourish, some aspects of the original plot were not reproduced.
+
+I used the Scatter template and manually updated which columns of the dataset to use for X, Y, size, and color. I then was able to just go into the settings for the background, the axis, or the points and manually change them so they fit the original visualization as much as possible. However, I wasn't able to change the location of the Manufacturer legend (it could either be above or below the graph, not to the side) nor could I add a secondary legend for the Weight. I was also unable to add minor gridlines between the major ones. However, Flourish is by nature interactive, and information can be see when hovering over a point.
+
+Flourish also didn't allow me to download the HTML version of the visualization, so I only have an image to show for it, but the live visualization can be found here: 
+https://public.flourish.studio/visualisation/8646932/
+
+![Flourish replica](img/Flourish.png)
+
+As Flourish didn't really offer much freedom in customization, I added a title and changed the color palette. I also added trendlines for each individual Manufacturer. Even though they are a little messy when looking at all the manufacturers together, the user can click on the legend to select only one, making it easier to see. 
+The live visualization can be found here: https://public.flourish.studio/visualisation/8678450/
+
+![Flourish improved](img/Flourish-improved.png)
+
+Flourish was the easiest to use, but also the most restrictive, which makes sense when looking at how it is organized. 
+
+
+# D3
+
+D3 is a javascript library used to create highly customizable and interactive visualizations. In order to recreate the graph in D3, I used a wide variety of different functions to create and customize every element I needed, which would make it too long of a list to have here. I did use quite a few tutorials, however I only ever adapted what I needed from each one and merged it into my own project, because I usually ran into issues that required 2 to 3 different sources to solve. Despite these problems, I managed to recreate the graph quite accurately, as seen below.
+
+![D3 replica](img/D3.png)
+
+In order to improve it, I once more added a title and modified the color palette. Additionally, I made the graph interactive, so the user could get more information out of it. Hovering over a circle makes it more opaque so it stands out more, and a tooltip displays its data nearby. I added what type of car the circle represented in this tooltip, because it adds one more level of information, and I also listed how many cars were present for each Manufacturer in the legend. 
+
+![D3 improved](img/D3-improved-final.png)
+
+D3 is definitely the most complicated of all the tools I used, mostly because it is the newest to me but also because you need to do absolutely everything in it. There is no wrapper function to create a graph easily like in seaborn, you have to do everything yourself. However, this is also what makes it the most customizable and potentially interactive.
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- **In R**: I used ggplot2 to create trendlines for each manufacturer individually and split the graph into 5 individual graphs (one for each manufacturer)
+- **In D3**: I made my graph interactive. When the user howers on a circle, it becomes opaque to stand out more and a frame appears near the user's mouse, displaying relevant data (including some that wasn't present in the original graph). Once the user stops hovering, the circle becomes transparent again and the frame disappears.
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+- **Colorblind accessibility**: As we discussed in class, I changed the color scheme for my improved visualizations to one that is color blind friendly.
+- **Consistency**: All my replicates of the original graph use the same color palette, and all my improved visualizations also use the same color palette (colorblind one). I also added a title to all my improved graphs.
+- **Improved trend visualization**: When I could add trendlines in a way that didn't make the visualization unreadable, I added them to help the user visualize individual trends more clearly for different manufacturers (R and Flourish).
+- **More information, less clutter**: In my improved D3 visualization, I displayed what type of car corresponded to each circle when the user hovers above it, to give another layer of information without cluttering the visuals. I also added how many circles there were for each manufacturer in the legend. For the R visualization, I removed the Manufacturer legend, as it was redundant with the headers of the 5 graphs. 
