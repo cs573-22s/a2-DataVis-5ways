@@ -9,7 +9,7 @@ d3.selectAll('#p1')
     .style('color', 'black');
 </script>
 
-<svg id="map1" width=800 height=800>
+<svg id="map1" width=1000 height=800>
 </svg>
 
 <script>
@@ -27,7 +27,7 @@ d3.selectAll('#p1')
        	var yValue = d => d.MPG;
         	var circleRadius = d => d.Weight * 0.003;
         
-        	var margin = { top: 20, right: 60, bottom: 88, left: 80 };
+        	var margin = { top: 20, right: 100, bottom: 88, left: 80 };
         	var innerWidth = width - margin.left - margin.right;
         	var innerHeight = height - margin.top - margin.bottom;
 
@@ -55,6 +55,7 @@ d3.selectAll('#p1')
           		.ticks(8)
           		.tickSize(-innerHeight)
           		.tickPadding(5);
+
 
         	const xAxisG = g.append('g').call(xAxis)
           		.attr('transform', `translate(0,${innerHeight})`);
@@ -120,9 +121,9 @@ var linscale = d3.scaleLinear()
          		d3.select(this).transition()
           		.duration('5000')
           		.ease(d3.easeLinear)
-          		.attr('cy', function(d) { return linscale(d) + 200; });})
+          		.attr('cy', function(d) { return linscale(d); });})
 		
-		.on('doubleclick', function (d, i) {
+		.on('mousedown', function (d, i) {
          		d3.select(this).transition()
           		.duration('5000')
           		.ease(d3.easeLinear)
@@ -141,6 +142,59 @@ d3.csv('https://raw.githubusercontent.com/cs573-22s/a2-DataVis-5ways/main/cars-s
       		);
       		render(data);
     }); 
+
+
+
+var data_legend = [
+    {
+        "name":"bmw",
+        "color":"#FF69B4"
+    },
+    {
+        "name":"ford",
+        "color":"#00BFFF"
+    },
+    {
+        "name":"honda",
+        "color":"#32CD32"
+    },
+    {
+        "name":"mercedes",
+        "color":"#FFFF00"
+    },
+    {
+        "name":"toyota",
+        "color":"#808080"
+    }
+];
+ 
+//初始化图例，将data_legend与图例绑定
+var legend = svg.selectAll(".legend") 
+    .data(data_legend)
+    .enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d, i) { return "translate(-30," + (i * 20 + 30) + ")"; });  //transform属性便是整个图例的坐标
+ 
+//绘制图例文字
+legend.append("text")
+    .attr("x", width - 10)
+    // .attr("x", (width / 40) * 39)
+    .attr("y", 15)
+    .style("text-anchor", "front") //样式对齐
+    .text(function(d) { 
+        return d.name;
+    });
+
+//绘制图例色块
+legend.append("circle")
+    .attr("cx", width - 30) //width是svg的宽度，x属性用来调整位置
+    .attr("cy", 9)
+    .attr("r", 5)
+    .style("fill", function(d){
+        return d.color
+    })
+    .style("opacity", .80);
+
 
 </script>
 
