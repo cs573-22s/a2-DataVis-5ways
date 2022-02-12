@@ -99,12 +99,27 @@ public class Main {
             graphics.drawString(label, (int)xAxis.map(xMin) - (int) bounds.getWidth() - 10 * multiSampling, image.getHeight() - (newY - (int) bounds.getHeight() / 2));
         });
 
+        // X Axis Label
+        graphics.setFont(graphics.getFont().deriveFont(20f * multiSampling));
+        String xAxisLabel = "Weight";
+        Rectangle2D bounds = graphics.getFontMetrics().getStringBounds(xAxisLabel, graphics);
+        graphics.drawString(xAxisLabel, image.getWidth() / 2 - (int) bounds.getWidth() / 2, image.getHeight() - 5 * multiSampling);
+
+        // Y Axis Label
         AffineTransform globalTransform = new AffineTransform();
+        globalTransform.setToRotation(-Math.PI / 2.0);
+        graphics.transform(globalTransform);
+        String yAxisLabel = "MPG";
+        bounds = graphics.getFontMetrics().getStringBounds(xAxisLabel, graphics);
+        graphics.drawString(yAxisLabel, -image.getHeight() / 2 - (int) bounds.getWidth() / 2,  5 * multiSampling + (int) bounds.getHeight());
+
+        globalTransform.setToRotation(Math.PI / 2.0);
         globalTransform.translate(0.0, image.getHeight());
         globalTransform.scale(1.0, -1.0);
         graphics.transform(globalTransform);
 
 
+        // Draw Points
         Ellipse2D.Double circle = new Ellipse2D.Double(-0.5, -0.5, 1.0, 1.0);
         graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
@@ -130,17 +145,5 @@ public class Main {
 
         ImageIO.write(shrunk, "png", new File("out.png"));
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
