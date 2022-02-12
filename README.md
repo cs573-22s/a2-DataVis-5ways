@@ -1,5 +1,27 @@
 # 02-DataVis-5ways
 
+
+## Approaches
+
+### D3
+![D3 output](./d3/out.png)
+
+### ggplot
+![R output](./r/out.png)
+
+### matplotlib
+![matplotlib output](./matplotlib/out.png)
+
+### Java
+![Java output](./java/out.png)
+
+### Excel
+![Excel output](./excel/out.png)
+
+
+
+
+
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
