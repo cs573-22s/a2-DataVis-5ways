@@ -4,4 +4,139 @@
 # https://observablehq.com/@d3/color-schemes
 # http://bl.ocks.org/jfreels/6816504
 # https://www.d3-graph-gallery.com/graph/custom_theme.html
-https://stackoverflow.com/questions/34890353/d3-change-font-size-of-axis-labels
+# https://stackoverflow.com/questions/34890353/d3-change-font-size-of-axis-labels
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<p id="para1"> Monet Norales, Assignment 2, February 11</p>
+<svg id="svg" width=1000 height=1000></svg>
+
+<script>
+    //loading csv file
+d3.csv('cars-sample.csv')
+    .then(file => {
+            file.forEach( 
+            d => {
+                    d.Weight = +d.Weight;
+                    d.MPG = +d.MPG;
+                    }
+            );
+            render(file);
+    }); 
+    //make create space
+    const svg = d3.select('svg')
+        .attr('width', 700)
+        .attr('height', 700);
+
+    var width = +svg.attr('width');
+    var height = +svg.attr('height');
+
+    const render = file => {
+    
+        //variables
+        var x = d => d.Weight;
+
+        var y = d => d.MPG;
+        
+        var cR = d => d.Weight * 0.005;
+    
+        var margin = { top: 50, right: 50, bottom: 100, left: 100};
+
+        var w = width - margin.left - margin.right;
+        
+        var h = height - margin.top - margin.bottom;
+
+        // graph backing
+        const background = svg.append('rect')
+        .attr('x', margin.left)
+        .attr('y', margin.top)
+        .attr('width', w)
+        .attr('height', h)
+        .attr('fill', 'black');
+
+        // individual color labels
+    var colors = {
+        'bmw': 1, 
+        'ford': 2, 
+        'honda': 3, 
+        'mercedes': 4, 
+        'toyota': 5
+    };
+            var design = ([
+                "#7fc97f",
+                "#beaed4",
+                "#fdc086",
+                "#ffff99",
+                "#386cb0",
+                "#f0027f",
+                "#bf5b17",
+                "#666666"
+                ])
+            const col = d => design[colors[d.Manufacturer]];
+
+    const g = svg.append('g')
+        .attr('transform', 
+            `translate(${margin.left},
+            ${margin.top})`);
+
+            
+    const yScale = d3.scaleLinear()
+        .domain([d3.min(file, y), 
+            d3.max(file, y)])
+        .range([h, 0]);
+        
+        
+    const yAxis = d3.axisLeft(yScale)
+        .ticks(5)
+        .tickSize(-w)
+        .tickPadding(10);
+
+    const yLabel = g.append('g').call(yAxis);
+
+    yLabel.append('text')
+        .attr('y', -40)
+        .attr('x', -h / 2)
+        .attr('fill', 'darkgrey')
+        .style("font-size", 30)
+        .attr('transform', `rotate(-90)`)
+        .attr('text-anchor', 'middle')
+        .text('MPG');
+
+
+    const xScale = d3.scaleLinear()
+                .domain(d3.extent(file, x))
+                .range([0, w]);
+        
+    const xAxis = d3.axisBottom(xScale)
+        .ticks(4)
+        .tickSize(-h)
+        .tickPadding(10);
+
+    const xLabel = g.append('g').call(xAxis)
+        .attr('transform', 
+            `translate(0,${h})`);
+        
+    xLabel.append('text')
+        .attr('y', 50)
+        .attr('x', w/2)
+        .attr('fill', 'darkgrey')
+        .style("font-size", 30)
+        .text('Weight');
+
+var scale = d3.scaleLinear()
+    .domain([0, 100]) // unit: km
+    .range([0, 200]) // unit: pixels
+
+        g.selectAll('circle')
+        .data(file)
+        .enter()
+        .append('circle')
+        .attr('cx', d => xScale(x(d)))
+        .attr('cy', d => yScale(y(d)))
+        .attr('r', cR)
+        .style("fill", col)
+        .style("opacity", .50)
+      }
+
+</script>
