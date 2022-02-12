@@ -1,0 +1,37 @@
+---
+title: "Oops All Cars"
+output: html_notebook
+---
+
+
+
+```{r}
+## Car Time
+library(viridis)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+cars <- read.csv("/Users/nick/Desktop/DataViz/Assigenment 2/cars-sample.csv")
+
+## Lets make the replica graph
+cars %>%  ggplot(aes(x = Weight, y = MPG, size = Weight, color = Manufacturer)) +
+  geom_point(alpha=0.5) 
+
+```
+
+```{r}
+## lets do it again but make it color blind friendly this time
+cars %>%  ggplot(aes(x = Weight, y = MPG, size = Weight, color = Manufacturer)) +
+  geom_point(alpha=0.5) + scale_color_viridis(discrete = TRUE, option = "turbo")
+
+```
+
+```{r}
+## Lets see them all individually too
+cars %>%  ggplot(aes(x = Weight, y = MPG, size = Weight, color = Manufacturer)) +
+  geom_point(alpha=0.5) + scale_color_viridis(discrete = TRUE, option = "turbo") + facet_wrap( ~ Manufacturer)
+
+```
+
