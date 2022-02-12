@@ -147,6 +147,6 @@ public class Main {
         Graphics2D shrunkGraphics = shrunk.createGraphics();
         shrunkGraphics.drawImage(scaledImage, new AffineTransform(), null);
 
-        ImageIO.write(shrunk, "png", new File("out.png"));
+        ImageIO.write(shrunk, "png", new File("java-matplotlib-r-excel-d3-out.png"));
     }
 }

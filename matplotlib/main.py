@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import pandas
 import numpy as np
@@ -26,5 +25,3 @@ ax.set_yticks(y_ticks)
 ax.grid(True)
 
 fig.savefig("out.png")
-
-
