@@ -5,7 +5,7 @@
 The implementation was modified from an example of basic scatter plot online: https://www.d3-graph-gallery.com/graph/scatter_basic.html. It was particularly easy based on previous experience with D3 for changing colors, opacity and all other attributes of the dots. However, finding the correct way to represent x and y axis was very difficult especially with adding ticks. This tool is definitely the one with most customization. 
 
 <div style="text-align:center;">
-<img src="./img/scatterplot-d3.jpg">
+<img src="./img/scatterplot-d3.JPG">
 </div>
 
 ## Flourish
@@ -21,7 +21,7 @@ This plot is easy because Flourish provides abundant API for creating plots and 
 With previous experience in Python and Matplotlib as well as pandas, this creation was also straight forward and easy to deal with. It is definitely easy for people doing Machine Learning to plot out data before making models. The result is as the following:
 
 <div style="text-align:center;">
-<img src="./img/scatterplot-python.jpg">
+<img src="./img/scatterplot-python.JPG">
 </div>
 
 ## R-ggplot
@@ -29,7 +29,7 @@ With previous experience in Python and Matplotlib as well as pandas, this creati
 This is a quick and easy plot with ggplot and R. It takes almost no arguments and offers a quick knit to html. This is a good source for academia to creat plot.
 
 <div style="text-align:center;">
-<img src="./img/scatterplot-R.jpg">
+<img src="./img/scatterplot-R.JPG">
 </div>
 
 ## Tableau
@@ -37,7 +37,7 @@ This is a quick and easy plot with ggplot and R. It takes almost no arguments an
 This is like Flourish, but it looks at the data aggregation directly, making it more difficult to use than Flourish. But this is also a very good choice for business users.
 
 <div style="text-align:center;">
-<img src="./img/scatterplot-Tableau.jpg">
+<img src="./img/scatterplot-Tableau.JPG">
 </div>
 
 ## VegaLite
@@ -45,7 +45,7 @@ This is like Flourish, but it looks at the data aggregation directly, making it 
 This tool is more like D3 but using a json type of writing. It is definitely great for creating static graph, not very sure about it with animations or transitions. The apis are straight and quick to use. 
 
 <div style="text-align:center;">
-<img src="./img/scatterplot-vega.jpg">
+<img src="./img/scatterplot-vega.JPG">
 </div>
 
 ## Technical Achievements
