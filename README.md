@@ -1,5 +1,6 @@
 # 02-DataVis-5ways
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
+James Plante
+jplante@wpi.edu
 
 # p5.js
 Processing is a software library that is used for drawing and teaching new programmers how to code. It has a number of implementations such as versions targeted at Java, JavaScript, and Python. I used the p5.js library for this project due to difficulties getting a Processing-like library working in Python 3 (the official version uses Jython as its runtime so it is still targeting Python 2.7). It also has an integrated editor/sketchbook that allows code to be easily shared online.
@@ -24,6 +25,20 @@ Matplotlib is a Python library that is used for plotting and making charts simil
 
 ![matplotlib](img/matplotlib.png)
 
+# Excel
+![excel](img/excel.png)
+
+Excel is a Microsoft spreadsheet application that has a graphical way of plotting data and doing data visualization. I surpingly had a more difficult time with this application than with other graphical data visualization tools. For one, while Excel has native support for bubble charts, it did not detect that the Manufacturers were categories. My solution to this was to filter the orginal CSV by category, paste the result into a new Sheet per category, then plot them as individual series, which seemed to fix the issue. I also had to manually scale the bubble sizes since they did not have a sane default scale: this was surpisingly difficult to do due to my lack of experience with Excel, but managed to make the chart work in the end. I would recommend this tool to someone who does not want to learn how to code or they have very basic data visualization needs since for more complex tasks, it is easier just to code it.
+
+# d3
+![d3](img/d3.png)
+
+d3 is a powerful JavaScript library that allows for interactive and appealing visualizations. I found using d3 relatively easy to use due to prior experience, although I found it difficult to debug with due to the nature of how it will silently fail. In terms of data processing, I was pleasantly suprised I did not have to do grouping of individual time series. I also found it easier to add new geometry in since it has a relatively intuitive syntax once you get past the initial learning curve. While it is a powerful tool, I would mainly use it if I needed to do a very advanced visualization with a lot of interactive elements.
+
+# Flourish
+![flourish](img/flourish.png)
+
+Flourish is a graphical visualization tool that exposes a lot of options to the user and does automatic data processing. This was a very easy application to use: creating the chart took less than 15 minutes. It already had a bubble chart template so I used it, uploaded the CSV, set the correct axes, enabled a legend, set the opacity and grid lines, and I was done. One aspect that I did not appreciate was the lack of customization so I was not able to find an option right away to include the size of the Weights as an option. Also I was not able to set a custom scaling for the size of the bubbles so it uses just a linear scale. I would see this tool being useful for simple visualizations, although I would not use it for more advanced visualizations due to the lack of control you have over the final image.
 
 ## Technical Achievements
 - **Proved P=NP**: Using a combination of...
