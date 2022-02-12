@@ -1,5 +1,5 @@
-# 02-DataVis-5ways
-
+Assignment 2 - Data Visualization, 5 Ways  
+===
 
 ## Approaches
 
@@ -7,23 +7,24 @@
 ![D3 output](./d3/out.png)
 
 ### ggplot
+This was by far the easiest tool to use to quickly get a graph since it required minimal tweaking once put into the basic tools. However I would likely avoid this tool for more complex work since the syntax for manipulating the graph felt fairly unintuitive and would likely be far more difficult to make small adjustments to manually.
 ![R output](./r/out.png)
 
 ### matplotlib
+
 ![matplotlib output](./matplotlib/out.png)
 
 ### Java
+This graph was fairly time consuming, but generally straightforward. I was not sure what "Java 2d" referred to so I decided to try using Java Swing's graphics to build the graph. Unfortunatly, this approach was very manual like with D3, but without the added helper functions for making plots and diagrams. While I was a bit unsure which way I wanted to do it, I eventually decided to just write out the csv parsing the display manually. One issue I did run into though was how Java Swing is reluctant to do antialiasing on basic shapes. I found this a bit annoying due to how blocky the circles looked so I put together my own makeshift version of multisampling where I first drew the image to a large buffer then scaled it down.
 ![Java output](./java/out.png)
 
 ### Excel
+So far this was probably the most painful one to make. Searching for help online was extremely difficult due to the abundance of irrelivant guides for tangential topics. I found that I had to compromise with either having the ticks at the correct locations or having all of the data points within the axis bounds. Since the axis labels were an explicit requirement I decided to let some of the data get cut off.
 ![Excel output](./excel/out.png)
 
 
 
 
-
-Assignment 2 - Data Visualization, 5 Ways  
-===
 
 Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
 
