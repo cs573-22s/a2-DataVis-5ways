@@ -96,6 +96,6 @@ This ended up being the area where many tools differed in their ability, so it w
 ### Design Achievements
 - **Color Choice**: I didn't care for the default color choice because I can't easily tell the difference between (Mercedes and Toyota) and (Honda and Ford).
 I picked some colors that were pretty different although with the 50% opacity and gray background It was difficult to find 5 colors that looked starkly different.
-![Colors Chosen](img/colors.png)
+![Colors Chosen](img/colors.PNG)
 I couldn't base the brand's colors off of colors they're typically associated with because like I said previously, they tend to be only silver or maybe some blue as well.
 Either way, I can tell these colors apart, although the yellow and orange could stand to be a little further from each other.
