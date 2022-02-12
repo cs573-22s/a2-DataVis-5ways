@@ -1,5 +1,18 @@
 Assignment 2 - Data Visualization, 5 Ways  
 ===
+In this assignment, 5 ways are used to show the bubble chart, they are:
+
+1.Excel
+
+2.Tableau
+
+3.Python
+
+4.R
+
+5.D3
+
+The details are as following.
 
 # Excel
 
