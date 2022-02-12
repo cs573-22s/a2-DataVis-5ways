@@ -20,7 +20,9 @@ R is a commonly used programming language for visualization, ggplot2 being a pop
 ![ggplot2](img/ggplot2.png)
 
 # Matplotlib
-Matplotlib is a Python library that is 
+Matplotlib is a Python library that is used for plotting and making charts similar to MATLAB's plotting libraries that are included in the language. The data processing for this library was involved was not trivial: I still had to do grouping on the data using a dictionary to plot the individual categories and do manual CSV parsing. However it was relatively easy to do the actual plottting of the graph: it was mostly just calling functions to set axis titles, specifying that a legend needed to be created, and plotting each category. The only difficulty that I had in this section was that I had to manually determine the size of each bubble which I scaled based on the range of all of the weights. I would recommend this tool since it does not require a lot of effort, the syntax is easy to follow, and it still gives control to the user if they need to.
+
+![matplotlib](img/matplotlib.png)
 
 
 ## Technical Achievements
