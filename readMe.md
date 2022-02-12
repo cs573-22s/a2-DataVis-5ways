@@ -19,7 +19,7 @@ Plotly was a library that I had been introduced to recently and in using it, I t
 Again transfering plotly from python to r took some time, but it to wasnt a terrible hassle to figure out. I did need to find extra documentaion for this tranfser  between coding laguages. It took me a while to realize certain reason why I wasn't getting an output, but its an easy fix and easy to adjst too. Using the piping to update the image was the best method i could find when trying to add things to the final image. 
 
 # ggplot - r
-![ggplot2](img/ggplot2_img(r).png)
+![ggplot2](img/ggplot2_img(r).png) 
 Because we did a lot of this one in class, the final image including the point sizes based on weight was not hard to do. However, figuring out how to incorperate that probably took longer than it should have for me. While coding it, I was over-complicating it and as a result, I kept getting unhelpful error messages. I thinkn I just need more work in r as it is a new language for me and I was expecting it to be more difficult than it actually was.
 
 
