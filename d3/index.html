@@ -7,68 +7,156 @@
 <script>
     const CANVAS_WIDTH = 800;
     const CANVAS_HEIGHT = 600;
+    const LEGEND_LENGTH = 200;
+    const LEGEND_HEIGHT = 400;
+
     const margins = {
-        left : 20,
-        right : 20,
-        top : 20,
-        bottom : 20
+        left: 30,
+        right: 30,
+        top: 20,
+        bottom: 40
     };
     console.log(d3);
     const plot = (data) => {
+        const xAxis = (g) => {
+            g
+                .attr("transform", `translate(0,${CANVAS_HEIGHT - margins.bottom})`)
+                .call(d3.axisBottom(x))
+                .call((g) =>
+                    g
+                        .append("text")
+                        .attr("x", CANVAS_WIDTH - margins.right)
+                        .attr("y", -4)
+                        .attr("fill", "#000")
+                        .attr("font-weight", "bold")
+                        .attr("text-anchor", "end")
+                        .text("Weight")
+                )
+        }
+
+
+        const yAxis = (g) => {
+            g
+                .attr("transform", `translate(${margins.left},0)`)
+                .call(d3.axisLeft(y))
+                .call((g) =>
+                    g
+                        .select(".tick:last-of-type text")
+                        .clone()
+                        .attr("x", 4)
+                        .attr("text-anchor", "start")
+                        .attr("font-weight", "bold")
+                        .text("MPG")
+                )
+        }
         const x = d3.scaleLinear()
             .domain(d3.extent(data, d => d.Weight)).nice()
             .range([margins.left, CANVAS_WIDTH - margins.right]);
+
         const y = d3.scaleLinear()
             .domain(d3.extent(data, d => d.MPG)).nice()
             .range([CANVAS_HEIGHT - margins.bottom, margins.top]);
+        
+        const size = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Weight)).nice()
+            .range([5, 30]);
+            
+
         const color = d3.scaleOrdinal(data.map(elt => elt.Manufacturer),
             d3.schemeCategory10
         );
 
-        const svg = d3.select("#main_canvas")
-            .attr("viewBox", [0, 0, CANVAS_WIDTH, CANVAS_HEIGHT])
-            .property("value", []);
+        const svg = d3.select("#main_canvas");
         
+        svg.append('g').call(xAxis);
+        svg.append('g').call(yAxis);
 
         var dot = svg
             .selectAll("circle")
             .data(data)
             .join("circle")
             .attr("transform", (d) => `translate(${x(+d.Weight)},${y(+d.MPG)})`)
-            .attr("r", (d) => 10)
+            .attr("r", (d) => size(d.Weight))
             .attr("fill", (d) => color(d.Manufacturer))
+            .attr("opacity", 0.5);
 
-        }
+        const allCategories = [...new Set(data.map(d => d.Manufacturer))] 
 
-    const xAxis = (g) =>
-    g
-      .attr("transform", `translate(0,${CANVAS_HEIGHT - margins.bottom})`)
-      .call(d3.axisBottom(x))
-      .call((g) =>
-          g
-          .append("text")
-          .attr("x", CANVAS_WIDTH - margins.right)
-          .attr("y", -4)
-          .attr("fill", "#000")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "end")
-          .text("Weight")
-        )
+        const legend = d3.select("#main_canvas")
+            .append("g")
+            .attr("class", "categories");
+        
+        legend
+            .selectAll("g")
+            .data(allCategories)
+            .join("g")
+            .attr("transform", (d, i) => `translate(${CANVAS_WIDTH - margins.right - 200}, ${margins.top + 50 + i * 30})`)
+            .attr("class", "category")
+            .call(g => {
+                g.append("circle")
+                    .attr("transform", "translate(-15, -5)")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("opacity", 0.5)
+                    .attr("fill", d => color(d))
+                    .attr("r", 10)
+            })
+            .call(g => {
+                g.append("text")
+                .style("font", "12pt sans-serif")
+                .text(d => d)
+            })
+        // This is hacky, I just want to get this legend drawn :L
+        const bubble_sizes = [1000, 2000, 3000, 4000, 5000];
+            
+        // Closure to keep track of the current offset
+        const counter = () => {
+            var current = 0;
+            const increment = (n) => {
+                current += n;
+                return current;
+            }
+            
+            const get = () => {
+                return current;
+            }
+
+            return {get, increment};
+        };
+        const counterBubbles = counter();
+        const counterText = counter();
 
 
-  const yAxis = (g) =>
-      g
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
-      .call((g) =>
-                g
-                  .select(".tick:last-of-type text")
-                  .clone()
-                  .attr("x", 4)
-                  .attr("text-anchor", "start")
-                  .attr("font-weight", "bold")
-                  .text("MPG")
-              )
+        legend.selectAll(".category")
+        .data(bubble_sizes)
+        .join(".category")
+        .call(g => {
+            g.append("circle")
+            .attr("cx", 120)
+            .attr("cy", (d) => {
+                const val = counterBubbles.get();
+                counterBubbles.increment(size(d) + 5);
+                return val;
+            })
+            .attr("r", d => size(d))
+            .attr("fill", "grey")
+            .attr("opacity", 0.5)
+        })
+        .call(g => {
+            g.append("text")
+            .attr("x", d => 140 + size(d))
+            .attr("y", d => {
+                const val = counterText.get();
+                counterText.increment(size(d) + 5);
+                return val;
+            })
+            .style("font", "12pt sans-serif")
+            .text(d => d)
+        })
+        
+    }
+
+
     const data = d3.csv("cars.csv", (d) => {
         return {
             Acceleration: parseInt(d.Displacement),
@@ -83,8 +171,9 @@
             Origin: d.Origin
         }
     })
-    .then(data => {
-        console.log(data);
-        plot(data);
-    });
+        .then(data => {
+            console.log(data);
+            data = data.filter(elt => elt.Weight && elt.MPG && elt.Manufacturer)
+            plot(data);
+        });
 </script>
