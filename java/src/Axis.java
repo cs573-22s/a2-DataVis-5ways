@@ -15,5 +15,4 @@ public class Axis {
         double px = (x - domainMin) / (domainMax - domainMin);
         return rangeMin + (rangeMax - rangeMin) * px;
     }
-
 }
