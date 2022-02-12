@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cars Scatter Plot</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Scatter Plot for Cars.csv</h1>
+    <ul>Separated Color by Manufacturer</ul>
+    <ul>Opacity: 0.5</ul>
+    <ul>Size by MPG</ul>
+    <div id="vis"></div>
+
+    <script>
+        var vlSpec = {
+
+            $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+            data: {
+                url: "https://raw.githubusercontent.com/YufeiLinUlysses/a2-DataVis-5ways/main/cars.csv"
+            },
+            mark: { "type": "point", "filled": true, opacity: 0.5 },
+            encoding: {
+                x: {
+                    field: 'Weight',
+                    type: 'quantitative',
+                    scale: { "domain": [1000, 6000] }
+                },
+                y: {
+                    field: 'MPG',
+                    type: 'quantitative',
+                    scale: { "domain": [0, 50] }
+                },
+                color: {
+                    field: "Manufacturer",
+                    type: "nominal",
+                    scale: {
+                        range: ['#cacb8a', '#f3b8b4', '#98d8f9', '#edb0f2', "#82d5b1"]
+                    }
+                },
+                size: {
+                    field: "Weight",
+                    type: "quantitative"
+                }
+            },
+
+        };
+
+        vegaEmbed('#vis', vlSpec);
+    </script>
+</body>
+
+</html>
