@@ -1,0 +1,10 @@
+{
+    "notebook.dragAndDropEnabled": false,
+    "r.rterm.mac": "/Users/zengmingjie/opt/anaconda3/envs/r_env/bin/radian",
+    "r.rterm.option": [
+        "--r-binary=/Users/zengmingjie/opt/anaconda3/envs/r_env/bin/R"
+    ],
+    "r.sessionWatcher": true,
+    "r.rpath.mac": "/Users/zengmingjie/opt/anaconda3/envs/r_env/bin/r",
+    "r.bracketedPaste": true,
+}
