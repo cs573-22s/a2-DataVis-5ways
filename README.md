@@ -83,11 +83,13 @@ and then call a geom_xxx() function to specify the type of graphics,
 such as scatter plot, curve chart, box graphs, etc. 
 
 Here is the chart with the ordinary requirement.
+The file is "A2-R.R".
 
 <img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-R-1.png" width = "600" height = "400" alt="" align=center />
 
 Here is the chart which use the other shapes to alternative the bubble in the previous one which can make the chart more clear and
 more easy for people to distinguish different manufactor.
+The file is "A2-R-2.R".
 
 <img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-R-2.png" width = "700" height = "400" alt="" align=center />
 
