@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = { top: 10, right: 20, bottom: 30, left: 30 };
+var width = 400 - margin.left - margin.right;
+var height = 460 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+d3.csv("https://raw.githubusercontent.com/cs573-22s/a2-DataVis-5ways/main/cars-sample.csv", function(err, data) {
+    data.forEach(function(d) {
+        d.MPG = +d.MPG;
+    });
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ 0, width])
+    //.ticks(4);
+    .nice();
+  svg.append("g")
+    .attr("class", "myXaxis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x)
+      .ticks(4));
+
+  svg.append("text")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+    .style("text-anchor", "middle")
+    .text("Weight");
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([10, 40])
+    .range([ height, 0])
+    .nice();
+    
+  svg.append("g")
+    .call(d3.axisLeft(y)
+     .ticks(4));
+
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("MPG");
+
+  var r = d3.scaleSqrt()
+    .domain([0, d3.max(data, d => d.Weight)])
+    .range([0, 10]);
+
+  // Color scale: give me a specie name, I return a color
+  var color = d3.scaleOrdinal()
+    .domain(["bmw", "ford", "honda", "mercedes", "toyota" ])
+    .range([ "#F1948A", "#B5A611", "#11B53A", "#3498DB", "#B511B5"])
+
+
+  // Add dots
+svg.append('g')
+    .selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .filter(function(d) {return d.MPG})
+     // .attr("class", function (d) { return "dot " + d.Manufacturer } )
+      .attr("cx", function (d) { return x(d.Weight); } )
+      .attr("cy", function (d) { return y(d.MPG); } )
+      .attr('r', function (d) { return r(d.Weight); })
+      .style('fill-opacity', 0.5)
+      .style("fill", function (d) { return color(d.Manufacturer) } )
+
+  
+x.domain([1100, 5000])
+  svg.select(".myXaxis")
+    .transition()
+    .duration(2000)
+    .attr("opacity", "1")
+    .call(d3.axisBottom(x)
+          .ticks(5));
+ 
+
+  svg.selectAll("circle")
+    .transition()
+    .delay(function(d,i){return(i*10)})
+    .duration(2000)
+    .attr("cx", function (d) { return x(d.Weight); } )
+    .attr("cy", function (d) { return y(d.MPG); } )
+  
+  
+
+})
+
+</script>
