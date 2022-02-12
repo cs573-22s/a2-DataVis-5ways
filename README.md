@@ -1,142 +1,134 @@
-# 02-DataVis-5ways
-
 Assignment 2 - Data Visualization, 5 Ways  
 ===
 
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
+# Excel
 
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
+Link to the file: https://github.com/ColdCode0214/a2-DataVis-5ways/tree/main/Excel
 
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
+Excel is an useful tool developed by Microsoft. 
+It can help you to make the different tables and charts much easier, including pie chart, line chart, bar chart and so on.
+You don't need to write code to generate the chart, just operating by using the graphical interface.
+It's a much friendly tool for the people who are not familiar with coding.
+However, it sometimes not as flexible as python or matlab. 
+And if there are too much data, like over ten thousand, it sometimes difficult to see clearly in such a small chart.
 
-Your goal is to use 5 different tools to make the following chart:
+Here is the chart with ordinary bubbles.
 
-![ggplot2](img/ggplot2.png)
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-Excel-1.png" width = "470" height = "400" alt="" align=center />
 
-These features should be preserved as much as possible in your replication:
+Here is the chart with 3D bubbles, which can make the bubbles more clear than the ordinary one.
+And when you move your mouse above the bubble, you can see the detail value of it.
 
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-Excel-2.png" width = "470" height = "400" alt="" align=center />
 
 
-Readme Requirements
----
+# Tableau
 
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
+Link to the file: https://github.com/ColdCode0214/a2-DataVis-5ways/tree/main/Tableau
 
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
+Tableau helps people see and understand data.
+It is a powerful and fastest growing data visualization tool used in the Business Intelligence Industry.
+Tableau combines data manipulation with beautiful charts. 
+Its programs are so easy to use that companies can use it to drag and drop large amounts of data onto a digital "canvas" and create graphs in a blink of an eye. 
+The idea of the software is that the easier the data on the interface is to manipulate, 
+the better a company will be able to understand whether it's doing right or wrong in its area of business. 
+It's also a much friendly tool for the people who are not familiar with coding.
 
-Other Requirements
----
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-Tableau-1.png" width = "600" height = "370" alt="" align=center />
 
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
+# Python
 
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
+Link to the file: https://github.com/ColdCode0214/a2-DataVis-5ways/tree/main/Python
 
-GitHub Details
----
+(To run this file, you need to put the data file "cars-sample.csv" in the same fold as this python file (A2-Python),
+otherwise, it will fail and show the error as following)
 
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
+<img src="https://github.com/ColdCode0214/pictures/blob/main/python-error.png" width = "870" height = "170" alt="" align=center />
 
-Grading
----
+Matplotlib is a Python 2D plotting library that produces publication-quality graphics in a variety of hardcopy formats and a cross-platform interactive environment. 
+With Matplotlib, developers can generate plots, histograms, power spectra, bar graphs, error graphs, scatter plots, and more with just a few lines of code. 
+For me, this Python method combined with Matplotlib is much easier compared with D3, 
+since many functions are already implemented in the library and what we need to do is just call them and set the parameters.
 
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-Python-1.png" width = "540" height = "500" alt="" align=center />
 
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
+# R & ggplot2
 
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
+Link to the file: https://github.com/ColdCode0214/a2-DataVis-5ways/tree/main/R
 
-# R + ggplot2 + R Markdown
+(If you want to run this file, you need to change the address of the data file. 
+This is the local address of the data file on my pc and you need to change it in to the address of the file on your computer)
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
-
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
-
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
-
-![ggplot2](img/ggplot2.png)
-
-# d3...
-
-(And so on...)
+<img src="https://github.com/ColdCode0214/pictures/blob/main/r-code.png" width = "800" height = "250" alt="" align=center />
 
 
-## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+The ggplot2 package is the most exciting extension package for R graphics, and R is a language primarily focused on statistical computing.
+It implements the "grammar of graphics", decomposes a plotting task into several subtasks, and the plotting can be completed as long as each subtask is completed. 
+When making common graphics, only two steps are required: 
+first, input the data displayed by the graphics into the ggplot() function, 
+and then call a geom_xxx() function to specify the type of graphics, 
+such as scatter plot, curve chart, box graphs, etc. 
 
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+Here is the chart with the ordinary requirement.
+
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-R-1.png" width = "600" height = "400" alt="" align=center />
+
+Here is the chart which use the other shapes to alternative the bubble in the previous one which can make the chart more clear and
+more easy for people to distinguish different manufactor.
+
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-R-2.png" width = "700" height = "400" alt="" align=center />
+
+# D3
+
+Link to the file: https://github.com/ColdCode0214/a2-DataVis-5ways/tree/main/D3
+
+D3 is one of the most popular visualization libraries and is used by many other table plugins.
+With D3, it will be more convenient for us to draw various graphics and coordinate axes.
+It's quite flexible and we can add some interactive functions.
+
+In my assignment, when you move your mouse on the bubble, the bubble will turn into red and become bigger. 
+And when you move your mouse away, the bubble will return to the original color and size.
+When you click on the bubble, it will move to the top of the chart.
+This function is used to remove some unsignificant data, so that we can compare the other data more directly.
+When you want the bubble which was moved to the top return back to the original position,
+you can 'drag' it back to its position by keep your mouse press down and move your mouse down.
+P.S. When you drag the bubble down, you should keep your mouse inside the bubble all the time, otherwise, the bubble will stop going down.
+When you dragged the bubble back to the original position, you should first move your mouse outside of the bubble, then stop pressing down the mouse,
+otherwise, the bubble will move to the top again.
+
+<img src="https://github.com/ColdCode0214/a2-DataVis-5ways/blob/main/img/A2-D3-1.png" width = "719" height = "637" alt="" align=center />
+
+# Technical Achievements
+1.All of the charts are added grid.
+
+2.All of the charts are added legends.
+
+3.Added some additional functions on D3
+- mouse move over a bubble: the bubble will turn into red and the size will become bigger.
+  This function is used to make the select bubble more clear compared with other bubbles, 
+  since some of the bubbles are overlapped together and hard to distinguish.
+- mouse move away from one bubble: the bubble will return to the original color and size.
+- click on the bubble: the bubble will move to the top of the chart
+  This function is used to remove the unsignificant data, 
+  inorder to make the significant data much easier to observe and compare.
+- Press on the bubble which are removed on the previous step: the bubble can be dragged down to the original position
+  But pay attention to the following things: 
+  When you drag the bubble down, you should keep your mouse inside the bubble all the time, otherwise, the bubble will stop going down.
+  When you dragged the bubble back to the original position, you should first move your mouse outside of the bubble, then stop pressing down the mouse,
+  otherwise, the bubble will move to the top again.
+
+# Design Achievements
+- Most of the charts are added title.
+- In the Excel chart, besides the ordinary bubble, I also use the 3D bubble instead of the ordinary bubble,
+  which can make the chart more clear.
+- In the R chart, besides the oridinary requirement, I also use other shapes instead of bubbles.
+  Because some of the bubbles are overlapped together and are hard to distinguish.
+- In the Tableau chart, I added the summary board which can show the maximum value, minimum value, average value and so on.
+
+# Reference
+- RGB color: https://www.sioe.cn/yingyong/yanse-rgb-16/
+- How to use Python matplotlib: https://blog.csdn.net/gaotihong/article/details/80983937
+- How to use R to draw a bubble chart: https://www.jianshu.com/p/55cb66acda6c
+- D3 instruction: https://www.cnblogs.com/qiushichen/p/6104143.html
+- R instruction: https://www.cnblogs.com/harywood/p/6993974.html
+- How to add a legend for D3: https://blog.csdn.net/weixin_40444691/article/details/109469189
