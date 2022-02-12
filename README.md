@@ -8,12 +8,13 @@ I started with D3 for this project. As a jumping-off point, I started with [This
 This rudimentary graph was helpful to build off of. Reading in the values was very easy using d3.csv and it was even able to extrapolate the
 names of each of the columns. After toying with the domains of both axes I was able to get the scaling correct which wasn't painful. Plotting the data
 was also easy enough except for two rows that didn't have an MPG. Two values reported NaN and my D3 decided they would be off the charts. I put in a catch
-for any value that wasn't a number and then just make the radius of their circles 0 to hide them. I also manually set the color of each manufacturer. The
+for any value that wasn't a number and then just made the radius of their circles 0 to hide them. I also manually set the color of each manufacturer. The
 new colors I chose are easier for me to distinguish but they don't correlate to the brands. But since every car brand is just associated with
-silver there isn't a specific (unique) color for each brand. Size and opacity were simple in D3 but outside of data changing things stylistically
+silver there isn't a specific (unique) color for each brand. Size and opacity were simple in D3 but outside of data, changing things stylistically
 tended to be tricky. Labeling the axes was alright once I figured out that the 'rotation transform' causes the 'translate transform' to behave differently.
 Extending the tick marks created the proper grid, but I was unable to figure out a way to have only 4 labeled ticks but have 3 other smaller ticks between them.
-Changing the color of the background was alright but changing the color of the grid was hackier.
+Changing the color of the background was alright but changing the color of the grid was hackier. I decided to try and implement the smaller graph inside of the
+legend to show the distribution of car brands instead of the standard legend for this example (See Achievements). 
 
 Overall, aside from the missing smaller interlaced grid lines, the graph matches pretty perfectly.
 
@@ -92,6 +93,10 @@ being one of the worst recreations.
 - **6 Replications**: Because I wanted to compare Excel and Google Sheets I made 6 different versions of the plot.
 - **Background Grids & Legends**: In each tool, I made it a point to try and preserve all aspects of the plot, which included the background color, grids, and legends.
 This ended up being the area where many tools differed in their ability, so it was a good thing to test.
+- **Bar Graph Legend**: For the D3 example, I wanted to try and create a smaller graph inside of the legend like we had seen in one example in class.
+Creating the bar graph axes was sort of similar to the scatterplot but wasn't too bad to set up. Most of the technical skills went into grouping and
+counting the dataset for 'Manufacturer'. I realized I couldn't just read through the dataset, I had to transform the data to count the occurrences
+of each brand to plot them accurately.
 
 ### Design Achievements
 - **Color Choice**: I didn't care for the default color choice because I can't easily tell the difference between (Mercedes and Toyota) and (Honda and Ford).
@@ -99,3 +104,7 @@ I picked some colors that were pretty different although with the 50% opacity an
 ![Colors Chosen](img/colors.PNG)
 I couldn't base the brand's colors off of colors they're typically associated with because like I said previously, they tend to be only silver or maybe some blue as well.
 Either way, I can tell these colors apart, although the yellow and orange could stand to be a little further from each other.
+- **Bar Graph Legend**: I took the idea from a visualization we saw in class where I believe the legend of the graph also had a smaller line graph that showed information about
+the values being represented. I figured I could take that idea and create a bar graph showing the number of each type of car depending on the brand (see D3 example). I like
+this idea in general because it adds more meaning to the legend. It still tells you everything you would otherwise need to know but the graph makes it feel like there's less
+space being wasted.
