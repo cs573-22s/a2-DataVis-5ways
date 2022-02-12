@@ -1,6 +1,6 @@
 # The instruction about the interactive functions
 
-### Mouse move over a bubble
+### Mouse move over a bubble:
   The bubble will turn into red and the size will become bigger. 
   This function is used to make the select bubble more clear compared with other bubbles, 
   since some of the bubbles are overlapped together and hard to distinguish.
