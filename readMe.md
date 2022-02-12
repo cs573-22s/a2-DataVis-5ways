@@ -24,7 +24,7 @@ Because we did a lot of this one in class, the final image including the point s
 
 
 # d3
-![caption](img/<imgname>)
+![d3](img/d3_img.png)
 This is definetly the most difficult language for me to figure out. My main focus was getting the graph rendered successfully, because if something was in the wrong order then i would end up with a black screen which was frustrating. d3 is something that takes me a long time to figure out, and even with all of the documentation that I look at, I still find it difficult to get certain things to work.I would much rather work in python as a visulaization language over d3. I can understand why people would like to use this as a method of making very complicated and interactive visualizations, but I think after this class, I am going to stick with python and r instead.
 
 - Description of the Technical achievements you attempted with this visualization.
