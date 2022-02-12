@@ -1,124 +1,30 @@
 # 02-DataVis-5ways
 
+## Alicia Howell-Munson
+
 Assignment 2 - Data Visualization, 5 Ways  
 ===
-
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
-
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
-
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
-
-Your goal is to use 5 different tools to make the following chart:
-
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
----
-
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
-
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
-
-
-Readme Requirements
----
-
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
-
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
 - Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
 
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
+# R + ggplot2
+![Image of scatterplot made in R with ggplot2](img/ggplot2.png)
+I used the sample code from class as a boiler plate for my R implementation. This included using the library ggplot2 and the function `geom_point` which made it extremely simple to create the scatterplot. I looked up the documentation for R to check what other aesthetics I could modify besides the x axis, y axis, color, size, and opacity. Another simple aesthetic is the shape of each dot, which I mapped to the Origin. This way, the user can look at trends in weight and MPG that aren't just related to the manufacturer but also to the origin - i.e. they could check if all American cars have similar trends. Despite being open source, R is well documented and it was easy to find the geom_point function to check for other aesthetics. I did have difficulties importing the csv file from the directory I wanted, so the user may need to change their file path on line 4 if they do not have a path named `Github/a2-DataVis-5ways` that the source code is located in.
 
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
+# d3
+![Image of scatterplot made in d3](img/d3.png)
+For d3, I also used the sample code from class. The most difficult part of d3, as a Windows user, is debugging it. I ended up using VizHub to load my code and debug. [This is a link](https://vizhub.com/allyziemage/47b25d95a385475eb40287958fb2ee29?edit=files&file=index.html) to my code there, incase the code in the folder does not load the same way. I struggled to find documentation or examples of how to change the size of the dots to be respective to the weight, but eventually realized the reason my screen was turning one shade of blue was because it was using the _exact_ value of the weight in the dataset. That means that the dots were each over 1,000 pixels, which is too large. I solved this by dividing all weights by a constant on 500, which then produced dots that did not consume the entire screen in an endless abyss of blue. 
 
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
+# Matlab 
+![Image of scatterplot made in MATLAB](img/matlab.png)
+MATLAB was more complicated when it came to accurately reproducing the original scatterplot. I used the group scatterplot function `gscatter` in order to have the color correspond to the manufacturer, however, `gscatter` does not have an opacity parameter nor can the size of each individual dot be changed. To address these two requirements, I overlaid a second scatterplot using the `scatter` function which does have size and opacity parameters. I made the fill color of the dots for `scatter` white and had their size correlate to weight, then changed the opacity of the white dots to 0.5. Since all of the dots are mapped exactly in the same location as the `gscatter` dots, this faded the color of the `gscatter` dots to appear more pastel/transparent (though it is not truly transparent). Then, to allow the user to see the size of the white `scatter` plot, I added a black border. 
 
-# R + ggplot2 + R Markdown
+# Jasp 
+![Image of scatterplot made in Jasp](img/jasp.png)
+Jasp is a statistical analysis tool similar to SPSS, but it is opensource. It was fairly simple to import the csv and set up the scatterplot, however it is extremely limited in options. The user cannot specify color or size for the dots, it can only be grayscale and the standard color. However, it is easy to find options of other analytical information to include, such as a trendline and a density graph for each axis. The x axis automatically started at 2,000 but the y axis started at 0 and there is no way to change that. 
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
+# Excel
+![Image of scatterplot made in Excel](img/excel.png)
+Excel was mildly complicated when it came to grouping the colors by manufacturer. I needed to pull each manufacturer into a separate column which either the weight or MPG value - I chose MPG. I used a conditional statement to check if the column manufacturer was equal to the row manufacturer, and if it was, it would transfer the MPG value to that location. This then gave me five manufacturer columns to plot for MPG and then another weight column. Luckily, each variable distributed itself to the correct axis without any manipulation from me. There was no clear way (or documentation I could easily find) to change the dot sizes to be equal to weight, but it was simple to add a trendline. It took more manual work to change the opacity of each manufacturer to 50% so it was more complex than other tools (which were one aesthetic/parameter to toggle) but it was at least an option, unlike in Jasp. 
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
-
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
-
-![ggplot2](img/ggplot2.png)
-
-# d3...
-
-(And so on...)
-
-
-## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
-
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
-
-Matlab - used two scatter plots overlayed on each other - one does the colors the other does the sizing. no function to change opacity on grouped scatter plot, so with the overlayed sizing scatter plot, I change the fill color to white and then made it more transparent, which then make the color behind it more transparent appearing. 
-
-Jasp - can't group by color, can't change sizing, can easily create trend line though so that's cool. s
+# Technical Achievements
+For Jasp and Excel, I included trendlines. For Jasp, there is an additional density chart for each axis, and then in R I added the aesthetic for shape to map to origin.
