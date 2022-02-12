@@ -1,0 +1,16 @@
+# https://ggplot2.tidyverse.org/
+# https://stackoverflow.com/questions/32207086/vary-scale-of-geom-point-size-by-facet
+
+## loading libraries
+library(tidyverse)
+library(ggplot2)
+
+# setting dataframe
+carsdf <- read.csv("cars-sample.csv")
+carsdf
+
+# plotting scatterplot
+carsdf %>% 
+  ggplot( aes(x=Weight, y=MPG, size = Weight, color=Manufacturer)) +
+  scale_color_brewer(palette = "Dark2") +
+  geom_point(alpha=0.5)

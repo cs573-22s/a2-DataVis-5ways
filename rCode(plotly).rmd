@@ -1,0 +1,23 @@
+# https://plotly.com/r/getting-started/
+# https://plotly.com/r/line-and-scatter/
+# https://plotly.com/r/figure-labels/
+# https://stackoverflow.com/questions/37809906/control-which-tick-marks-labels-appear-on-x-axis-in-plotly
+
+library(plotly)
+
+col <- c("orchid", "lightblue", "lightgreen", "darkgrey", "pink")
+
+img <- plot_ly(carsdf, 
+               x = carsdf$Weight, 
+               y = carsdf$MPG, 
+               color = carsdf$Manufacturer, 
+               type = "scatter", 
+               colors = col)
+
+img <- img %>% layout(xaxis = list(title = 'Weight'), 
+                      yaxis = list(title = 'MPG'), 
+                      legend = list(title=list(text='<b> Manufacturer </b>')))
+img <- img %>%
+  layout(xaxis = list(autotick = F, dtick = 1000),
+         yaxis = list(autotick = F, dtick = 10))
+img
