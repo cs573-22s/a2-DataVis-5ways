@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+
+<body>
+    <div id="scatter"></div>
+    <div id="legend"></div>
+</body>
+
+<script>
+
+    // set the dimensions and margins of the graph
+    var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#scatter")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+
+    function removeNull(d) {
+        return !(isNaN(d.MPG) || isNaN(d.Weight))
+    }
+
+
+    d3.csv("https://raw.githubusercontent.com/YufeiLinUlysses/a2-DataVis-5ways/main/cars.csv", function (data) {
+        data = data.filter(removeNull)
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([0, 6000])
+            .range([0, width])
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).tickSize(-height).ticks(5)
+                .tickSizeOuter(0));
+
+        svg.append("text")
+            .attr("class", "x label")
+            .attr("text-anchor", "end")
+            .attr("x", 220)
+            .attr("y", height + 25)
+            .text("Weight");
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, 50])
+            .range([height, 0]);
+
+        svg.append("g")
+            .call(d3.axisLeft(y).tickSize(-width).ticks(4)
+                .tickSizeOuter(0));
+        
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "end")
+            .attr("y", -50)
+            .attr("x", -150)
+            .attr("dy", ".75em")
+            .attr("transform", "rotate(-90)")
+            .text("MPG");
+        
+        // Add dots
+        svg.append('g')
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x(d.Weight); })
+            .attr("cy", function (d) { return y(d.MPG); })
+            .attr("r", function (d) {
+                return d.Weight / 300
+            })
+            .attr('opacity', '.5')
+            .style("fill", function (d) {
+                if (d.Manufacturer == "ford") {
+                    return '#cacb8a'
+                }
+                if (d.Manufacturer == "bmw") {
+                    return '#f3b8b4'
+                }
+                if (d.Manufacturer == "mercedes") {
+                    return '#98d8f9'
+                }
+                if (d.Manufacturer == "toyota") {
+                    return '#edb0f2'
+                }
+                return "#82d5b1"
+            })
+
+    })
+
+
+
+
+</script>

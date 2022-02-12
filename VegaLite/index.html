@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Vega-Lite Bar Chart</title>
+
+<head>
+    <title>Cars Scatter Plot</title>
     <meta charset="utf-8" />
 
     <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
@@ -9,40 +10,56 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
 
     <style media="screen">
-      /* Add space between Vega-Embed links  */
-      .vega-actions a {
-        margin-right: 5px;
-      }
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
     </style>
-  </head>
-  <body>
-    <h1>Template for Embedding Vega-Lite Visualization</h1>
-    <!-- Container for the visualization -->
+</head>
+
+<body>
+    <h1>Scatter Plot for Cars.csv</h1>
+    <ul>Separated Color by Manufacturer</ul>
+    <ul>Opacity: 0.5</ul>
+    <ul>Size by MPG</ul>
     <div id="vis"></div>
 
     <script>
-      // Assign the specification to a local variable vlSpec.
-      var vlSpec = {
-        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-        data: {
-          url:"../cars.csv"
-        },
-        mark: 'bar',
-        encoding: {
-          y: {field: 'weight', type: 'nominal'},
-          x: {
-            aggregate: 'mpg',
-            field: 'mpg',
-            type: 'quantitative',
-            axis: {
-              title: 'Average of b'
-            }
-          }
-        }
-      };
+        var vlSpec = {
 
-      // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis', vlSpec);
+            $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+            data: {
+                url: "https://raw.githubusercontent.com/YufeiLinUlysses/a2-DataVis-5ways/main/cars.csv"
+            },
+            mark: { "type": "point", "filled": true, opacity: 0.5 },
+            encoding: {
+                x: {
+                    field: 'Weight',
+                    type: 'quantitative',
+                    scale: { "domain": [1000, 6000] }
+                },
+                y: {
+                    field: 'MPG',
+                    type: 'quantitative',
+                    scale: { "domain": [0, 50] }
+                },
+                color: {
+                    field: "Manufacturer",
+                    type: "nominal",
+                    scale: {
+                        range: ['#cacb8a', '#f3b8b4', '#98d8f9', '#edb0f2', "#82d5b1"]
+                    }
+                },
+                size: {
+                    field: "Weight",
+                    type: "quantitative"
+                }
+            },
+
+        };
+
+        vegaEmbed('#vis', vlSpec);
     </script>
-  </body>
+</body>
+
 </html>
