@@ -1,142 +1,96 @@
-# 02-DataVis-5ways
-
 Assignment 2 - Data Visualization, 5 Ways  
-===
-
-Now that you have successfully made a "visualization" of shapes and lines using d3, your next assignment is to successfully make a *actual visualization*... 5 times. 
-
-The goal of this project is to gain experience with as many data visualization libraries, languages, and tools as possible.
-
-I have provided a small dataset about cars, `cars-sample.csv`.
-Each row contains a car and several variables about it, including miles-per-gallon, manufacturer, and more.
-
-Your goal is to use 5 different tools to make the following chart:
-
-![ggplot2](img/ggplot2.png)
-
-These features should be preserved as much as possible in your replication:
-
-- Data positioning: it should be a downward-trending scatterplot as shown.  Weight should be on the x-axis and MPG on the y-axis.
-- Scales: Note the scales do not start at 0.
-- Axis ticks and labels: both axes are labeled and there are tick marks at 10, 20, 30, etcetera.
-- Color mapping to Manufacturer.
-- Size mapping to Weight.
-- Opacity of circles set to 0.5 or 50%.
-
-Other features are not required. This includes:
-
-- The background grid.
-- The legends.
-
-Note that some software packages will make it **impossible** to perfectly preserve the above requirements. 
-Be sure to note where these do not support the features you need, but feel free to still use them.
-
-Improvements to the chart and design are also welcome as part of Technical and Design achievements.
-
-Libraries, Tools, Languages
 ---
 
-You are required to use 5 different tools or libraries.
-Of the 5 tools, you must use at least 3 libraries (libraries require code of some kind).
-This could be `Python, R, Javascript`, or `Java, Javascript, Matlab` or any other combination.
-Dedicated tools (i.e. Excel) do not count towards the language requirement.
+Mingjie Zeng (671222265)   
+Email:mzeng2@wpi.edu
 
-Otherwise, you should seek tools and libraries like Excel, Tableau, or Flourish to fill out your 5.
-
-Below are a few ideas. Do not limit yourself to this list!
-Some may be difficult choices, like Matlab or SPSS, which require large installations, licenses, and occasionally difficult UIs.
-
-I have marked a few that are strongly suggested.
-
-- R + ggplot2 `<- definitely worth trying`
-- Excel
-- d3 `<- since the rest of the class uses this, we're requiring it`
-- Matplotlib
-- three.js `<- well, it's a 3d library. not really recommended, but could be interesting and fun`
-- p5js `<- good for playing around. not really a chart lib but great for art and animation`
-- Tableau
-- Java 2d
-- GNUplot
-- Vega-lite <- `<- very cool formal language for visualization. might be the future of the field.`
-- Flourish <- `<- popular in recent years`
-- PowerBI
-- SPSS
-
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, please identify the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-Tips
----
-
-- If you're using d3, key to this assignment is knowing how to load data.
-You will likely use the [`d3.json` or `d3.csv` functions](https://github.com/mbostock/d3/wiki/Requests) to load the data you found.
-Beware that these functions are *asynchronous*, meaning it's possible to "build" an empty visualization before the data actually loads.
-
-- *For web languages like d3* Don't forget to run a local webserver when you're debugging.
-See this [ebook](http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server) if you're stuck.
+In this assignment, I use Python+Matplotlib, D3, Flourish, R+ggplot, and Tableau way separately to achieve the visualization goal.
 
 
-Readme Requirements
----
+## Python + Matplotlib
 
-A good readme with screenshots and structured documentation is required for this project. 
-It should be possible to scroll through your readme to get an overview of all the tools and visualizations you produced.
+Here is the file link:https://github.com/JasmineZZZ9/a2-DataVis-5ways/tree/main/Python%2BMatplotlib
 
-- Each visualization should start with a top-level heading (e.g. `# d3`)
-- Each visualization should include a screenshot. Put these in an `img` folder and link through the readme (markdown command: `![caption](img/<imgname>)`.
-- Write a paragraph for each visualization tool you use. What was easy? Difficult? Where could you see the tool being useful in the future? Did you have to use any hacks or data manipulation to get the right chart?
+Among the languages and tools used in this assignment, python and matplotlib are the combination I am most familiar with. I have used this to draw graphs before, but more for the purpose of enriching the presentation of the results rather than focusing on expressing the data itself. 
 
-Other Requirements
----
+And in this assignment, it took some pains to get similar results to the example. I was impressed by a few points. One is that the result of the drawing is rather archaic and not very beautiful. In order to adjust it to be closer to the way ggplot presents it, many variables were adjusted, such as the color of the facecolor and the grid color and even the color of spines. This can cause new problems, for example, the priority of the grid adjusted to white has become higher, so it is presented above the scatter dots, so I need to find a way to solve the priority problem. Although none of this is a complex problem, there are many details that are troublesome. Another thing that impressed me was the legend problem. The model presented two different legends at the same time, and in the conventional way, the second initialized legend would overwrite the first one, which was a problem I had not encountered before, and there was a bit of tricky.
 
-0. Your code should be forked from the GitHub repo.
-1. Place available code, Excel sheets, etcetera in a named folder. For example, `r-ggplot, matlab, mathematica, excel` and so on.
-2. Your writeup (readme.md in the repo) should also contain the following:
+This is the scatter plot obtained in Python + Matplotlib way:
 
-- Description of the Technical achievements you attempted with this visualization.
-  - Some ideas include interaction, such as mousing over to see more detail about the point selected.
-- Description of the Design achievements you attempted with this visualization.
-  - Some ideas include consistent color choice, font choice, element size (e.g. the size of the circles).
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/python%2Bmatplotlib.png" width = "600" height = "400" alt="" align=center />
 
-GitHub Details
----
+The advantages of this approach are that first of all, python is a popular language, which is very versatile and easy to understand, and drawing in python is also very common and convenient. The disadvantage is that the drawing is more conventional, but there are many ready-made packages to make up for this.
 
-- Fork the GitHub Repository. You now have a copy associated with your username.
-- Make changes to fulfill the project requirements. 
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
 
-Grading
----
+## D3
 
-Grades on a 120 point scale. 
-24 points will be based on your Technical and Design achievements, as explained in your readme. 
+Here is the file link:https://github.com/JasmineZZZ9/a2-DataVis-5ways/tree/main/d3
 
-Make sure you include the files necessary to reproduce your plots.
-You should structure these in folders if helpful.
-We will choose some at random to run and test.
+This part of work is based on a theme templates in D3.js Graph Gallery: https://www.d3-graph-gallery.com/graph/custom_theme.html in a mimicking ggplots style.
+This is the results of d3 work: 
 
-**NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/d3.jpg" width = "500" height = "600" alt="" align=center />
 
-# R + ggplot2 + R Markdown
+When exploring d3 there are a lot of excellent templates which is very happy, in fact, d3 is relatively simple to apply, but for people without html or css foundation, it will be a little difficult to accept. But because there are excellent examples, luckily I can learn a lot. One of the difficult parts for me in this section was to understand how d3 reads csv data and how it is used. Another novelty is how to bind the color with certain properties, I see a lot of methods, look forward to trying to achieve one by one later. In this part, my understanding of the html and svg is still not enough, for the canvas size is difficult to determine efficiently, the final rendering of the axis also has some strange. But d3 still plays an important role in interacting with the data in these tools, which makes me feel its simplicity and power.
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
+## Flourish
 
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
+Here is the file link:https://github.com/JasmineZZZ9/a2-DataVis-5ways/tree/main/Flourish
 
-![ggplot2](img/ggplot2.png)
+This is my first time using Flourish, an online platform that is very easy to use, very simple and clear for data manipulation, and the final result is perfect. Although the template provided by the online platform is not similar to the example, the information expressed is the same.
+Here is the result:
 
-# d3...
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Flourish.png" width = "600" height = "400" alt="" align=center />
 
-(And so on...)
+
+The platform is very comprehensive in its consideration of the various representations of data, with more than imaginable mapping forms, not just color, shape or size.
+
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Flourish-mapping.jpg" width = "450" height = "600" alt="" align=center />
+
+What's more, this platform is very friendly for people who can't program, and the efficiency of making data visualization is also very high. You can just upload files to operate on the data directly, and the operation is also very straightforward and simple, which is easy to get started.
+
+![image](https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Flourish-data.jpg)
+
+
+## R + ggplot
+
+Here is the file link:https://github.com/JasmineZZZ9/a2-DataVis-5ways/tree/main/R%2Bggplot
+
+The combination of R and ggplot is very simple and efficient in use, and the presentation is really very smart and beautiful. It is really amazing that a very simple code can produce a very good effect. But the part I spent the longest time in this section is the deployment of the environment, because I have not touched R before, although his syntax is very straightforward and simple, but there are indeed many potholes when matching the environment, including the problem that ggplot somehow fail to generate images, and the problem that the compiler does not work. The process of rendering data with R is very cool, but it takes some hands-on time. Here is the final result rendered in R + ggplot：
+
+![image](https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/R.png)
+
+The effect looks very complicated but actually does not require people to do anything, the legend, color, even the size of the dots are automatically generated according to certain conditions. R can easily achieve effects that look fancy, such as gradient colors that meet certain conditions, including a well-matched and harmonious color style, different shapes, and different ways of filling, which will create a desire to explore.
+
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/R_color.png" width = "480" height = "400" alt="" align=left />
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/R_color_2.png" width = "480" height = "400" alt="" align=right />
+
+
+
+## Tableau
+
+Here is the file link:https://github.com/JasmineZZZ9/a2-DataVis-5ways/tree/main/Tableau
+
+Tableau is also a very convenient and smart platform, but compared to Flourish, I think it is slightly more complicated, but can do more things, such as some further manipulation of the data, summing and averaging, etc. Good effects can be fetched by using this platform:
+
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Tableau.jpg" width = "600" height = "400" alt="" align=center />
+
+Not only can Tableau directly exclude missing data, but you can also manipulate the presentation of data in detail from all angles:
+
+
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Tableau-1.jpg" width = "280" height = "400" alt="" align=left />
+<img src="https://github.com/JasmineZZZ9/a2-DataVis-5ways/blob/main/pics/Tableau-2.jpg" width = "280" height = "400" alt="" align=center />
+
+Besides these basic ones, this platform has more professional ways to handle data. Next I will try to learn their mature ways to handle data and try to apply them to my own practice.
 
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+- For myself, this is the first time I have tried using R and it's a very intereting. And for the two data visulization platform Fourish and Tableau, this is my first time to use them too, they bring me a lot surprise about visulization.
+- Try a lot of different attributes about every function and methods to get the properiate format of data viz.
+- The implement of two different lengends in python using add_artist() and patches is new and interesting to me.
 
-### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+## Design Achievements
+- Some attempts were made in the R section to take advantage of its superiority to experience some beautiful designs, such as different shapes and fills, etc.
+- Go to the color matching website specifically to select a more harmonious color to represent.
+- Many attempts have been made for the beauty of the images, such as the placement and size of the legend, the ratio of the size of the dots and even the thickness of the grid, etc. have been adjusted accordingly.
