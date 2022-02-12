@@ -5,6 +5,14 @@
 </svg>
 
 <script>
+
+    /*
+     * CS573 A2 d3 Portion
+     * James Plante (jplante@wpi.edu)
+     * This code was partially contructed from the sample code from lecture
+     * and this tutorial to create a legend
+     * https://observablehq.com/@thetylerwolf/day-8-scatter-plot?collection=@thetylerwolf/25-days-of-d3
+     */
     const CANVAS_WIDTH = 800;
     const CANVAS_HEIGHT = 600;
     const LEGEND_LENGTH = 200;
@@ -61,7 +69,6 @@
             .domain(d3.extent(data, d => d.Weight)).nice()
             .range([5, 30]);
             
-
         const color = d3.scaleOrdinal(data.map(elt => elt.Manufacturer),
             d3.schemeCategory10
         );
@@ -85,7 +92,8 @@
         const legend = d3.select("#main_canvas")
             .append("g")
             .attr("class", "categories");
-        
+
+        // Color categories
         legend
             .selectAll("g")
             .data(allCategories)
@@ -127,6 +135,7 @@
         const counterText = counter();
 
 
+        // Size scales
         legend.selectAll(".category")
         .data(bubble_sizes)
         .join(".category")
