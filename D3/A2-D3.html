@@ -1,0 +1,204 @@
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<p id="p1">
+Assignment 2 - D3
+</p>
+
+<script>
+d3.selectAll('#p1')
+    .style('color', 'black');
+</script>
+
+<svg id="map1" width=1000 height=800>
+</svg>
+
+<script>
+
+	const svg = d3.select('svg')
+     	.attr('width', 750)
+     	.attr('height', 650);
+
+	var width = +svg.attr('width');
+      	var height = +svg.attr('height');
+
+     	const render = data => {
+        
+        	var xValue = d => d.Weight;
+       	var yValue = d => d.MPG;
+        	var circleRadius = d => d.Weight * 0.003;
+        
+        	var margin = { top: 20, right: 100, bottom: 88, left: 80 };
+        	var innerWidth = width - margin.left - margin.right;
+        	var innerHeight = height - margin.top - margin.bottom;
+
+        	const background = svg.append('rect')
+        	.attr('class', 'plot-background')
+        	.attr('x', margin.left)
+        	.attr('y', margin.top)
+        	.attr('width', innerWidth)
+        	.attr('height', innerHeight)
+	.attr('fill', 'white');
+
+	var manufacturerSet = {'bmw': 1, 'ford': 2, 'honda': 3, 'mercedes': 4, 'toyota': 5};
+        	var colorSet = ([ "#FF69B4", "#FF69B4", "#00BFFF", "#32CD32","#FFFF00", "#808080"]);
+        	const colorPicker = d => colorSet[manufacturerSet[d.Manufacturer]];
+
+	const g =svg.append('g')
+		.attr('transform', `translate(${margin.left},${margin.top})`);
+
+	const xScale = d3.scaleLinear()
+          		.domain(d3.extent(data, xValue))
+          		.range([0, innerWidth])
+          		.nice();
+        
+       	const xAxis = d3.axisBottom(xScale)
+          		.ticks(8)
+          		.tickSize(-innerHeight)
+          		.tickPadding(5);
+
+
+        	const xAxisG = g.append('g').call(xAxis)
+          		.attr('transform', `translate(0,${innerHeight})`);
+        
+        	xAxisG.append('text')
+            		.attr('class', 'x label')
+            		.attr('y', 30)
+            		.attr('x', innerWidth / 2)
+            		.attr('fill', 'black')
+            		.text('Weight');
+
+        	
+	const yScale = d3.scaleLinear()
+          		.domain([d3.min(data, yValue) - 1, d3.max(data, yValue) + 1])
+          		.range([innerHeight, 0])
+          		.nice();
+		
+        
+        	const yAxis = d3.axisLeft(yScale)
+          		.ticks(10)
+          		.tickSize(-innerWidth)
+          		.tickPadding(5);
+
+
+        	const yAxisG = g.append('g').call(yAxis);
+     
+        	yAxisG.append('text')
+            		.attr('class', 'y label')
+            		.attr('y', -30)
+            		.attr('x', -innerHeight / 2)
+            		.attr('fill', 'black')
+            		.attr('transform', `rotate(-90)`)
+            		.attr('text-anchor', 'middle')
+            		.text('MPG');
+
+var linscale = d3.scaleLinear()
+	.domain([0, 50]) // unit: km
+	.range([0, 100]) // unit: pixels
+
+        	g.selectAll('circle')
+		.data(data)
+          		.enter()
+		.append('circle')
+		.attr('cx', d => xScale(xValue(d)))
+            		.attr('cy', d => yScale(yValue(d)))
+            		.attr('r', circleRadius)
+            		.style("fill", colorPicker)
+		.style("opacity", .50)
+
+      		.on('mouseover', function (d, i) {
+         		d3.select(this).transition()
+          		.duration('200')
+          		.attr("r", 15)
+          		.style("fill", 'red');})
+
+      		.on('mouseout', function (d, i) {
+         		d3.select(this).transition()
+          		.duration('200')
+          		.attr("r", circleRadius)
+          		.style("fill", colorPicker);})
+
+		.on('click', function (d, i) {
+         		d3.select(this).transition()
+          		.duration('5000')
+          		.ease(d3.easeLinear)
+          		.attr('cy', function(d) { return linscale(d); });})
+		
+		.on('mousedown', function (d, i) {
+         		d3.select(this).transition()
+          		.duration('5000')
+          		.ease(d3.easeLinear)
+          		.attr('cy', d => yScale(yValue(d)));});
+
+      }
+
+
+d3.csv('https://raw.githubusercontent.com/cs573-22s/a2-DataVis-5ways/main/cars-sample.csv')
+	.then(data => {
+     		data.forEach( 
+			d => {
+        			d.Weight = +d.Weight;
+        			d.MPG = +d.MPG;
+	          		}
+      		);
+      		render(data);
+    }); 
+
+
+
+var data_legend = [
+    {
+        "name":"bmw",
+        "color":"#FF69B4"
+    },
+    {
+        "name":"ford",
+        "color":"#00BFFF"
+    },
+    {
+        "name":"honda",
+        "color":"#32CD32"
+    },
+    {
+        "name":"mercedes",
+        "color":"#FFFF00"
+    },
+    {
+        "name":"toyota",
+        "color":"#808080"
+    }
+];
+ 
+//初始化图例，将data_legend与图例绑定
+var legend = svg.selectAll(".legend") 
+    .data(data_legend)
+    .enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d, i) { return "translate(-30," + (i * 20 + 30) + ")"; });  //transform属性便是整个图例的坐标
+ 
+//绘制图例文字
+legend.append("text")
+    .attr("x", width - 10)
+    // .attr("x", (width / 40) * 39)
+    .attr("y", 15)
+    .style("text-anchor", "front") //样式对齐
+    .text(function(d) { 
+        return d.name;
+    });
+
+//绘制图例色块
+legend.append("circle")
+    .attr("cx", width - 30) //width是svg的宽度，x属性用来调整位置
+    .attr("cy", 9)
+    .attr("r", 5)
+    .style("fill", function(d){
+        return d.color
+    })
+    .style("opacity", .80);
+
+
+</script>
+
+
+
+
+
