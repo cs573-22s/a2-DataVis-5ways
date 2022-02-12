@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<svg></svg>
+
+
+<script>
+
+    const margin = {top: 10, right: 20, bottom: 60, left: 60};
+    const width = 400 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+
+    const svg = d3.select("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    d3.csv("../cars-sample.csv", d3.autoType)
+    .then(data => {
+        console.log(data)
+        const x = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Weight)).nice()
+            .range([ 0, width ]);
+        svg.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(x).ticks(4));
+
+        const y = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.MPG)).nice()
+            .range([ height, 0]);
+        svg.append("g").call(d3.axisLeft(y).ticks(4));
+
+        const colorScale = d3.scaleOrdinal(data.map(d => d.Manufacturer), d3.schemeCategory10);
+
+        const points = svg.selectAll("circle")
+            .data(data.filter(d => d.MPG !== "NA"))
+            .join("circle")
+            .attr("cx", d => x(d.Weight))
+            .attr("cy", d => y(d.MPG))
+            .attr("fill", d => colorScale(d.Manufacturer))
+            .attr("opacity" , _ => 0.5)
+            .attr("r", d => d.Weight / 400 -1)
+
+        // Axis labels based on https://stackoverflow.com/a/11194968/5987669
+        svg.append("text")
+            .attr("class", "x label")
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height + margin.top + margin.bottom / 2)
+            .text("Weight");
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "middle")
+            .attr("y", -margin.left / 2)
+            .attr("x", -height / 2)
+            .attr("transform", "rotate(-90)")
+            .text("MPG");
+    });
+</script>
