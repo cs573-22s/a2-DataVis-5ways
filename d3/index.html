@@ -1,0 +1,223 @@
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<svg width='100%' height='60%'>
+
+</svg>
+
+<script>
+    var height = 600;
+    var width = 800;
+    var x_scale, y_scale, size, imgSize, stroke;
+    var margin = ({
+        top: 20,
+        right: 30,
+        bottom: 30,
+        left: 40
+    });
+
+    const logos = new Map();
+
+
+    // magical img storing code from https://stackoverflow.com/a/16566198
+    function cacheBase64FromImageUrl(car, url) {
+        var img = new Image();
+
+        img.setAttribute('crossOrigin', 'anonymous');
+
+        img.onload = function() {
+            var canvas = document.createElement("canvas");
+            canvas.width = this.width;
+            canvas.height = this.height;
+
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(this, 0, 0);
+
+            var dataURL = canvas.toDataURL("image/png");
+
+            logos.set(car, dataURL)
+        };
+
+        img.src = url;
+    }
+
+    var carLogoDict = {
+        // ford logo from https://www.carlogos.org/car-logos/ford-logo-2017.png
+        'ford': 'ford-logo-2017.png',
+
+        // mercedes from https://1000logos.net/wp-content/uploads/2018/04/Mercedes-Benz-Logo.png
+        'mercedes': 'Mercedes-Benz-Logo.png',
+
+        // toyota from https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png
+        'toyota': 'toyota-logos-brands-10.png',
+
+        // honda from https://www.freepnglogos.com/uploads/honda-logo-png/honda-logo-png-19.png
+        'honda': 'honda-logo-png-19.png',
+
+        // bmw from https://www.freepnglogos.com/uploads/bmw-brand-logo-0.png
+        'bmw': 'bmw-brand-logo-0.png'
+    }
+
+    for (var car in carLogoDict) {
+        cacheBase64FromImageUrl(car, carLogoDict[car])
+    }
+
+    console.log(d3); // test if d3 is loaded
+
+    d3.csv("cars-sample.csv", d3.autoType).then(function(data) {
+        data = data.filter((d) => d.MPG != 'NA')
+        buildChart(data)
+    })
+
+    function buildChart(data) {
+
+        x_scale = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Weight)).nice()
+            .range([margin.left, width - margin.right])
+        y_scale = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.MPG)).nice()
+            .range([height - margin.bottom, margin.top])
+
+        size = d3.scaleLinear()
+            .domain([1500, 5000]).nice()
+            .range([4, 15])
+
+        imgSize = d3.scaleLinear()
+            .domain([1500, 5000]).nice()
+            .range([30, 100])
+
+
+        stroke = d3.scaleLinear()
+            .domain([1500, 5000]).nice()
+            .range([1, 5])
+
+        color = d3.scaleOrdinal(data.map((d) => d.Manufacturer),
+            d3.schemeCategory10
+        )
+
+        var svg = d3.select('svg')
+            .attr("viewBox", [0, 0, width, height])
+            .property("value", [])
+
+        svg.append("g").call(xAxis);
+        svg.append("g").call(yAxis);
+
+
+        var labels = svg.append('g')
+            .attr('font-family', 'sans-serif')
+        var pathg = svg.append('g')
+
+        var points = svg.append('g')
+        var img = points.append('svg:image')
+
+        points.selectAll("circle")
+            .data(data)
+            .join("circle")
+            .attr('transform', (d) => `translate(${x_scale(+d.Weight)},${y_scale(+d.MPG)})`)
+            .attr('r', (d) => size(+d.Weight))
+            .attr('fill', (d) => color(d.Manufacturer))
+            .attr('opacity', .7)
+            .on('mouseover mousemove', function(e, d) {
+                const wtScaled = x_scale(+d.Weight)
+                const mpgScaled = y_scale(+d.MPG)
+                d3.select(this)
+                    .attr('r', (d) => size(+d.Weight) + 3)
+                    .attr('opacity', .2)
+                    .raise()
+
+                // logo image
+                img.attr('id', 'active_img')
+                    .attr("x", wtScaled - (imgSize(+d.Weight) / 2))
+                    .attr("y", mpgScaled - (imgSize(+d.Weight) / 2))
+                    .attr("width", imgSize(+d.Weight))
+                    .attr("height", imgSize(+d.Weight))
+                    .attr("xlink:href", logos.get(d.Manufacturer))
+                    .attr('opacity', 1)
+
+
+                // MPG label
+                labels.append('rect')
+                    .attr('x', -20 + (wtScaled + x_scale(x_scale.domain()[0])) / 2)
+                    .attr('y', mpgScaled + 5)
+                    .attr('width', 40)
+                    .attr('height', 20)
+                    .attr('fill', color(d.Manufacturer))
+                    .attr('rx', 10)
+                labels.append('text')
+                    .attr("x", -10 + (wtScaled + x_scale(x_scale.domain()[0])) / 2)
+                    .attr("y", mpgScaled + 20)
+                    .text(parseInt(d.MPG))
+                    .attr('fill', 'white')
+
+                // Weight Label
+                labels.append('rect')
+                    .attr('y', (mpgScaled + y_scale(y_scale.domain()[0])) / 2)
+                    .attr('x', wtScaled + 5)
+                    .attr('width', 45)
+                    .attr('height', 20)
+                    .attr('fill', color(d.Manufacturer))
+                    .attr('rx', 10)
+                labels.append('text')
+                    .attr("y", 15 + (mpgScaled + y_scale(y_scale.domain()[0])) / 2)
+                    .attr("x", wtScaled + 9)
+                    .text(parseInt(d.Weight))
+                    .attr('fill', 'white')
+
+                pathg.append('path')
+                    .attr('d', () => {
+                        context = d3.path()
+
+                        // draw path to axis
+                        context.moveTo(wtScaled, mpgScaled)
+                        context.lineTo(wtScaled, y_scale(y_scale.domain()[0]))
+                        context.moveTo(wtScaled, mpgScaled)
+                        context.lineTo(x_scale(x_scale.domain()[0]), mpgScaled)
+                        return context.toString()
+                    })
+                    .attr('stroke', color(d.Manufacturer))
+                    .attr('stroke-width', stroke(+d.Weight))
+            })
+            .on('mouseout', function(e, d) {
+                labels.selectAll('text').remove()
+                labels.selectAll('rect').remove()
+                pathg.selectAll('path').remove()
+                img.attr('x', 0)
+                    .attr('y', 0)
+                    .attr('opacity', 0)
+                    .raise()
+                d3.select(this)
+                    .attr('r', size(+d.Weight))
+                    .attr('opacity', .7)
+            })
+        labels.raise()
+        pathg.lower()
+    }
+
+    const xAxis = (g) =>
+        g
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x_scale))
+        .call((g) =>
+            g
+            .append("text")
+            .attr("x", (width - margin.right) / 2)
+            .attr("y", 25)
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor", "end")
+            .text("Weight")
+        )
+
+    const yAxis = (g) =>
+        g
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y_scale))
+        .call((g) =>
+            g
+            .select(".tick:last-of-type text")
+            .clone()
+            .attr("x", 4)
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .text("MPG")
+        )
+</script>
