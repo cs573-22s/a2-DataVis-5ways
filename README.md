@@ -24,7 +24,9 @@ Tableau was extremely easy to do. I have a bit of previous experience in Tableau
 
 ![Tableau plot](img/tableau.png)
 
-# d3
+# [d3](https://trumanlarson.github.io/a2-DataVis-5ways/d3/)
+
+[Link here!](https://trumanlarson.github.io/a2-DataVis-5ways/d3/)
 
 D3 is what I put most of my time into. It does take a bit to get started, even with the simple things, but it has so much potential for customization. I tried to take advantage of this as much as possible. I tried to keep it simple visually, but with interactivity to add extra clarity if the user wishes. 
   The base chart is fairly simple, but I added a hover capability that enables clearer data viewing. The most prominent aspect is the image of the manufacturer logo that appears in the place of the point. There are also lines that go out to the axis, with labels as to the values of the point. All of these are coordinated with color and ease of use. This is also where my technical and design achievements are. 
