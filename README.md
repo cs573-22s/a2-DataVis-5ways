@@ -117,26 +117,27 @@ We will choose some at random to run and test.
 
 **NOTE: THE BELOW IS A SAMPLE ENTRY TO GET YOU STARTED ON YOUR README. YOU MAY DELETE THE ABOVE.**
 
+Elaine Chen Link to Repo: https://github.com/ElaineChenWPI/a2-DataVis-5ways
+
+
 # R + ggplot2 + R Markdown
+R + ggplot2 was the easiest implementations I was able to work with due to the flexability of R libraries. I've used R in statistics and have experience with plotting graphs and using these functions, but it wasn't as easy as this implementation and I am glad I was able to learn this method. 
 
-R is a language primarily focused on statistical computing.
-ggplot2 is a popular library for charting in R.
-R Markdown is a document format that compiles to HTML or PDF and allows you to include the output of R code directly in the document.
+# Flourish
+I found that this implementation was not difficult once I was able to get the hang of it, but I did struggle in the beginning trying to understand how to customize the graphs and add different legends.  
 
-To visualized the cars dataset, I made use of ggplot2's `geom_point()` layer, with aesthetics functions for the color and size.
+# Vegalite
+This was the first time I heard of and used Vegalite. I found that it was quite simple to implement the graph using it, but it was a learning curve to get used to the syntax. I found that it was a very powerful method that doesn't require much code but it was a learning curve to understand the syntax itself. 
 
-While it takes time to find the correct documentation, these functions made the effort creating this chart minimal.
+# Matplotlib
+I thought that this matplotlib was also relatively easy to use. I have previously used this library in machine learning and it was interesting to use it for this purpose as well. I found that this method was very straightforward, but I struggled with getting the graph to be the size I wanted. 
 
-![ggplot2](img/ggplot2.png)
-
-# d3...
-
-(And so on...)
-
+# d3js
+I found this method to be the most challenging. This is because there is so much versitility in d3 that it became confusing on how many different ways there are to do the same thing. I liked being able to use just one svg and continuously append to it, and making an entire graph with one main object. 
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI Forever**: ...
+Used matplotlib and pandas
+
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: As demonstrated in my colorscheme...
+Utilized random color schemes to ensure that the plots were readable and differenciated from each other
