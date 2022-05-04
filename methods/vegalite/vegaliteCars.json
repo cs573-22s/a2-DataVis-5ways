@@ -1,0 +1,17 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Car Sample",
+    "description": "A scatterplot showing the weight and miles per gallon of cars.",
+    "data": {
+      "url": "https://raw.githubusercontent.com/ElaineChenWPI/a2-DataVis-5Ways/main/cars-sample.csv"
+    },
+    "mark": "circle",
+    "opacity": 0.5,
+    "encoding": {
+      "x": {"field": "Weight", "type": "quantitative", "scale": {"zero": false}},
+      "y": {"field": "MPG", "type": "quantitative", "scale": {"zero": false}},
+      "color": {"field": "Manufacturer", "type": "nominal"},
+      "size": {"field": "Weight", "type": "nominal"}
+    },
+    "config": {}
+  }

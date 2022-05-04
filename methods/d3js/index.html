@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<svg width="500" height="400"></svg>
+
+<script>
+
+const xLabel = 'Weight';
+const yLabel = 'MPG';
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select('svg')
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+          //  https://ElaineChenWPI.github.io/A2-DATAVIS-5WAYS/main/cars-sample.csv
+//Read the data
+d3.csv("https://raw.githubusercontent.com/ElaineChenWPI/a2-DataVis-5Ways/main/cars-sample.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([2000, 5000])
+    .range([ 0, width]);
+
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(4))
+
+    svg.append("text")
+    .attr("transform", "translate(180,"+height+")")
+    .call(x)
+    .text("Weight")
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([10, 45])
+    .range([ height, 0]);
+
+    var z = d3.scaleSqrt()
+     .domain([1000, 5000])
+     .range([2, 10]);
+
+  svg.append("g")
+    .call(d3.axisLeft(y).ticks(5))
+
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left + 30)
+    .attr("x", -margin.top - height / 2 + 10)
+    .call(y)
+    .text("MPG")
+
+
+// setup fill color
+ var colorVal = function (d) {
+     return d.Manufacturer;
+ },
+color = d3.scaleOrdinal(["#d87a5b","#e4d34e","#9fc6ac","#85bf82","#189fb4"]);
+
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.Weight); } )
+      .attr("cy", function (d) { return y(d.MPG); } )
+      .attr("r", function (d) { return z(d.Weight); } )
+      .style("fill", function(d){return color(colorVal(d));})
+      .style("opacity", 0.5)
+});
+
+</script>
